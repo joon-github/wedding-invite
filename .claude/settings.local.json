@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s \"http://localhost:3000/_next/static/chunks/Desktop_testProject_wedding-invite_src_0dsrb~5._.css\")",
+      "Bash(python3 -c ' *)",
+      "Bash(npm run *)",
+      "Bash(npx vercel *)",
+      "Bash(brew list *)",
+      "Bash(node -e ' *)",
+      "Bash(npm install *)",
+      "Bash(node *)"
+    ]
+  }
+}
