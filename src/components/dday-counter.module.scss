@@ -1,0 +1,136 @@
+// ─── Container ───
+.section {
+  position: relative;
+  background-color: #000;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+// ─── Countdown grid ───
+.countdown {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 4.5rem;
+}
+
+.number {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.numberDays {
+  font-size: 72px;
+  color: var(--pink);
+  text-shadow: 0 0 40px rgba(230, 160, 191, 0.35);
+}
+
+.unitLabel {
+  margin-top: 0.5rem;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.separator {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.15);
+  line-height: 1;
+  padding-top: 0.25rem;
+  align-self: flex-start;
+}
+
+// ─── Subtitle ───
+.subtitle {
+  margin-top: 1.25rem;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.02em;
+}
+
+.subtitlePink {
+  color: var(--pink);
+}
+
+/* 본문 서브타이틀(레터스페이싱·굵기·뮤트 색)이 이모지에만 덜 붙게 */
+.subtitleEmoji {
+  letter-spacing: 0;
+  font-weight: 400;
+  font-synthesis: none;
+  color: #fff;
+  font-style: normal;
+  font-variant-emoji: emoji;
+}
+
+// ─── D-day state ───
+.ddayHero {
+  margin-top: 1rem;
+}
+
+.ddayEmoji {
+  font-size: 48px;
+  line-height: 1;
+  animation: ddayFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes ddayFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.ddayTitle {
+  margin-top: 0.75rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--pink);
+  text-shadow: 0 0 50px rgba(230, 160, 191, 0.4);
+}
+
+.ddayMessage {
+  margin-top: 0.75rem;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+}
+
+// ─── Confetti canvas ───
+.confettiCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}

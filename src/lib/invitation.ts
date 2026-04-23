@@ -19,7 +19,7 @@ export const invitation = {
   },
   event: {
     dateText: "2026년 10월 4일 일요일",
-    timeText: "오후 4시",
+    timeText: "오후 5시",
     hall: "리움 하우스웨딩",
     address: "인천광역시 중구 북성동 제물량로232번길 23",
     lat: 37.474727503707,
@@ -29,7 +29,7 @@ export const invitation = {
     kakaoMapUrl:
       "https://map.kakao.com/link/map/%EB%A6%AC%EC%9B%80%20%ED%95%98%EC%9A%B0%EC%8A%A4%EC%9B%A8%EB%94%A9,37.474727503707,126.62048207432",
     calendarUrl:
-      "https://calendar.google.com/calendar/render?action=TEMPLATE&text=%ED%8E%B8%EB%B2%94%EC%A4%80%C2%B7%EC%9C%A0%EC%A0%95%EC%95%84%20%EA%B2%B0%ED%98%BC%EC%8B%9D&dates=20261004T070000Z/20261004T090000Z&location=%EB%A6%AC%EC%9B%80%20%ED%95%98%EC%9A%B0%EC%8A%A4%EC%9B%A8%EB%94%A9",
+      "https://calendar.google.com/calendar/render?action=TEMPLATE&text=%ED%8E%B8%EB%B2%94%EC%A4%80%C2%B7%EC%9C%A0%EC%A0%95%EC%95%84%20%EA%B2%B0%ED%98%BC%EC%8B%9D&dates=20261004T080000Z/20261004T100000Z&location=%EB%A6%AC%EC%9B%80%20%ED%95%98%EC%9A%B0%EC%8A%A4%EC%9B%A8%EB%94%A9",
   },
   message: {
     headline: "너의 바람은",

@@ -1,5 +1,6 @@
 import { AccountAccordion } from "@/components/account-accordion";
 import { CopyButton } from "@/components/copy-button";
+import { DdayCounter } from "@/components/dday-counter";
 import { Gallery } from "@/components/gallery";
 import { Guestbook } from "@/components/guestbook";
 import { KakaoMap } from "@/components/kakao-map";
@@ -12,6 +13,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <HeroSection />
+      <DdayCounter targetDate="2026-10-04" />
       <PaperInvitation />
       <FamilyStory />
       <SaveTheDate />
@@ -111,7 +113,7 @@ function PaperInvitation() {
         <div className={styles.paperBadge}>
           <p>{romanize(invitation.couple.groom)}</p>
           <p className={styles.paperBadgeLine}>October 4, 2026</p>
-          <p className={styles.paperBadgeLine}>16:00 PM</p>
+          <p className={styles.paperBadgeLine}>17:00 PM</p>
           <p className={styles.paperBadgeLine}>{romanize(invitation.couple.bride)}</p>
         </div>
       </div>
@@ -182,7 +184,7 @@ function SaveTheDate() {
         2026.10.04. SUN
       </p>
       <p className={`serif-title ${styles.calendarTime}`}>
-        16:00
+        17:00
       </p>
       <div className={styles.calendarGrid}>
         {["SUN", "M", "T", "W", "T", "F", "SAT"].map((day, index) => (
