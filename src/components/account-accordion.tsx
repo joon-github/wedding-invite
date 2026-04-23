@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { Account } from "@/lib/invitation";
 import { CopyButton } from "./copy-button";
+import styles from "./account-accordion.module.scss";
 
 type AccountAccordionProps = {
   title: string;
@@ -13,38 +14,38 @@ export function AccountAccordion({ title, accounts }: AccountAccordionProps) {
   const [open, setOpen] = useState(false);
 
   return (
-    <section className="border-t border-black/20 py-3 first:border-t-0">
+    <section className={styles.section}>
       <button
         type="button"
-        className="flex w-full items-center justify-between py-3 text-left"
+        className={styles.trigger}
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
       >
-        <span className="serif-title text-lg font-black text-black">
+        <span className={`serif-title ${styles.triggerTitle}`}>
           {title}
         </span>
         <span
           aria-hidden="true"
-          className="grid size-9 place-items-center rounded-full border border-black/25 bg-white/45 text-xl font-black text-black"
+          className={styles.triggerIcon}
         >
           {open ? "−" : "+"}
         </span>
       </button>
       {open ? (
-        <div className="mt-2 space-y-2">
+        <div className={styles.list}>
           {accounts.map((account) => (
             <div
               key={`${account.relation}-${account.holder}`}
-              className="grid grid-cols-[1fr_auto] gap-3 border border-black/10 bg-white/35 p-3"
+              className={styles.item}
             >
               <div>
-                <p className="inline-flex rounded-full bg-black px-2 py-0.5 text-[10px] font-bold text-white">
+                <p className={styles.relationBadge}>
                   {account.relation}
                 </p>
-                <p className="mt-2 text-sm font-black text-black">
+                <p className={styles.accountNumber}>
                   {account.bank} {account.number}
                 </p>
-                <p className="mt-1 text-sm text-black/60">
+                <p className={styles.accountHolder}>
                   {account.holder}
                 </p>
               </div>

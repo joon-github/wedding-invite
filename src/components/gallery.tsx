@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import styles from "./gallery.module.scss";
 
 type GalleryProps = {
   images: readonly string[];
@@ -12,13 +13,13 @@ export function Gallery({ images }: GalleryProps) {
   const visibleImages = expanded ? images : images.slice(0, 4);
 
   return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-2">
+    <div className={styles.wrapper}>
+      <div className={styles.grid}>
         {visibleImages.map((src, index) => (
           <button
             type="button"
             key={src}
-            className="group relative aspect-[4/5] overflow-hidden rounded-sm bg-[var(--shell)]"
+            className={styles.imageButton}
             aria-label={`갤러리 사진 ${index + 1}`}
           >
             <Image
@@ -26,7 +27,7 @@ export function Gallery({ images }: GalleryProps) {
               alt=""
               fill
               sizes="(max-width: 480px) 50vw, 240px"
-              className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+              className={styles.image}
               priority={index < 2}
             />
           </button>
@@ -35,7 +36,7 @@ export function Gallery({ images }: GalleryProps) {
       {images.length > 4 ? (
         <button
           type="button"
-          className="mx-auto flex h-11 min-w-32 items-center justify-center rounded-full border border-[var(--line)] px-5 text-sm font-medium text-[var(--ink)] transition hover:border-[var(--coral)] hover:text-[var(--coral)]"
+          className={styles.toggleButton}
           onClick={() => setExpanded((value) => !value)}
         >
           {expanded ? "접기" : "더보기"}

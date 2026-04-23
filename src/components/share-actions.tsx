@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import styles from "./share-actions.module.scss";
 
 type ShareActionsProps = {
   title: string;
@@ -35,23 +36,23 @@ export function ShareActions({ title, text }: ShareActionsProps) {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-2">
+    <div className={styles.grid}>
       <button
         type="button"
-        className="inline-flex h-12 items-center justify-center rounded-full bg-[var(--pink)] px-4 text-sm font-semibold text-black transition hover:bg-white"
+        className={styles.shareButton}
         onClick={handleShare}
       >
-        <span aria-hidden="true" className="mr-2 text-base leading-none">
+        <span aria-hidden="true" className={styles.buttonIcon}>
           ↗
         </span>
         공유하기
       </button>
       <button
         type="button"
-        className="inline-flex h-12 items-center justify-center rounded-full border border-white/45 px-4 text-sm font-semibold text-white transition hover:border-[var(--pink)] hover:text-[var(--pink)]"
+        className={styles.copyButton}
         onClick={handleCopyUrl}
       >
-        <span aria-hidden="true" className="mr-2 text-base leading-none">
+        <span aria-hidden="true" className={styles.buttonIcon}>
           ⧉
         </span>
         {copied ? "복사 완료" : "주소 복사"}

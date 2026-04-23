@@ -1,0 +1,772 @@
+// ─── Main wrapper ───
+.main {
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 480px;
+  overflow: hidden;
+  background-color: #000;
+  color: #fff;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+}
+
+// ─── HeroSection ───
+.hero {
+  background-color: #000;
+  padding: 2rem 1.5rem 3rem;
+  text-align: center;
+}
+
+.heroInner {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 430px;
+}
+
+.heroTitle {
+  font-size: 80px;
+  line-height: 1;
+  color: var(--pink);
+
+  @media (min-width: 640px) {
+    font-size: 92px;
+  }
+}
+
+.heroSubtitle {
+  margin-top: 1rem;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: #fff;
+}
+
+.heroAsterisk {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  color: var(--pink);
+}
+
+.heroFrame {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3rem;
+  display: grid;
+  aspect-ratio: 1 / 1;
+  width: 88%;
+  max-width: 370px;
+  place-items: center;
+  padding: 2rem;
+}
+
+.heroImageWrap {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 9999px;
+}
+
+.heroImage {
+  object-fit: cover;
+  filter: grayscale(15%) contrast(0.95);
+}
+
+.heroInviteText {
+  margin-top: 3rem;
+  font-size: 28px;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--pink);
+}
+
+.heroDetails {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.75;
+  color: #fff;
+}
+
+.heroAddress {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+// ─── PaperInvitation ───
+.paperSection {
+  background-color: #000;
+  padding: 2.5rem 1.5rem;
+}
+
+.paperCard {
+  position: relative;
+  padding: 3rem 1.75rem;
+  text-align: center;
+  color: #000;
+}
+
+.paperHeart {
+  position: absolute;
+  left: 50%;
+  top: 1.75rem;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+}
+
+.paperHeadline {
+  margin-top: 1.5rem;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.paperBody {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 18px;
+  line-height: 2;
+}
+
+.paperClosing {
+  margin-top: 2.25rem;
+  font-size: 18px;
+  line-height: 2;
+}
+
+.paperPhotoGrid {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 92px;
+  gap: 1rem;
+  text-align: left;
+}
+
+.paperPhotoLeft {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: #fff;
+  padding: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  transform: rotate(-1deg);
+}
+
+.paperPhotoLeftImg {
+  object-fit: cover;
+  padding: 0.5rem;
+}
+
+.paperPhotoRight {
+  position: relative;
+  margin-top: 2rem;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: #d4d4d8;
+  padding: 0.25rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  transform: rotate(2deg);
+}
+
+.paperPhotoRightImg {
+  object-fit: cover;
+  filter: grayscale(100%);
+}
+
+.paperBadge {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  width: 50%;
+  border-radius: 50%;
+  border: 1px solid var(--pink);
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pink);
+}
+
+.paperBadgeLine {
+  margin-top: 0.25rem;
+}
+
+// ─── FamilyStory ───
+.familySection {
+  background-color: #000;
+  padding: 1.5rem 1.5rem 2.5rem;
+}
+
+.familyStory {
+  position: relative;
+  padding-bottom: 2.5rem;
+}
+
+.familyPhotoMain {
+  position: relative;
+  width: 72%;
+  background-color: #fff;
+  padding: 0.25rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  transform: rotate(1deg);
+}
+
+.familyPhotoMainImg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.familyTape {
+  position: absolute;
+  left: -1rem;
+  top: 4rem;
+  height: 3rem;
+  width: 2rem;
+  background-color: var(--tape);
+}
+
+.familyNote {
+  position: relative;
+  margin-left: auto;
+  margin-top: -2.5rem;
+  width: 88%;
+  transform: rotate(-3deg);
+  padding: 2rem 1.5rem;
+  font-size: 19px;
+  line-height: 2.25;
+  color: #000;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.familyNoteParagraph {
+  margin-top: 1rem;
+}
+
+.familyPhotoSmall {
+  position: relative;
+  margin-top: -1rem;
+  margin-left: auto;
+  width: 46%;
+  transform: rotate(6deg);
+}
+
+.familyPhotoSmallImg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  border-radius: 0.125rem;
+  object-fit: cover;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.familyGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  text-align: center;
+}
+
+// ─── FamilyBlock ───
+.familyBlock {
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  color: #fff;
+}
+
+.familyBlockLabel {
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.familyBlockRole {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--pink);
+}
+
+.familyBlockName {
+  margin-top: 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+// ─── SaveTheDate ───
+.calendarSection {
+  position: relative;
+  background-color: #000;
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+}
+
+.calendarTitle {
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+.calendarTime {
+  margin-top: 0.5rem;
+  font-size: 24px;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.calendarGrid {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  column-gap: 0.25rem;
+  row-gap: 1.25rem;
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.daySunday {
+  color: #c72c4d;
+}
+
+.daySaturday {
+  color: #3854c5;
+}
+
+.calendarEmpty {
+  width: 3rem;
+  height: 3rem;
+}
+
+.calendarDay {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  border-radius: 9999px;
+}
+
+.calendarDayWedding {
+  background-color: #292929;
+  color: var(--pink);
+}
+
+.calendarDayHolidayLabel {
+  position: absolute;
+  bottom: -0.75rem;
+  left: 50%;
+  width: 4rem;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  color: #7b2034;
+}
+
+// ─── PinkGallery ───
+.pinkSection {
+  padding: 3rem 2rem;
+  color: #000;
+}
+
+.pinkInner {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.pinkPhotoCard {
+  background-color: #fff;
+  padding: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.pinkPhotoImg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.pinkCaption {
+  margin-top: 1.25rem;
+  text-align: center;
+  font-size: 20px;
+  line-height: 2;
+}
+
+// ─── LocationSection ───
+.locationSection {
+  background-color: #000;
+  padding: 3.5rem 1.5rem;
+  color: #fff;
+}
+
+.locationBadge {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  display: grid;
+  height: 4rem;
+  max-width: 320px;
+  width: 70%;
+  grid-template-columns: 56px 1px 1fr 38px;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid var(--pink);
+  background-color: #11110f;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  color: var(--pink);
+  box-shadow: 0 0 18px rgba(230, 160, 191, 0.28);
+  transition: all 0.15s ease;
+  text-decoration: none;
+
+  &:hover {
+    background-color: #171313;
+    box-shadow: 0 0 26px rgba(230, 160, 191, 0.42);
+  }
+}
+
+.locationBadgeIcon {
+  display: grid;
+  place-items: center;
+}
+
+.locationBadgeIconSvg {
+  width: 2rem;
+  height: 2rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.locationBadgeDivider {
+  height: 2.25rem;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.locationBadgeText {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: #fff;
+}
+
+.locationBadgeArrow {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--pink);
+}
+
+.locationCard {
+  position: relative;
+  padding: 1.25rem;
+  color: #000;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+}
+
+.locationTape {
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  height: 2rem;
+  width: 6rem;
+  transform: translateX(-50%) rotate(2deg);
+  background-color: rgba(255, 212, 138, 0.9);
+}
+
+.locationHeader {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  padding-bottom: 0.75rem;
+}
+
+.locationLabel {
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.locationHallName {
+  margin-top: 0.25rem;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.locationNumber {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.locationInfo {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.locationAddress {
+  border-left: 4px solid #000;
+  padding-left: 0.75rem;
+}
+
+.locationAddressLabel {
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.locationAddressText {
+  margin-top: 0.25rem;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.locationActions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.locationCopyButton {
+  border-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.4);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.locationActionNaver {
+  display: inline-flex;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: #000;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #fff;
+  transition: all 0.15s ease;
+  text-decoration: none;
+
+  &:hover {
+    background-color: var(--pink);
+    color: #000;
+  }
+}
+
+.locationActionKakao {
+  display: inline-flex;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: #fee500;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #000;
+  transition: all 0.15s ease;
+  text-decoration: none;
+
+  &:hover {
+    background-color: var(--pink);
+  }
+}
+
+.locationDivider {
+  margin-top: 1.75rem;
+  margin-bottom: 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.locationDividerLine {
+  height: 1px;
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.locationDividerText {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.locationTransport {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.locationTransportItem {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 0.75rem;
+}
+
+.locationTransportTitle {
+  font-size: 0.875rem;
+  font-weight: 900;
+}
+
+.locationTransportDesc {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+// ─── AccountSection ───
+.accountSection {
+  background-color: #000;
+  padding: 3rem 1.5rem;
+  color: #fff;
+}
+
+.accountBadge {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  display: grid;
+  height: 4rem;
+  max-width: 340px;
+  grid-template-columns: 58px 1px 1fr 38px;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid var(--pink);
+  background-color: #11110f;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  color: var(--pink);
+  box-shadow: 0 0 18px rgba(230, 160, 191, 0.28);
+}
+
+.accountBadgeHeart {
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.accountBadgeDivider {
+  height: 2.25rem;
+  width: 1px;
+  background-color: rgba(230, 160, 191, 0.6);
+}
+
+.accountBadgeText {
+  text-align: center;
+  font-size: 23px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+.accountBadgeArrow {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--pink);
+}
+
+.accountCard {
+  position: relative;
+  padding: 1.25rem;
+  color: #000;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+}
+
+.accountTapeLeft {
+  position: absolute;
+  top: -1rem;
+  left: 2rem;
+  height: 2rem;
+  width: 5rem;
+  transform: rotate(-6deg);
+  background-color: rgba(255, 212, 138, 0.9);
+}
+
+.accountTapeRight {
+  position: absolute;
+  top: -1rem;
+  right: 2rem;
+  height: 2rem;
+  width: 5rem;
+  transform: rotate(6deg);
+  background-color: rgba(255, 212, 138, 0.9);
+}
+
+.accountHeader {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.accountLabel {
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.accountDesc {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+// ─── ShareSection ───
+.shareSection {
+  background-color: #000;
+  padding: 1rem 1.5rem 3rem;
+}
+
+.shareFooter {
+  padding-top: 2.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.55);
+}

@@ -1,0 +1,89 @@
+.placeholder {
+  display: grid;
+  aspect-ratio: 16 / 11;
+  place-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #e7e1d6;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  text-align: center;
+}
+
+.placeholderTitle {
+  font-size: 1.125rem;
+  font-weight: 900;
+}
+
+.placeholderAddress {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.placeholderHint {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.placeholderActions {
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.placeholderNaver {
+  display: inline-flex;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: #000;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+}
+
+.placeholderKakao {
+  display: inline-flex;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: #fee500;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #000;
+  text-decoration: none;
+}
+
+.mapContainer {
+  position: relative;
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #e7e1d6;
+}
+
+.mapElement {
+  height: 100%;
+  width: 100%;
+}
+
+.mapLoading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background-color: #e7e1d6;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.65);
+}

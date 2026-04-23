@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import styles from "./kakao-map.module.scss";
 
 declare global {
   interface Window {
@@ -81,19 +82,19 @@ export function KakaoMap({
 
   if (!appKey) {
     return (
-      <div className="grid aspect-[16/11] place-items-center border border-black/20 bg-[#e7e1d6] px-5 text-center">
+      <div className={styles.placeholder}>
         <div>
-          <p className="text-lg font-black">{title}</p>
-          <p className="mt-2 text-sm leading-6">{address}</p>
-          <p className="mt-4 text-xs leading-5 text-black/55">
+          <p className={styles.placeholderTitle}>{title}</p>
+          <p className={styles.placeholderAddress}>{address}</p>
+          <p className={styles.placeholderHint}>
             카카오 지도 API 키를 넣으면 이 영역에 실제 지도가 표시됩니다.
           </p>
-          <div className="mt-5 grid grid-cols-2 gap-2">
+          <div className={styles.placeholderActions}>
             <a
               href={naverUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex h-9 items-center justify-center rounded-full bg-black px-3 text-xs font-semibold text-white"
+              className={styles.placeholderNaver}
             >
               네이버지도
             </a>
@@ -101,7 +102,7 @@ export function KakaoMap({
               href={kakaoUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex h-9 items-center justify-center rounded-full bg-[#fee500] px-3 text-xs font-semibold text-black"
+              className={styles.placeholderKakao}
             >
               카카오맵
             </a>
@@ -112,10 +113,10 @@ export function KakaoMap({
   }
 
   return (
-    <div className="relative aspect-[16/11] overflow-hidden border border-black/20 bg-[#e7e1d6]">
-      <div ref={mapRef} className="h-full w-full" aria-label={`${title} 지도`} />
+    <div className={styles.mapContainer}>
+      <div ref={mapRef} className={styles.mapElement} aria-label={`${title} 지도`} />
       {!ready ? (
-        <div className="absolute inset-0 grid place-items-center bg-[#e7e1d6] text-sm font-semibold text-black/65">
+        <div className={styles.mapLoading}>
           지도를 불러오는 중
         </div>
       ) : null}

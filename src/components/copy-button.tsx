@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import styles from "./copy-button.module.scss";
 
 type CopyButtonProps = {
   value: string;
@@ -26,10 +27,10 @@ export function CopyButton({
   return (
     <button
       type="button"
-      className={`inline-flex h-10 items-center justify-center rounded-full border border-[var(--line)] px-4 text-sm font-medium text-[var(--ink)] transition hover:border-[var(--coral)] hover:text-[var(--coral)] ${className}`}
+      className={`${styles.button} ${className}`}
       onClick={handleCopy}
     >
-      <span aria-hidden="true" className="mr-1.5 text-base leading-none">
+      <span aria-hidden="true" className={styles.icon}>
         {copied ? "✓" : "⧉"}
       </span>
       {copied ? copiedLabel : label}

@@ -1,0 +1,235 @@
+.section {
+  padding: 3.5rem 1.5rem;
+  color: #000;
+}
+
+.badge {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  display: grid;
+  height: 4rem;
+  max-width: 340px;
+  grid-template-columns: 58px 1px 1fr 38px;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, 0.55);
+  background-color: #11110f;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  color: var(--pink);
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.22);
+}
+
+.badgeIcon {
+  display: grid;
+  place-items: center;
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.badgeDivider {
+  height: 2.25rem;
+  width: 1px;
+  background-color: rgba(230, 160, 191, 0.6);
+}
+
+.badgeText {
+  text-align: center;
+  font-size: 23px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+.badgeArrow {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--pink);
+}
+
+.card {
+  position: relative;
+  padding: 1.25rem 1.25rem 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.tapeLeft {
+  position: absolute;
+  top: -1rem;
+  left: 2.5rem;
+  height: 2rem;
+  width: 5rem;
+  transform: rotate(-6deg);
+  background-color: rgba(255, 212, 138, 0.9);
+}
+
+.tapeRight {
+  position: absolute;
+  top: -1rem;
+  right: 2.5rem;
+  height: 2rem;
+  width: 5rem;
+  transform: rotate(6deg);
+  background-color: rgba(255, 212, 138, 0.9);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.honeypot {
+  display: none;
+}
+
+.fieldLabel {
+  display: block;
+}
+
+.fieldLabelText {
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.input {
+  margin-top: 0.25rem;
+  height: 2.75rem;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.45);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.15s ease;
+
+  &:focus {
+    border-color: #000;
+  }
+}
+
+.textarea {
+  margin-top: 0.25rem;
+  min-height: 7rem;
+  width: 100%;
+  resize: none;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.45);
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5;
+  outline: none;
+  transition: border-color 0.15s ease;
+
+  &:focus {
+    border-color: #000;
+  }
+}
+
+.submitButton {
+  height: 2.75rem;
+  width: 100%;
+  border-radius: 9999px;
+  background-color: #000;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background-color: var(--pink);
+    color: #000;
+  }
+
+  &:disabled {
+    opacity: 0.55;
+  }
+}
+
+.divider {
+  margin-top: 1.75rem;
+  margin-bottom: 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dividerLine {
+  height: 1px;
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.dividerText {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.statusMessage {
+  background-color: rgba(255, 255, 255, 0.35);
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.doneMessage {
+  margin-bottom: 0.75rem;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.messageList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.messageItem {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.35);
+  padding: 1rem;
+}
+
+.messageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.messageName {
+  font-weight: 900;
+}
+
+.messageDate {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.messageBody {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.68);
+}

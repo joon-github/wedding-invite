@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import styles from "./guestbook.module.scss";
 
 type GuestbookMessage = {
   id: string;
@@ -85,36 +86,36 @@ export function Guestbook() {
   }
 
   return (
-    <section className="pink-collage px-6 py-14 text-black">
-      <div className="mx-auto mb-8 grid h-16 max-w-[340px] grid-cols-[58px_1px_1fr_38px] items-center rounded-full border border-black/55 bg-[#11110f] px-5 text-[var(--pink)] shadow-[0_0_18px_rgba(0,0,0,0.22)]">
-        <span className="grid place-items-center text-[32px] font-light leading-none">
+    <section className={`pink-collage ${styles.section}`}>
+      <div className={styles.badge}>
+        <span className={styles.badgeIcon}>
           ✎
         </span>
-        <span className="h-9 w-px bg-[var(--pink)]/60" />
-        <span className="text-center text-[23px] font-light tracking-[0.04em] text-white">
+        <span className={styles.badgeDivider} />
+        <span className={styles.badgeText}>
           방명록
         </span>
-        <span className="text-center text-[34px] font-light leading-none text-[var(--pink)]">
+        <span className={styles.badgeArrow}>
           ›
         </span>
       </div>
 
-      <div className="paper-texture relative px-5 py-6 shadow-2xl shadow-black/25">
-        <span className="absolute -top-4 left-10 h-8 w-20 -rotate-6 bg-[var(--tape)]/90" />
-        <span className="absolute -top-4 right-10 h-8 w-20 rotate-6 bg-[var(--tape)]/90" />
+      <div className={`paper-texture ${styles.card}`}>
+        <span className={styles.tapeLeft} />
+        <span className={styles.tapeRight} />
 
-        <form className="space-y-3" onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <input
             value={trap}
             onChange={(event) => setTrap(event.target.value)}
-            className="hidden"
+            className={styles.honeypot}
             tabIndex={-1}
             autoComplete="off"
             aria-hidden="true"
             name="website"
           />
-          <label className="block">
-            <span className="text-[11px] font-black uppercase tracking-[0.18em] text-black/45">
+          <label className={styles.fieldLabel}>
+            <span className={styles.fieldLabelText}>
               Name
             </span>
             <input
@@ -122,11 +123,11 @@ export function Guestbook() {
               onChange={(event) => setName(event.target.value)}
               maxLength={20}
               placeholder="성함"
-              className="mt-1 h-11 w-full border border-black/15 bg-white/45 px-3 text-sm font-semibold outline-none transition focus:border-black"
+              className={styles.input}
             />
           </label>
-          <label className="block">
-            <span className="text-[11px] font-black uppercase tracking-[0.18em] text-black/45">
+          <label className={styles.fieldLabel}>
+            <span className={styles.fieldLabelText}>
               Message
             </span>
             <textarea
@@ -134,55 +135,55 @@ export function Guestbook() {
               onChange={(event) => setMessage(event.target.value)}
               maxLength={140}
               placeholder="축하 메시지를 남겨주세요"
-              className="mt-1 min-h-28 w-full resize-none border border-black/15 bg-white/45 p-3 text-sm font-medium leading-6 outline-none transition focus:border-black"
+              className={styles.textarea}
             />
           </label>
           <button
             type="submit"
             disabled={status === "saving"}
-            className="h-11 w-full rounded-full bg-black text-sm font-bold text-white transition hover:bg-[var(--pink)] hover:text-black disabled:opacity-55"
+            className={styles.submitButton}
           >
             {status === "saving" ? "남기는 중" : "축하 메시지 남기기"}
           </button>
         </form>
 
-        <div className="my-7 flex items-center gap-3">
-          <span className="h-px flex-1 bg-black/25" />
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-black/45">
+        <div className={styles.divider}>
+          <span className={styles.dividerLine} />
+          <span className={styles.dividerText}>
             Messages
           </span>
-          <span className="h-px flex-1 bg-black/25" />
+          <span className={styles.dividerLine} />
         </div>
 
         {status === "setup" ? (
-          <p className="bg-white/35 p-4 text-center text-sm font-semibold leading-6 text-black/65">
+          <p className={styles.statusMessage}>
             Apps Script URL을 연결하면 방명록이 표시됩니다.
           </p>
         ) : null}
         {status === "error" ? (
-          <p className="bg-white/35 p-4 text-center text-sm font-semibold leading-6 text-black/65">
+          <p className={styles.statusMessage}>
             방명록을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.
           </p>
         ) : null}
         {status === "done" ? (
-          <p className="mb-3 text-center text-sm font-bold text-black">
+          <p className={styles.doneMessage}>
             메시지가 저장되었습니다.
           </p>
         ) : null}
 
-        <div className="space-y-2">
+        <div className={styles.messageList}>
           {messages.map((item) => (
             <article
               key={item.id}
-              className="border border-black/10 bg-white/35 p-4"
+              className={styles.messageItem}
             >
-              <div className="flex items-center justify-between gap-3">
-                <p className="font-black">{item.name}</p>
-                <time className="text-[11px] font-bold text-black/40">
+              <div className={styles.messageHeader}>
+                <p className={styles.messageName}>{item.name}</p>
+                <time className={styles.messageDate}>
                   {formatDate(item.createdAt)}
                 </time>
               </div>
-              <p className="mt-2 text-sm leading-6 text-black/68">
+              <p className={styles.messageBody}>
                 {item.message}
               </p>
             </article>
