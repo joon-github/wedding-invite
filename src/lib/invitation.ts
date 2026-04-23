@@ -22,10 +22,14 @@ export const invitation = {
     timeText: "오후 4시",
     hall: "리움 하우스웨딩",
     address: "인천광역시 중구 북성동 제물량로232번길 23",
+    lat: 37.474727503707,
+    lng: 126.62048207432,
     mapUrl:
       "https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%EB%B6%81%EC%84%B1%EB%8F%99%20%EC%A0%9C%EB%AC%BC%EB%9F%89%EB%A1%9C232%EB%B2%88%EA%B8%B8%2023/place/31098812?c=15.00,0,0,0,dh&placePath=/home?bk_query=%EC%9D%B8%EC%B2%9C%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%EB%B6%81%EC%84%B1%EB%8F%99%20%EC%A0%9C%EB%AC%BC%EB%9F%89%EB%A1%9C232%EB%B2%88%EA%B8%B8%2023&entry=bmp&from=map&fromPanelNum=2&timestamp=202604221952&locale=ko&svcName=map_pcv5&searchText=%EC%9D%B8%EC%B2%9C%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%A4%91%EA%B5%AC%20%EB%B6%81%EC%84%B1%EB%8F%99%20%EC%A0%9C%EB%AC%BC%EB%9F%89%EB%A1%9C232%EB%B2%88%EA%B8%B8%2023",
+    kakaoMapUrl:
+      "https://map.kakao.com/link/map/%EB%A6%AC%EC%9B%80%20%ED%95%98%EC%9A%B0%EC%8A%A4%EC%9B%A8%EB%94%A9,37.474727503707,126.62048207432",
     calendarUrl:
-      "https://calendar.google.com/calendar/render?action=TEMPLATE&text=%EC%9D%B4%EC%9E%A5%ED%98%84%C2%B7%EB%85%B8%EC%9D%80%EC%95%84%20%EA%B2%B0%ED%98%BC%EC%8B%9D&dates=20260502T020000Z/20260502T040000Z&location=%EC%9B%A8%EB%94%A9%ED%94%BC%EC%B9%98%20%EC%9B%A8%EB%94%A9%ED%99%80",
+      "https://calendar.google.com/calendar/render?action=TEMPLATE&text=%ED%8E%B8%EB%B2%94%EC%A4%80%C2%B7%EC%9C%A0%EC%A0%95%EC%95%84%20%EA%B2%B0%ED%98%BC%EC%8B%9D&dates=20261004T070000Z/20261004T090000Z&location=%EB%A6%AC%EC%9B%80%20%ED%95%98%EC%9A%B0%EC%8A%A4%EC%9B%A8%EB%94%A9",
   },
   message: {
     headline: "너의 바람은",

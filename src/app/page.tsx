@@ -1,6 +1,8 @@
 import { AccountAccordion } from "@/components/account-accordion";
 import { CopyButton } from "@/components/copy-button";
 import { Gallery } from "@/components/gallery";
+import { Guestbook } from "@/components/guestbook";
+import { KakaoMap } from "@/components/kakao-map";
 import { ShareActions } from "@/components/share-actions";
 import { invitation } from "@/lib/invitation";
 import Image from "next/image";
@@ -15,6 +17,7 @@ export default function Home() {
       <PinkGallery />
       <LocationSection />
       <AccountSection />
+      <Guestbook />
       <ShareSection />
     </main>
   );
@@ -104,10 +107,10 @@ function PaperInvitation() {
           </div>
         </div>
 
-        <div className="mx-auto mt-8 w-32 rounded-[50%] border border-[var(--pink)] py-3 text-center text-[10px] font-semibold uppercase tracking-wider text-[var(--pink)]">
+        <div className="mx-auto mt-8 w-32 rounded-[50%] border border-[var(--pink)] py-3 text-center text-[10px] font-semibold uppercase tracking-wider text-[var(--pink)] w-[50%]">
           <p>{romanize(invitation.couple.groom)}</p>
-          <p className="mt-1">May 02, 2026</p>
-          <p className="mt-1">11:00 AM</p>
+          <p className="mt-1">October 4, 2026</p>
+          <p className="mt-1">16:00 PM</p>
           <p className="mt-1">{romanize(invitation.couple.bride)}</p>
         </div>
       </div>
@@ -163,11 +166,19 @@ function FamilyStory() {
 }
 
 function SaveTheDate() {
-  const leadingEmptyDays = Array.from({ length: 4 }, (_, index) => `empty-${index}`);
-  const days = Array.from({ length: 31 }, (_, index) => index + 1);
+  const calendarWeeks = [
+    [null, null, null, null, 1, 2, 3],
+    [4, 5, 6, 7, 8, 9, 10],
+    [11, 12, 13, 14, 15, 16, 17],
+    [18, 19, 20, 21, 22, 23, 24],
+    [25, 26, 27, 28, 29, 30, 31],
+  ];
+  const textColor = "#acacac";
 
   return (
-    <section className="relative bg-black px-6 py-14 text-center text-[#242424]">
+    <section className="relative bg-black px-6 py-14 text-center"
+      style={{ color: textColor }}
+    >
       <p className="serif-title text-[38px] font-black tracking-wide">
         2026.10.04. SUN
       </p>
@@ -175,52 +186,61 @@ function SaveTheDate() {
         16:00
       </p>
       <div className="mt-12 grid grid-cols-7 gap-x-1 gap-y-5 text-[19px] font-black">
-        {["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"].map((day, index) => (
+        {["SUN", "M", "T", "W", "T", "F", "SAT"].map((day, index) => (
           <span
-            key={day}
+            key={`${day}-${index}`}
             className={
               index === 0
-                ? "text-[#8f253d]"
+                ? "text-[#c72c4d]"
                 : index === 6
-                  ? "text-[#26345f]"
+                  ? "text-[#3854c5]"
                   : ""
             }
           >
             {day}
           </span>
         ))}
-        {leadingEmptyDays.map((key) => (
-          <span key={key} aria-hidden="true" />
-        ))}
-        {days.map((day) => (
-          <CalendarDay key={day} day={day} />
-        ))}
+        {calendarWeeks.flatMap((week, weekIndex) =>
+          week.map((day, dayIndex) =>
+            day === null ? (
+              <span
+                key={`empty-${weekIndex}-${dayIndex}`}
+                className="size-12"
+                aria-hidden="true"
+              />
+            ) : (
+              <CalendarDay key={day} day={day} dayIndex={dayIndex} />
+            ),
+          ),
+        )}
       </div>
     </section>
   );
 }
 
-function CalendarDay({ day }: Readonly<{ day: number }>) {
+function CalendarDay({
+  day,
+  dayIndex,
+}: Readonly<{ day: number; dayIndex: number }>) {
   const isWeddingDay = day === 4;
   const isSubstituteHoliday = day === 5;
-  const isSunday = [4, 11, 18, 25].includes(day);
-  const isSaturday = [3, 10, 17, 24, 31].includes(day);
+  const isSunday = dayIndex === 0;
+  const isSaturday = dayIndex === 6;
 
   return (
     <span
-      className={`relative mx-auto grid size-12 place-items-center rounded-full ${
-        isWeddingDay
-          ? "bg-[#292929] text-[var(--pink)]"
-          : isSubstituteHoliday || isSunday
-            ? "text-[#8f253d]"
-            : isSaturday
-              ? "text-[#26345f]"
-              : ""
-      }`}
+      className={`relative mx-auto grid size-12 place-items-center rounded-full ${isWeddingDay
+        ? "bg-[#292929] text-[var(--pink)]"
+        : isSubstituteHoliday || isSunday
+          ? "text-[#c72c4d]"
+          : isSaturday
+            ? "text-[#3854c5]"
+            : ""
+        }`}
     >
       {day}
       {isSubstituteHoliday ? (
-        <span className="absolute -bottom-3 left-1/2 w-16 -translate-x-1/2 text-[9px] font-bold leading-none text-[#8f253d]">
+        <span className="absolute -bottom-3 left-1/2 w-16 -translate-x-1/2 text-[9px] font-bold leading-none text-[#7b2034]">
           대체공휴일
         </span>
       ) : null}
@@ -257,40 +277,105 @@ function PinkGallery() {
 
 function LocationSection() {
   return (
-    <section className="bg-black px-6 py-12 text-white">
-      <div className="relative mx-auto mb-8 w-64 rounded-[50%] bg-[var(--pink)] px-8 py-6 text-center text-[32px] font-black text-black">
-        오시는 길
-        <span className="absolute inset-3 rounded-[50%] border border-black/45" />
-      </div>
+    <section className="bg-black px-6 py-14 text-white">
+      <a
+        href={invitation.event.kakaoMapUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="mx-auto mb-8 grid h-16 max-w-[320px] grid-cols-[56px_1px_1fr_38px] items-center rounded-full border border-[var(--pink)] bg-[#11110f] px-5 text-[var(--pink)] shadow-[0_0_18px_rgba(230,160,191,0.28)] transition hover:bg-[#171313] hover:shadow-[0_0_26px_rgba(230,160,191,0.42)]  w-[70%]"
+        aria-label="카카오맵으로 오시는 길 열기"
+      >
+        <span className="grid place-items-center">
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            className="size-8"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M12 22s7-7.1 7-13a7 7 0 0 0-14 0c0 5.9 7 13 7 13Z" />
+            <circle cx="12" cy="9" r="2.4" />
+          </svg>
+        </span>
+        <span className="h-9 w-px bg-white/18" />
+        <span className="text-center text-[24px] font-light tracking-[0.08em] text-white">
+          오시는 길
+        </span>
+        <span className="text-center text-[34px] font-light leading-none text-[var(--pink)]">
+          ›
+        </span>
+      </a>
 
-      <div className="paper-texture px-5 py-5 text-black">
-        <div className="grid aspect-[16/11] place-items-center border border-black/20 bg-[#e7e1d6] text-center">
+      <div className="paper-texture relative px-5 py-5 text-black shadow-2xl shadow-black/35">
+        <span className="absolute -top-4 left-1/2 h-8 w-24 -translate-x-1/2 rotate-2 bg-[var(--tape)]/90" />
+        <div className="mb-4 flex items-end justify-between border-b border-black/25 pb-3">
           <div>
-            <p className="text-lg font-black">{invitation.event.hall}</p>
-            <p className="mt-2 text-sm">{invitation.event.address}</p>
+            <p className="text-[11px] font-black uppercase tracking-[0.22em] text-black/45">
+              Location
+            </p>
+            <p className="mt-1 text-2xl font-black">{invitation.event.hall}</p>
           </div>
+          <p className="serif-title text-4xl font-black text-black/20">01</p>
         </div>
-        <div className="mt-5 space-y-3">
-          <p className="text-[15px] font-bold">{invitation.event.address}</p>
-          <p className="text-xl font-black">{invitation.event.hall}</p>
-          <div className="grid grid-cols-2 gap-2">
-            <CopyButton value={invitation.event.address} label="복사하기" />
+        <KakaoMap
+          title={invitation.event.hall}
+          address={invitation.event.address}
+          lat={invitation.event.lat}
+          lng={invitation.event.lng}
+          naverUrl={invitation.event.mapUrl}
+          kakaoUrl={invitation.event.kakaoMapUrl}
+        />
+        <div className="mt-5 space-y-4">
+          <div className="border-l-4 border-black pl-3">
+            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-black/45">
+              Address
+            </p>
+            <p className="mt-1 text-[15px] font-bold leading-6">
+              {invitation.event.address}
+            </p>
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            <CopyButton
+              value={invitation.event.address}
+              label="복사"
+              className="border-black/30 bg-white/40 text-xs font-bold"
+            />
             <a
               href={invitation.event.mapUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex h-10 items-center justify-center rounded-full bg-black px-4 text-sm font-medium text-white transition hover:bg-[var(--pink)] hover:text-black"
+              className="inline-flex h-10 items-center justify-center rounded-full bg-black px-3 text-xs font-medium text-white transition hover:bg-[var(--pink)] hover:text-black"
             >
-              지도 열기
+              네이버
+            </a>
+            <a
+              href={invitation.event.kakaoMapUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex h-10 items-center justify-center rounded-full bg-[#fee500] px-3 text-xs font-bold text-black transition hover:bg-[var(--pink)]"
+            >
+              카카오
             </a>
           </div>
         </div>
-        <hr className="my-6 border-black/30" />
-        <div className="space-y-5">
+        <div className="my-7 flex items-center gap-3">
+          <span className="h-px flex-1 bg-black/25" />
+          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-black/45">
+            Guide
+          </span>
+          <span className="h-px flex-1 bg-black/25" />
+        </div>
+        <div className="space-y-3">
           {invitation.transport.map((item) => (
-            <div key={item.title}>
-              <p className="font-black">{item.title}</p>
-              <p className="mt-1 text-sm leading-6 text-black/70">
+            <div
+              key={item.title}
+              className="grid grid-cols-[72px_1fr] gap-3 border border-black/10 bg-white/30 p-3"
+            >
+              <p className="text-sm font-black">{item.title}</p>
+              <p className="text-sm leading-6 text-black/65">
                 {item.description}
               </p>
             </div>
@@ -303,12 +388,30 @@ function LocationSection() {
 
 function AccountSection() {
   return (
-    <section className="bg-black px-6 py-10 text-white">
-      <div className="relative mx-auto mb-8 w-72 rounded-[50%] bg-[var(--pink)] px-8 py-6 text-center text-[28px] font-black text-black">
-        마음 전하실 곳
-        <span className="absolute inset-3 rounded-[50%] border border-black/45" />
+    <section className="bg-black px-6 py-12 text-white">
+      <div className="mx-auto mb-8 grid h-16 max-w-[340px] grid-cols-[58px_1px_1fr_38px] items-center rounded-full border border-[var(--pink)] bg-[#11110f] px-5 text-[var(--pink)] shadow-[0_0_18px_rgba(230,160,191,0.28)]">
+        <span className="grid place-items-center text-[34px] font-light leading-none">
+          ♡
+        </span>
+        <span className="h-9 w-px bg-[var(--pink)]/60" />
+        <span className="text-center text-[23px] font-light tracking-[0.04em] text-white">
+          마음 전하실 곳
+        </span>
+        <span className="text-center text-[34px] font-light leading-none text-[var(--pink)]">
+          ›
+        </span>
       </div>
-      <div className="paper-texture px-5 py-4 text-black">
+      <div className="paper-texture relative px-5 py-5 text-black shadow-2xl shadow-black/35">
+        <span className="absolute -top-4 left-8 h-8 w-20 -rotate-6 bg-[var(--tape)]/90" />
+        <span className="absolute -top-4 right-8 h-8 w-20 rotate-6 bg-[var(--tape)]/90" />
+        <div className="mb-4 text-center">
+          <p className="text-[11px] font-black uppercase tracking-[0.24em] text-black/45">
+            Account
+          </p>
+          <p className="mt-2 text-sm leading-6 text-black/65">
+            참석이 어려우신 분들을 위해 계좌번호를 안내드립니다.
+          </p>
+        </div>
         <AccountAccordion
           title="신랑 측 계좌번호"
           accounts={invitation.accounts.groom}
