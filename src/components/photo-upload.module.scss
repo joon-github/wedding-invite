@@ -1,0 +1,280 @@
+.section {
+  background-color: #000;
+  padding: 3.5rem 1.5rem;
+  color: #fff;
+}
+
+// ─── Header badge ───
+.badge {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  display: grid;
+  height: 4rem;
+  max-width: 340px;
+  grid-template-columns: 58px 1px 1fr 38px;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid var(--pink);
+  background-color: #11110f;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  color: var(--pink);
+  box-shadow: 0 0 18px rgba(230, 160, 191, 0.28);
+}
+
+.badgeIcon {
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.badgeDivider {
+  height: 2.25rem;
+  width: 1px;
+  background-color: rgba(230, 160, 191, 0.6);
+}
+
+.badgeText {
+  text-align: center;
+  font-size: 23px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+.badgeArrow {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--pink);
+}
+
+// ─── Card ───
+.card {
+  position: relative;
+  padding: 1.5rem 1.25rem;
+  color: #000;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+}
+
+.tapeLeft {
+  position: absolute;
+  top: -1rem;
+  left: 2rem;
+  height: 2rem;
+  width: 5rem;
+  transform: rotate(-4deg);
+  background-color: rgba(255, 212, 138, 0.9);
+}
+
+.tapeRight {
+  position: absolute;
+  top: -1rem;
+  right: 2rem;
+  height: 2rem;
+  width: 5rem;
+  transform: rotate(4deg);
+  background-color: rgba(255, 212, 138, 0.9);
+}
+
+.header {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.subtitle {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+// ─── Upload area ───
+.uploadArea {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem 1rem;
+  border: 2px dashed rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    border-color: var(--pink);
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.uploadAreaDragOver {
+  border-color: var(--pink);
+  background-color: rgba(230, 160, 191, 0.1);
+}
+
+.uploadIcon {
+  font-size: 32px;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.uploadText {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.uploadHint {
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.fileInput {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+// ─── Uploading state ───
+.uploadingBar {
+  margin-top: 0.75rem;
+  height: 3px;
+  width: 100%;
+  border-radius: 2px;
+  background-color: rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.uploadingProgress {
+  height: 100%;
+  background-color: var(--pink);
+  border-radius: 2px;
+  animation: progressPulse 1.2s ease-in-out infinite;
+  width: 60%;
+}
+
+@keyframes progressPulse {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.uploadingText {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+// ─── Prize message ───
+.prizeMessage {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid var(--pink);
+  background-color: rgba(230, 160, 191, 0.08);
+}
+
+.prizeText {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.prizeHighlight {
+  font-weight: 800;
+  color: #000;
+}
+
+// ─── Divider ───
+.divider {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dividerLine {
+  height: 1px;
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.dividerText {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(0, 0, 0, 0.35);
+}
+
+// ─── Photo grid ───
+.photoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.375rem;
+}
+
+.photoItem {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 2px;
+}
+
+.photoImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photoNew {
+  animation: photoReveal 0.5s ease both;
+}
+
+@keyframes photoReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.emptyState {
+  grid-column: 1 / -1;
+  padding: 2rem 1rem;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: rgba(0, 0, 0, 0.35);
+  font-weight: 600;
+}
+
+.photoCount {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.04em;
+}

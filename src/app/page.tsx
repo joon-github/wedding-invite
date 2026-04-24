@@ -5,6 +5,7 @@ import { EnvelopeGate } from "@/components/envelope-gate";
 import { Gallery } from "@/components/gallery";
 import { Guestbook } from "@/components/guestbook";
 import { KakaoMap } from "@/components/kakao-map";
+import { PhotoUpload } from "@/components/photo-upload";
 import { ShareActions } from "@/components/share-actions";
 import { invitation } from "@/lib/invitation";
 import Image from "next/image";
@@ -23,6 +24,7 @@ export default function Home() {
       <LocationSection />
       <AccountSection />
       <Guestbook />
+      <PhotoUpload />
       <ShareSection />
     </main>
   );

@@ -1,3 +1,4 @@
+import { verifyAdmin } from "@/lib/admin";
 import { supabase } from "@/lib/supabase";
 
 const MAX_NAME_LENGTH = 20;
@@ -66,6 +67,30 @@ export async function POST(request: Request) {
   }));
 
   return Response.json({ messages });
+}
+
+export async function DELETE(request: Request) {
+  if (!verifyAdmin(request)) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const body = await request.json().catch(() => null);
+  const id = body?.id;
+
+  if (!id) {
+    return Response.json({ error: "ID is required" }, { status: 400 });
+  }
+
+  const { error } = await supabase
+    .from("guestbook")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    return Response.json({ error: "Delete failed" }, { status: 500 });
+  }
+
+  return Response.json({ ok: true });
 }
 
 function sanitizeText(value: unknown, maxLength: number) {
