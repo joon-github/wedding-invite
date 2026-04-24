@@ -149,27 +149,29 @@ export function EnvelopeIntro({ guestName, onComplete }: EnvelopeIntroProps) {
         onPointerUp={handleSwipeEnd}
         onPointerCancel={handleSwipeEnd}
       >
-        <div
-          className={`${styles.envelopeCard} ${dragRef.current.dragging ? styles.envelopeCardDragging : ""}`}
-          style={{ transform: `translateY(${cardTranslateY}px)` }}
-        >
-          <Image
-            src="/image/welcome_image.png"
-            alt="청첩장"
-            width={600}
-            height={840}
-            className={styles.envelopeImage}
-            priority
-          />
-          <div className={styles.recipientOverlay}>
-            <p className={styles.recipientTo}>To.</p>
-            <p className={styles.recipientName}>
-              {guestName}
-              <span className={styles.recipientSuffix}>님께</span>
-            </p>
+        <div className={styles.envelopeTop} />
+        <div className={styles.envelopeCenter}>
+          <div
+            className={`${styles.envelopeCard} ${dragRef.current.dragging ? styles.envelopeCardDragging : ""}`}
+            style={{ transform: `translateY(${cardTranslateY}px)` }}
+          >
+            <Image
+              src="/image/welcome_image.png"
+              alt="청첩장"
+              width={600}
+              height={840}
+              className={styles.envelopeImage}
+              priority
+            />
+            <div className={styles.recipientOverlay}>
+              <p className={styles.recipientTo}>To.</p>
+              <p className={styles.recipientName}>
+                {guestName}
+                <span className={styles.recipientSuffix}>님께</span>
+              </p>
+            </div>
           </div>
         </div>
-
         <div className={styles.swipeHint}>
           <span className={styles.swipeArrow}>↑</span>
           <span className={styles.swipeText}>위로 쓸어 올려주세요</span>
