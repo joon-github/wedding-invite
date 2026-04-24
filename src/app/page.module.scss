@@ -280,6 +280,30 @@
   line-height: 2.25;
   color: #000;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  overflow: visible;
+}
+
+/* 방명록·업로드 카드와 동일 — 노란 마스킹 테이프 */
+.familyNoteTapeLeft,
+.familyNoteTapeRight {
+  position: absolute;
+  z-index: 1;
+  top: -0.9rem;
+  height: 1.85rem;
+  width: 4.5rem;
+  background-color: var(--tape);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+}
+
+.familyNoteTapeLeft {
+  left: 1.5rem;
+  transform: rotate(-5deg);
+}
+
+.familyNoteTapeRight {
+  right: 1.5rem;
+  transform: rotate(5deg);
 }
 
 .familyNoteParagraph {
@@ -291,16 +315,32 @@
   margin-top: -1rem;
   margin-left: auto;
   width: 46%;
+  background-color: #fff;
+  padding: 0.25rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   transform: rotate(6deg);
+  overflow: visible;
+}
+
+/* familyTape와 동일(작은 액자 비율), 왼쪽 바깥 — 오른쪽으로 뻗으면 .main overflow에 잘림 */
+.familyPhotoSmallTape {
+  position: absolute;
+  z-index: 1;
+  left: -0.8rem;
+  top: 2.5rem;
+  height: 2.4rem;
+  width: 1.6rem;
+  background-color: var(--tape);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
 }
 
 .familyPhotoSmallImg {
+  display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 4 / 5;
-  border-radius: 0.125rem;
   object-fit: cover;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
 }
 
 .familyGrid {

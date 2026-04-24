@@ -176,8 +176,9 @@ function FamilyStory() {
           <span className={styles.familyTape} />
         </div>
         <div className={`notebook-paper hand-text ${styles.familyNote}`}>
-          <p>착하고 멋있는 아들 {invitation.couple.groom}아!</p>
-          <p>엄마 아빠 아들로 태어나서 항상 고맙고 감사하다.</p>
+          <span className={styles.familyNoteTapeRight} aria-hidden />
+          <p>착하고 멋있는 아들 {invitation.couple.groom.substring(1)}아!</p>
+          <p>우리 아들로 태어나서 항상 고맙고 감사하다.</p>
           <p>언제나 기쁘게 행복하게, 서로 의지하면서 잘 살아라.</p>
           <p className={styles.familyNoteParagraph}>사랑한다 ~ ♡</p>
         </div>
@@ -189,6 +190,7 @@ function FamilyStory() {
             height={620}
             className={styles.familyPhotoSmallImg}
           />
+          <span className={styles.familyPhotoSmallTape} aria-hidden />
         </div>
       </div>
 
