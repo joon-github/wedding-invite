@@ -113,15 +113,15 @@ function HeroSection() {
         </div>
       </div>
 
-      <p className={styles.heroDateLine}>{heroDate}</p>
+      {/* <p className={styles.heroDateLine}>{heroDate}</p> */}
 
-      <div className={styles.heroNames} lang="ko">
+      {/* <div className={styles.heroNames} lang="ko">
         <span className={styles.heroGroomName}>{invitation.couple.groom}</span>
         <span className={styles.heroAnd}>그리고</span>
         <span className={styles.heroBrideName}>{invitation.couple.bride}</span>
-      </div>
+      </div> */}
 
-      <p className={styles.heroClosing}>저희, 결혼합니다.</p>
+      {/* <p className={styles.heroClosing}>저희, 결혼합니다.</p> */}
 
       <div className={styles.heroMeta} lang="ko">
         <p>

@@ -71,13 +71,9 @@
 
 /* 가로 4:3 — 섹션 좌우 패딩만큼 네거티브 마진으로 main 폭에 거의 딱 붙음 */
 .heroImageFrame {
-  margin: 2.5rem 0 0;
-  /* .hero padding-x 와 같아야 전체 맞닿는 폭(1.5rem) */
-  $hero-pad-x: 1.5rem;
-  width: calc(100% + 2 * $hero-pad-x);
-  max-width: none;
-  margin-left: calc(-1 * $hero-pad-x);
-  margin-right: calc(-1 * $hero-pad-x);
+  margin: 2.5rem auto 0;
+  width: 100%;
+  max-width: 100%;
   padding: 0;
 }
 
@@ -142,7 +138,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   line-height: 1.6;
   font-weight: 500;
   color: var(--hero-ink-mute);
@@ -151,14 +147,14 @@
   margin-left: auto;
   margin-right: auto;
   padding-top: 0.25rem;
-  border-top: 1px solid rgba(100, 85, 70, 0.12);
+  // border-top: 1px solid rgba(100, 85, 70, 0.12);
 }
 
 .heroAddress {
   color: var(--terra);
   text-decoration: none;
   text-underline-offset: 0.2em;
-
+  font-weight: bold;
   &:hover,
   &:focus-visible {
     text-decoration: underline;
