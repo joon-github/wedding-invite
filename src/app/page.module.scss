@@ -129,6 +129,14 @@
 
 .heroAddress {
   color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  text-underline-offset: 0.2em;
+
+  &:hover,
+  &:focus-visible {
+    color: #fff;
+    text-decoration: underline;
+  }
 }
 
 // ─── PaperInvitation ───

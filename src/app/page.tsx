@@ -101,7 +101,14 @@ function HeroSection() {
           {invitation.event.dateText} {invitation.event.timeText}
         </p>
         <p>{invitation.event.hall}</p>
-        <p className={styles.heroAddress}>{invitation.event.address}</p>
+        <a
+          href={invitation.event.mapUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.heroAddress}
+        >
+          {invitation.event.address}
+        </a>
       </div>
     </section>
   );
