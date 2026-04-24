@@ -114,11 +114,11 @@ export function WeddingQuiz() {
 
   return (
     <section className={styles.section}>
-      <div className={styles.badge}>
-        <span className={styles.badgeIcon}>❓</span>
-        <span className={styles.badgeDivider} />
-        <span className={styles.badgeText}>커플 퀴즈</span>
-        <span className={styles.badgeArrow}>›</span>
+      <div className="section-badge">
+        <span className="section-badge__icon">❓</span>
+        <span className="section-badge__divider" />
+        <span className="section-badge__text">커플 퀴즈</span>
+        <span className="section-badge__arrow">›</span>
       </div>
 
       <div className={`paper-texture ${styles.card}`}>

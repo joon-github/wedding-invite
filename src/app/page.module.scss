@@ -6,142 +6,170 @@
   width: 100%;
   max-width: 480px;
   overflow: hidden;
-  background-color: #000;
-  color: #fff;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+  background-color: transparent;
+  color: var(--ink);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
 }
 
-// ─── HeroSection ───
+// ─── HeroSection (밝은 종이·명조·테라코타 악센트) ───
 .hero {
-  background-color: #000;
-  padding: 2rem 1.5rem 3rem;
+  background-color: transparent;
+  padding: 2.75rem 1.5rem 3.25rem;
   text-align: center;
+  color: var(--hero-ink);
 }
 
-.heroInner {
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  max-width: 430px;
-}
-
-.heroTitle {
-  font-size: 80px;
-  line-height: 1;
-  color: var(--pink);
-
-  @media (min-width: 640px) {
-    font-size: 92px;
-  }
-}
-
-.heroSubtitle {
-  margin-top: 1rem;
-  width: 100%;
+.heroTagline {
   display: flex;
-  /* 모바일: 세로 스택 */
-  flex-direction: column;
-  align-items: center;
-  row-gap: 0.15rem;
-  line-height: 1.2;
-  font-size: 20px;
-  font-weight: 900;
-  letter-spacing: 0.05em;
-  color: #fff;
-}
-
-/* 넓은 화면: [신랑 * 신부] 덩어리 전체를 가로로 가운데 정렬 */
-@media (min-width: 480px) {
-  .heroSubtitle {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    column-gap: 0.4rem;
-    row-gap: 0.2rem;
-    align-items: baseline;
-  }
-}
-
-/* 이름·별은 쪼개지지 않게(단어 사이 끊김 방지) */
-.heroName {
-  min-width: 0;
-  white-space: nowrap;
-}
-
-.heroAsterisk {
-  margin: 0;
-  color: var(--pink);
-  /* 이름과 동일한 줄 상자(안 올라가 보이게) */
-  line-height: 1.2;
-  font-size: 0.9em;
-  font-weight: 800;
-  flex-shrink: 0;
-  padding: 0 0.1em;
-  /* Georgia 등에서 * 꼬리가 위에 붙어 보이는 광학 보정 */
-  position: relative;
-  top: 0.13em;
-}
-
-.heroFrame {
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  row-gap: 0.2rem;
+  column-gap: 0.25rem;
+  font-size: clamp(1.12rem, 3.2vw, 1.4rem);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  line-height: 1.65;
+  max-width: 22.5rem;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 3rem;
-  display: grid;
-  aspect-ratio: 1 / 1;
-  width: 88%;
-  max-width: 370px;
-  place-items: center;
-  padding: 2rem;
+}
+
+.heroSlashTerra,
+.heroSlash {
+  font-weight: 400;
+  line-height: 0;
+  display: inline-block;
+  user-select: none;
+}
+
+/* 살짝 사선 느낌 */
+.heroSlashTerra,
+.heroSlash {
+  transform: rotate(18deg) translateY(-0.04em);
+  font-size: 0.92em;
+  opacity: 0.9;
+}
+
+.heroSlashTerra {
+  color: var(--terra);
+}
+
+.heroSlash {
+  color: var(--hero-ink-mute);
+}
+
+.heroTagAccent {
+  color: var(--terra);
+  font-weight: 500;
+}
+
+.heroTagRest {
+  color: var(--hero-ink);
+  font-weight: 500;
+}
+
+/* 가로 4:3 — 섹션 좌우 패딩만큼 네거티브 마진으로 main 폭에 거의 딱 붙음 */
+.heroImageFrame {
+  margin: 2.5rem 0 0;
+  /* .hero padding-x 와 같아야 전체 맞닿는 폭(1.5rem) */
+  $hero-pad-x: 1.5rem;
+  width: calc(100% + 2 * $hero-pad-x);
+  max-width: none;
+  margin-left: calc(-1 * $hero-pad-x);
+  margin-right: calc(-1 * $hero-pad-x);
+  padding: 0;
 }
 
 .heroImageWrap {
   position: relative;
-  aspect-ratio: 1 / 1;
   width: 100%;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
-  border-radius: 9999px;
+  border-radius: 0;
+  box-shadow: 0 8px 28px rgba(50, 38, 30, 0.1);
 }
 
 .heroImage {
   object-fit: cover;
-  filter: grayscale(15%) contrast(0.95);
 }
 
-.heroInviteText {
-  margin-top: 3rem;
-  font-size: 28px;
-  font-weight: 900;
-  text-transform: uppercase;
-  line-height: 1;
-  color: var(--pink);
+.heroDateLine {
+  margin-top: 2.1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  color: var(--terra);
 }
 
-.heroDetails {
-  margin-top: 2.5rem;
+.heroNames {
+  margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.5rem;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.75;
-  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  color: var(--hero-ink);
+}
+
+.heroAnd {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  color: var(--hero-ink-mute);
+}
+
+.heroGroomName,
+.heroBrideName {
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+}
+
+.heroClosing {
+  margin-top: 1.5rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+  color: var(--hero-ink-mute);
+}
+
+.heroMeta {
+  margin-top: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+  line-height: 1.6;
+  font-weight: 500;
+  color: var(--hero-ink-mute);
+  letter-spacing: 0.02em;
+  max-width: 18.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 0.25rem;
+  border-top: 1px solid rgba(100, 85, 70, 0.12);
 }
 
 .heroAddress {
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--terra);
   text-decoration: none;
   text-underline-offset: 0.2em;
 
   &:hover,
   &:focus-visible {
-    color: #fff;
     text-decoration: underline;
+    color: var(--terra);
   }
 }
 
 // ─── PaperInvitation ───
 .paperSection {
-  background-color: #000;
+  background-color: transparent;
   padding: 2.5rem 1.5rem;
 }
 
@@ -243,7 +271,7 @@
 
 // ─── FamilyStory ───
 .familySection {
-  background-color: #000;
+  background-color: transparent;
   padding: 1.5rem 1.5rem 2.5rem;
 }
 
@@ -360,17 +388,17 @@
 
 // ─── FamilyBlock ───
 .familyBlock {
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
-  color: #fff;
+  color: var(--ink);
 }
 
 .familyBlockLabel {
   font-size: 0.75rem;
   line-height: 1.25rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .familyBlockRole {
@@ -388,32 +416,44 @@
 // ─── SaveTheDate ───
 .calendarSection {
   position: relative;
-  background-color: #000;
+  background-color: transparent;
   padding: 3.5rem 1.5rem;
   text-align: center;
+  color: var(--ink);
 }
 
 .calendarTitle {
-  font-size: 38px;
+  font-size: clamp(1.35rem, 4.2vw, 2.1rem);
   font-weight: 900;
   letter-spacing: 0.05em;
+  color: var(--ink);
+  line-height: 1.2;
+  word-break: break-word;
 }
 
 .calendarTime {
   margin-top: 0.5rem;
-  font-size: 24px;
+  font-size: clamp(1.1rem, 2.6vw, 1.4rem);
   font-weight: 900;
   font-style: italic;
+  color: var(--ink);
 }
 
 .calendarGrid {
-  margin-top: 3rem;
+  margin-top: 1.75rem;
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  column-gap: 0.25rem;
-  row-gap: 1.25rem;
-  font-size: 19px;
+  /* 좁은 폭에서도 카드 밖으로 나가지 않게: 열·셀이 줄어들 수 있게 */
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  column-gap: 0.15rem;
+  row-gap: 1.1rem;
+  /* 하단(대체공휴일 라벨) 잘림 방지 */
+  padding-bottom: 0.35rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   font-weight: 900;
+  color: var(--muted);
 }
 
 .daySunday {
@@ -425,36 +465,55 @@
 }
 
 .calendarEmpty {
-  width: 3rem;
-  height: 3rem;
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
+  max-width: 2.6rem;
+  margin-left: auto;
+  margin-right: auto;
+  aspect-ratio: 1;
+  height: auto;
 }
 
 .calendarDay {
   position: relative;
+  box-sizing: border-box;
+  min-width: 0;
   margin-left: auto;
   margin-right: auto;
   display: grid;
-  width: 3rem;
-  height: 3rem;
+  width: 100%;
+  max-width: 2.6rem;
+  aspect-ratio: 1;
+  height: auto;
   place-items: center;
   border-radius: 9999px;
+  overflow: visible;
 }
 
 .calendarDayWedding {
-  background-color: #292929;
+  // background-color: #292929;
+  border: 2px solid var(--pink);
+
   color: var(--pink);
 }
 
 .calendarDayHolidayLabel {
   position: absolute;
-  bottom: -0.75rem;
+  z-index: 1;
+  bottom: -0.6rem;
   left: 50%;
-  width: 4rem;
+  max-width: min(3.4rem, 200%);
+  width: max-content;
+  padding: 0 0.1rem;
   transform: translateX(-50%);
-  font-size: 9px;
+  font-size: 7px;
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.1;
   color: #7b2034;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 // ─── PinkGallery ───
@@ -494,79 +553,16 @@
 
 // ─── LocationSection ───
 .locationSection {
-  background-color: #000;
+  background-color: transparent;
   padding: 3.5rem 1.5rem;
-  color: #fff;
-}
-
-.locationBadge {
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2rem;
-  display: grid;
-  height: 4rem;
-  max-width: 320px;
-  width: 70%;
-  grid-template-columns: 56px 1px 1fr 38px;
-  align-items: center;
-  border-radius: 9999px;
-  border: 1px solid var(--pink);
-  background-color: #11110f;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  color: var(--pink);
-  box-shadow: 0 0 18px rgba(230, 160, 191, 0.28);
-  transition: all 0.15s ease;
-  text-decoration: none;
-
-  &:hover {
-    background-color: #171313;
-    box-shadow: 0 0 26px rgba(230, 160, 191, 0.42);
-  }
-}
-
-.locationBadgeIcon {
-  display: grid;
-  place-items: center;
-}
-
-.locationBadgeIconSvg {
-  width: 2rem;
-  height: 2rem;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2.2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.locationBadgeDivider {
-  height: 2.25rem;
-  width: 1px;
-  background-color: rgba(255, 255, 255, 0.18);
-}
-
-.locationBadgeText {
-  text-align: center;
-  font-size: 24px;
-  font-weight: 300;
-  letter-spacing: 0.08em;
-  color: #fff;
-}
-
-.locationBadgeArrow {
-  text-align: center;
-  font-size: 34px;
-  font-weight: 300;
-  line-height: 1;
-  color: var(--pink);
+  color: var(--ink);
 }
 
 .locationCard {
   position: relative;
   padding: 1.25rem;
-  color: #000;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  color: var(--ink);
+  box-shadow: var(--section-card-shadow);
 }
 
 .locationTape {
@@ -654,18 +650,18 @@
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  background-color: #000;
+  background-color: var(--section-cta);
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   font-size: 0.75rem;
   font-weight: 500;
-  color: #fff;
+  color: var(--section-cta-text);
   transition: all 0.15s ease;
   text-decoration: none;
 
   &:hover {
     background-color: var(--pink);
-    color: #000;
+    color: var(--ink);
   }
 }
 
@@ -737,66 +733,35 @@
   color: rgba(0, 0, 0, 0.65);
 }
 
-// ─── AccountSection ───
-.accountSection {
-  background-color: #000;
-  padding: 3rem 1.5rem;
-  color: #fff;
-}
-
-.accountBadge {
+/* 달력 — 캡슐 뱃지는 .section-badge (전역) + paper-texture + 테이프 */
+.calendarCard {
+  @extend .locationCard;
+  box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 2rem;
-  display: grid;
-  height: 4rem;
-  max-width: 340px;
-  grid-template-columns: 58px 1px 1fr 38px;
-  align-items: center;
-  border-radius: 9999px;
-  border: 1px solid var(--pink);
-  background-color: #11110f;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  color: var(--pink);
-  box-shadow: 0 0 18px rgba(230, 160, 191, 0.28);
-}
-
-.accountBadgeHeart {
-  display: grid;
-  place-items: center;
-  font-size: 34px;
-  font-weight: 300;
-  line-height: 1;
-}
-
-.accountBadgeDivider {
-  height: 2.25rem;
-  width: 1px;
-  background-color: rgba(230, 160, 191, 0.6);
-}
-
-.accountBadgeText {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding: 1.5rem 0.65rem 1.6rem;
   text-align: center;
-  font-size: 23px;
-  font-weight: 300;
-  letter-spacing: 0.04em;
-  color: #fff;
 }
 
-.accountBadgeArrow {
-  text-align: center;
-  font-size: 34px;
-  font-weight: 300;
-  line-height: 1;
-  color: var(--pink);
+.calendarTape {
+  @extend .locationTape;
+}
+
+// ─── AccountSection ───
+.accountSection {
+  background-color: transparent;
+  padding: 3rem 1.5rem;
+  color: var(--ink);
 }
 
 .accountCard {
   position: relative;
   padding: 1.25rem;
-  color: #000;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  color: var(--ink);
+  box-shadow: var(--section-card-shadow);
 }
 
 .accountTapeLeft {
@@ -841,7 +806,7 @@
 
 // ─── ShareSection ───
 .shareSection {
-  background-color: #000;
+  background-color: transparent;
   padding: 1rem 1.5rem 3rem;
 }
 
@@ -849,5 +814,5 @@
   padding-top: 2.5rem;
   text-align: center;
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(0, 0, 0, 0.45);
 }

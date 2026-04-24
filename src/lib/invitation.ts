@@ -41,6 +41,8 @@ export const invitation = {
     ],
   },
   heroImage: "/image/A7401864.jpeg",
+  /** 히어로 상단 짧은 문장 (쉼으로 구분, 첫 덩이는 --terra) */
+  heroTagline: ["우리", "둘의", "첫시작"] as const,
   gallery: [
     "/image/A7402598.jpeg",
     "/image/A7401864.jpeg",

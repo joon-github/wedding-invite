@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { PhoneFrame } from "@/components/phone-frame";
+import { THEME_STYLE } from "@/lib/design-tokens";
+import type { CSSProperties } from "react";
 import "./globals.scss";
 
 export const metadata: Metadata = {
@@ -18,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" style={THEME_STYLE as CSSProperties}>
       <body>
         <PhoneFrame>{children}</PhoneFrame>
       </body>

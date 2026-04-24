@@ -1,19 +1,4 @@
-:root {
-  --background: #111111;
-  --foreground: #161616;
-  --ink: #181818;
-  --muted: #6d6460;
-  --coral: #e6a0bf;
-  --olive: #181818;
-  --rose: #f8d7e5;
-  --shell: #f7f4ef;
-  --line: #242424;
-  --pink: #e6a0bf;
-  --soft-pink: #f8d7e5;
-  --paper: #f7f4ef;
-  --paper-deep: #ece5dc;
-  --tape: #ffd48ae6;
-}
+/* CSS 변수(색·그림자)는 @/lib/design-tokens THEME_STYLE → <html> 주입 */
 
 *,
 *::before,
@@ -24,14 +9,23 @@
 }
 
 html {
-  height: 100%;
+  /* height: 100% 만 주면 루트가 뷰포트에 고정되어 배경이 위쪽에만 끊길 수 있음 */
+  min-height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  background-image: url("/image/background_paper.jpg");
+  /* 문서(스크롤) 전체 높이에 맞춰 한 장이 이어짐: 가로는 100% 덮고 세로는 이미지 비율에 맞춰 쌓이듯 */
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+  background-position: top center;
+  background-attachment: scroll;
 }
 
 body {
   min-height: 100%;
-  background: var(--background);
+  /* 배경은 html에만 — 본문은 투명으로 비침 */
+  background: transparent;
   color: var(--foreground);
   font-family:
     ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
@@ -90,10 +84,107 @@ img {
   background-size: 100% 30px, 30px 100%;
 }
 
+/* ── 섹션 캡슐 뱃지 (로케이션·계좌·달력·방명록·사진·퀴즈 공통) ── */
+.section-badge {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  display: grid;
+  height: 4rem;
+  max-width: 340px;
+  grid-template-columns: 58px 1px 1fr 38px;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid var(--section-badge-border);
+  background: var(--section-badge-surface);
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  color: var(--pink);
+  box-shadow: var(--section-badge-shadow);
+}
+
+/* 오시는 길 링크: 약간 좁은 캡슐·호버 */
+.section-badge--link {
+  max-width: 320px;
+  width: 70%;
+  grid-template-columns: 56px 1px 1fr 38px;
+  text-decoration: none;
+  color: var(--pink);
+  transition: box-shadow 0.15s ease;
+
+  &:hover {
+    box-shadow: 0 6px 28px rgb(45 32 20 / 0.1);
+  }
+}
+
+/* 뱃지 div 전용(달력 등) */
+.section-badge--static {
+  pointer-events: none;
+  user-select: none;
+}
+
+.section-badge__icon {
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.section-badge__icon--lg {
+  font-size: 32px;
+}
+
+.section-badge__icon--heart {
+  font-size: 34px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.section-badge__svg {
+  width: 2rem;
+  height: 2rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.section-badge__divider {
+  height: 2.25rem;
+  width: 1px;
+  background-color: var(--terra-50);
+}
+
+/* 로케이션: 구분선 톤만 살짝 연함 */
+.section-badge__divider--muted {
+  background-color: var(--terra-40);
+}
+
+.section-badge__text {
+  text-align: center;
+  font-size: 23px;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+/* 로케이션 제목(조금 큰 letter-spacing) */
+.section-badge__text--wide {
+  font-size: 24px;
+  letter-spacing: 0.08em;
+}
+
+.section-badge__arrow {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--pink);
+}
+
+/* 갤러리·방명록 섹션: 본문 종이 배경과 맞추기 위해 톤만 제거 */
 .pink-collage {
-  background:
-    #FFE6E8,
-    radial-gradient(circle at 20% 12%, rgb(255 255 255 / 0.58), transparent 18%),
-    radial-gradient(circle at 86% 36%, rgb(255 255 255 / 0.42), transparent 22%),
-    #fcb8d5;
+  background: transparent;
 }

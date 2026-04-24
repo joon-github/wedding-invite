@@ -8,10 +8,18 @@ import { KakaoMap } from "@/components/kakao-map";
 import { PhotoUpload } from "@/components/photo-upload";
 import { ShareActions } from "@/components/share-actions";
 import { WeddingQuiz } from "@/components/wedding-quiz";
+import { colors } from "@/lib/design-tokens";
 import { invitation } from "@/lib/invitation";
 import { supabase } from "@/lib/supabase";
+import { Gowun_Batang } from "next/font/google";
 import Image from "next/image";
 import styles from "./page.module.scss";
+
+const heroSerif = Gowun_Batang({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
 
 export const dynamic = "force-dynamic";
 
@@ -41,7 +49,7 @@ export default async function Home({ searchParams }: HomeProps) {
           position: "absolute",
           inset: 0,
           zIndex: 9998,
-          backgroundColor: "#f9f7f4",
+          backgroundColor: colors.curtain,
         }}
       />
     ) : null}
@@ -65,38 +73,56 @@ export default async function Home({ searchParams }: HomeProps) {
 }
 
 function HeroSection() {
-  return (
-    <section className={styles.hero}>
-      <div className={styles.heroInner}>
-        <p className={`script-title ${styles.heroTitle}`}>
-          Save the Date
-        </p>
-        <p className={`serif-title ${styles.heroSubtitle}`}>
-          <span className={styles.heroName}>{romanize(invitation.couple.groom)}</span>
-          <span className={styles.heroAsterisk} aria-hidden>
-            *
-          </span>
-          <span className={styles.heroName}>{romanize(invitation.couple.bride)}</span>
-        </p>
-      </div>
+  const [a, b, c] = invitation.heroTagline;
+  const heroDate = formatHeroDateKor(2026, 9, 4);
 
-      <div className={`lace-frame ${styles.heroFrame}`}>
+  return (
+    <section className={`${styles.hero} ${heroSerif.className}`}>
+      <p className={styles.heroTagline} lang="ko">
+        <span className={styles.heroSlashTerra} aria-hidden>
+          /
+        </span>
+        <span className={styles.heroTagAccent}>
+          {a}
+        </span>
+        <span className={styles.heroSlash} aria-hidden>
+          /
+        </span>
+        <span className={styles.heroTagRest}>
+          {b}
+        </span>
+        <span className={styles.heroSlash} aria-hidden>
+          /
+        </span>
+        <span className={styles.heroTagRest}>
+          {c}
+        </span>
+      </p>
+
+      <div className={styles.heroImageFrame}>
         <div className={styles.heroImageWrap}>
           <Image
             src={invitation.heroImage}
             alt=""
             fill
             priority
-            sizes="360px"
+            sizes="(max-width: 480px) 90vw, 400px"
             className={styles.heroImage}
           />
         </div>
       </div>
 
-      <p className={`serif-title ${styles.heroInviteText}`}>
-        You&apos;re invited to our wedding
-      </p>
-      <div className={styles.heroDetails}>
+      <p className={styles.heroDateLine}>{heroDate}</p>
+
+      <div className={styles.heroNames} lang="ko">
+        <span className={styles.heroGroomName}>{invitation.couple.groom}</span>
+        <span className={styles.heroAnd}>그리고</span>
+        <span className={styles.heroBrideName}>{invitation.couple.bride}</span>
+      </div>
+
+      <p className={styles.heroClosing}>저희, 결혼합니다.</p>
+
+      <div className={styles.heroMeta} lang="ko">
         <p>
           {invitation.event.dateText} {invitation.event.timeText}
         </p>
@@ -225,17 +251,58 @@ function SaveTheDate() {
     [18, 19, 20, 21, 22, 23, 24],
     [25, 26, 27, 28, 29, 30, 31],
   ];
-  const textColor = "#acacac";
-
   return (
-    <section className={styles.calendarSection} style={{ color: textColor }}>
-      <p className={`serif-title ${styles.calendarTitle}`}>
-        2026.10.04. SUN
-      </p>
-      <p className={`serif-title ${styles.calendarTime}`}>
-        17:00
-      </p>
-      <div className={styles.calendarGrid}>
+    <section className={styles.calendarSection}>
+      <div
+        className="section-badge section-badge--static"
+        role="img"
+        aria-label="일정"
+      >
+        <span className="section-badge__icon">
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            className="section-badge__svg"
+          >
+            <rect
+              x="3"
+              y="4"
+              width="18"
+              height="18"
+              rx="2"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+            />
+            <path
+              d="M3 9h18M8 2v3M16 2v3"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+            />
+            <path
+              d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
+          </svg>
+        </span>
+        <span className="section-badge__divider" />
+        <span className="section-badge__text">날짜</span>
+        <span className="section-badge__arrow">›</span>
+      </div>
+
+      <div className={`paper-texture ${styles.calendarCard}`}>
+        <span className={styles.calendarTape} aria-hidden />
+        <p className={`serif-title ${styles.calendarTitle}`}>
+          2026.10.04. SUN
+        </p>
+        <p className={`serif-title ${styles.calendarTime}`}>
+          17:00
+        </p>
+        <div className={styles.calendarGrid}>
         {["SUN", "M", "T", "W", "T", "F", "SAT"].map((day, index) => (
           <span
             key={`${day}-${index}`}
@@ -263,6 +330,7 @@ function SaveTheDate() {
             ),
           ),
         )}
+        </div>
       </div>
     </section>
   );
@@ -330,24 +398,24 @@ function LocationSection() {
         href={invitation.event.kakaoMapUrl}
         target="_blank"
         rel="noreferrer"
-        className={styles.locationBadge}
+        className="section-badge section-badge--link"
         aria-label="카카오맵으로 오시는 길 열기"
       >
-        <span className={styles.locationBadgeIcon}>
+        <span className="section-badge__icon">
           <svg
             viewBox="0 0 24 24"
             aria-hidden="true"
-            className={styles.locationBadgeIconSvg}
+            className="section-badge__svg"
           >
             <path d="M12 22s7-7.1 7-13a7 7 0 0 0-14 0c0 5.9 7 13 7 13Z" />
             <circle cx="12" cy="9" r="2.4" />
           </svg>
         </span>
-        <span className={styles.locationBadgeDivider} />
-        <span className={styles.locationBadgeText}>
+        <span className="section-badge__divider section-badge__divider--muted" />
+        <span className="section-badge__text section-badge__text--wide">
           오시는 길
         </span>
-        <span className={styles.locationBadgeArrow}>
+        <span className="section-badge__arrow">
           ›
         </span>
       </a>
@@ -432,17 +500,13 @@ function LocationSection() {
 function AccountSection() {
   return (
     <section className={styles.accountSection}>
-      <div className={styles.accountBadge}>
-        <span className={styles.accountBadgeHeart}>
+      <div className="section-badge">
+        <span className="section-badge__icon section-badge__icon--heart">
           ♡
         </span>
-        <span className={styles.accountBadgeDivider} />
-        <span className={styles.accountBadgeText}>
-          마음 전하실 곳
-        </span>
-        <span className={styles.accountBadgeArrow}>
-          ›
-        </span>
+        <span className="section-badge__divider" />
+        <span className="section-badge__text">마음 전하실 곳</span>
+        <span className="section-badge__arrow">›</span>
       </div>
       <div className={`paper-texture ${styles.accountCard}`}>
         <span className={styles.accountTapeLeft} />
@@ -498,6 +562,14 @@ function FamilyBlock({
       <p className={styles.familyBlockName}>{name}</p>
     </div>
   );
+}
+
+function formatHeroDateKor(year: number, monthZeroIndexed: number, day: number) {
+  const d = new Date(year, monthZeroIndexed, day, 12, 0, 0);
+  const w = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"] as const;
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  return `${year}.${m}.${dd}.${w[d.getDay()]}`;
 }
 
 function romanize(value: string) {

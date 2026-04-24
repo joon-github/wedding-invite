@@ -1,62 +1,15 @@
 .section {
-  background-color: #000;
+  background-color: transparent;
   padding: 3.5rem 1.5rem;
-  color: #fff;
-}
-
-.badge {
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2rem;
-  display: grid;
-  height: 4rem;
-  max-width: 340px;
-  grid-template-columns: 58px 1px 1fr 38px;
-  align-items: center;
-  border-radius: 9999px;
-  border: 1px solid var(--pink);
-  background-color: #11110f;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  color: var(--pink);
-  box-shadow: 0 0 18px rgba(230, 160, 191, 0.28);
-}
-
-.badgeIcon {
-  display: grid;
-  place-items: center;
-  font-size: 28px;
-  line-height: 1;
-}
-
-.badgeDivider {
-  height: 2.25rem;
-  width: 1px;
-  background-color: rgba(230, 160, 191, 0.6);
-}
-
-.badgeText {
-  text-align: center;
-  font-size: 23px;
-  font-weight: 300;
-  letter-spacing: 0.04em;
-  color: #fff;
-}
-
-.badgeArrow {
-  text-align: center;
-  font-size: 34px;
-  font-weight: 300;
-  line-height: 1;
-  color: var(--pink);
+  color: var(--ink);
 }
 
 // ─── Card ───
 .card {
   position: relative;
   padding: 1.5rem 1.25rem;
-  color: #000;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  color: var(--ink);
+  box-shadow: var(--section-card-shadow);
   min-height: 360px;
 }
 
@@ -96,7 +49,7 @@
   font-family: Georgia, "Times New Roman", serif;
   font-size: 22px;
   font-weight: 900;
-  color: #000;
+  color: var(--ink);
 }
 
 .introDesc {
@@ -110,7 +63,7 @@
   margin-top: 1.25rem;
   padding: 0.625rem 1rem;
   border-left: 3px solid var(--pink);
-  background-color: rgba(230, 160, 191, 0.08);
+  background-color: var(--terra-8);
   text-align: left;
   font-size: 0.8125rem;
   line-height: 1.6;
@@ -119,7 +72,7 @@
 
 .introPrizeStrong {
   font-weight: 800;
-  color: #000;
+  color: var(--ink);
 }
 
 .nameInput {
@@ -137,7 +90,7 @@
   transition: border-color 0.15s ease;
 
   &:focus {
-    border-color: #000;
+    border-color: rgb(180 120 150 / 0.65);
   }
 }
 
@@ -147,8 +100,8 @@
   height: 2.75rem;
   border-radius: 9999px;
   border: none;
-  background-color: #000;
-  color: #fff;
+  background-color: var(--section-cta);
+  color: var(--section-cta-text);
   font-size: 0.875rem;
   font-weight: 700;
   cursor: pointer;
@@ -156,7 +109,7 @@
 
   &:hover {
     background-color: var(--pink);
-    color: #000;
+    color: var(--ink);
   }
 
   &:disabled {
@@ -222,7 +175,7 @@
   font-size: 1rem;
   font-weight: 800;
   line-height: 1.5;
-  color: #000;
+  color: var(--ink);
   margin-bottom: 1rem;
 }
 
@@ -245,7 +198,7 @@
   text-align: left;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #000;
+  color: var(--ink);
 
   &:hover {
     border-color: rgba(0, 0, 0, 0.25);
@@ -255,7 +208,7 @@
 
 .optionSelected {
   border-color: var(--pink);
-  background: rgba(230, 160, 191, 0.1);
+  background: var(--terra-10);
 }
 
 .optionCorrect {
@@ -336,8 +289,8 @@
   height: 2.5rem;
   border-radius: 9999px;
   border: none;
-  background-color: #000;
-  color: #fff;
+  background-color: var(--section-cta);
+  color: var(--section-cta-text);
   font-size: 0.8125rem;
   font-weight: 700;
   cursor: pointer;
@@ -345,7 +298,7 @@
 
   &:hover {
     background-color: var(--pink);
-    color: #000;
+    color: var(--ink);
   }
 }
 
@@ -386,7 +339,7 @@
   font-size: 0.9375rem;
   font-weight: 700;
   line-height: 1.6;
-  color: #000;
+  color: var(--ink);
 }
 
 // ─── Secret passphrase ───
@@ -431,7 +384,7 @@
 
 .secretHintStrong {
   font-weight: 800;
-  color: #000;
+  color: var(--ink);
 }
 
 .retryButton {
@@ -448,7 +401,7 @@
   transition: all 0.15s ease;
 
   &:hover {
-    border-color: #000;
-    color: #000;
+    border-color: var(--section-cta);
+    color: var(--ink);
   }
 }

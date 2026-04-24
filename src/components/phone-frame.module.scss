@@ -5,9 +5,7 @@
     justify-content: center;
     min-height: 100vh;
     padding: 2rem;
-    background:
-      radial-gradient(ellipse at 50% 30%, rgba(230, 160, 191, 0.06), transparent 60%),
-      #0e0e0e;
+    background: transparent;
   }
 }
 
@@ -23,7 +21,7 @@
       0 0 0 6px #2a2a2a,
       0 0 0 8px #1a1a1a,
       0 40px 80px rgba(0, 0, 0, 0.5),
-      0 0 120px rgba(230, 160, 191, 0.08);
+      0 0 120px var(--terra-10);
     flex-shrink: 0;
   }
 }

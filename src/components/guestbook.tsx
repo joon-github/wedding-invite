@@ -92,15 +92,13 @@ export function Guestbook() {
 
   return (
     <section className={`pink-collage ${styles.section}`}>
-      <div className={styles.badge}>
-        <span className={styles.badgeIcon}>
+      <div className="section-badge">
+        <span className="section-badge__icon section-badge__icon--lg">
           ✎
         </span>
-        <span className={styles.badgeDivider} />
-        <span className={styles.badgeText}>
-          방명록
-        </span>
-        <span className={styles.badgeArrow}>
+        <span className="section-badge__divider" />
+        <span className="section-badge__text">방명록</span>
+        <span className="section-badge__arrow">
           ›
         </span>
       </div>

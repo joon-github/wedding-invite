@@ -1,5 +1,6 @@
 "use client";
 
+import { confettiColors } from "@/lib/design-tokens";
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./dday-counter.module.scss";
 
@@ -77,10 +78,7 @@ export function DdayCounter({ targetDate }: DdayCounterProps) {
       emoji?: string;
     };
 
-    const colors = [
-      "#e6a0bf", "#f8d7e5", "#ffd48a", "#fff",
-      "#ff8fa3", "#ffc2d1", "#ffebcd", "#c9a0dc",
-    ];
+    const palette = [...confettiColors];
     const emojis = ["😇", "👼", "✨", "💕", "💒", "💍"];
 
     const particles: Particle[] = [];
@@ -96,7 +94,7 @@ export function DdayCounter({ targetDate }: DdayCounterProps) {
           vx: Math.cos(angle) * speed * (0.6 + Math.random()),
           vy: -Math.abs(Math.sin(angle) * speed * (1.5 + Math.random())),
           size: isEmoji ? 16 + Math.random() * 8 : 3 + Math.random() * 5,
-          color: colors[Math.floor(Math.random() * colors.length)],
+          color: palette[Math.floor(Math.random() * palette.length)],
           rotation: Math.random() * 360,
           rotationSpeed: (Math.random() - 0.5) * 8,
           opacity: 1,

@@ -1,60 +1,12 @@
 .section {
   padding: 3.5rem 1.5rem;
-  color: #000;
-}
-
-.badge {
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2rem;
-  display: grid;
-  height: 4rem;
-  max-width: 340px;
-  grid-template-columns: 58px 1px 1fr 38px;
-  align-items: center;
-  border-radius: 9999px;
-  border: 1px solid rgba(0, 0, 0, 0.55);
-  background-color: #11110f;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  color: var(--pink);
-  box-shadow: 0 0 18px rgba(0, 0, 0, 0.22);
-}
-
-.badgeIcon {
-  display: grid;
-  place-items: center;
-  font-size: 32px;
-  font-weight: 300;
-  line-height: 1;
-}
-
-.badgeDivider {
-  height: 2.25rem;
-  width: 1px;
-  background-color: rgba(230, 160, 191, 0.6);
-}
-
-.badgeText {
-  text-align: center;
-  font-size: 23px;
-  font-weight: 300;
-  letter-spacing: 0.04em;
-  color: #fff;
-}
-
-.badgeArrow {
-  text-align: center;
-  font-size: 34px;
-  font-weight: 300;
-  line-height: 1;
-  color: var(--pink);
+  color: var(--ink);
 }
 
 .card {
   position: relative;
   padding: 1.25rem 1.25rem 1.5rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--section-card-shadow);
 }
 
 .tapeLeft {
@@ -113,7 +65,7 @@
   transition: border-color 0.15s ease;
 
   &:focus {
-    border-color: #000;
+    border-color: rgb(180 120 150 / 0.65);
   }
 }
 
@@ -132,7 +84,7 @@
   transition: border-color 0.15s ease;
 
   &:focus {
-    border-color: #000;
+    border-color: rgb(180 120 150 / 0.65);
   }
 }
 
@@ -140,17 +92,17 @@
   height: 2.75rem;
   width: 100%;
   border-radius: 9999px;
-  background-color: #000;
+  background-color: var(--section-cta);
   border: none;
   font-size: 0.875rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--section-cta-text);
   cursor: pointer;
   transition: all 0.15s ease;
 
   &:hover {
     background-color: var(--pink);
-    color: #000;
+    color: var(--ink);
   }
 
   &:disabled {
@@ -195,7 +147,7 @@
   text-align: center;
   font-size: 0.875rem;
   font-weight: 700;
-  color: #000;
+  color: var(--ink);
 }
 
 .messageList {
