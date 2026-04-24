@@ -1,0 +1,454 @@
+.section {
+  background-color: #000;
+  padding: 3.5rem 1.5rem;
+  color: #fff;
+}
+
+.badge {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  display: grid;
+  height: 4rem;
+  max-width: 340px;
+  grid-template-columns: 58px 1px 1fr 38px;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid var(--pink);
+  background-color: #11110f;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  color: var(--pink);
+  box-shadow: 0 0 18px rgba(230, 160, 191, 0.28);
+}
+
+.badgeIcon {
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.badgeDivider {
+  height: 2.25rem;
+  width: 1px;
+  background-color: rgba(230, 160, 191, 0.6);
+}
+
+.badgeText {
+  text-align: center;
+  font-size: 23px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+.badgeArrow {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--pink);
+}
+
+// ─── Card ───
+.card {
+  position: relative;
+  padding: 1.5rem 1.25rem;
+  color: #000;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  min-height: 360px;
+}
+
+.tapeLeft {
+  position: absolute;
+  top: -1rem;
+  left: 2.5rem;
+  height: 2rem;
+  width: 5rem;
+  transform: rotate(-3deg);
+  background-color: rgba(255, 212, 138, 0.9);
+}
+
+.tapeRight {
+  position: absolute;
+  top: -1rem;
+  right: 2.5rem;
+  height: 2rem;
+  width: 5rem;
+  transform: rotate(3deg);
+  background-color: rgba(255, 212, 138, 0.9);
+}
+
+// ─── Intro ───
+.intro {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.introEmoji {
+  font-size: 40px;
+  line-height: 1;
+}
+
+.introTitle {
+  margin-top: 1rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: #000;
+}
+
+.introDesc {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.introPrize {
+  margin-top: 1.25rem;
+  padding: 0.625rem 1rem;
+  border-left: 3px solid var(--pink);
+  background-color: rgba(230, 160, 191, 0.08);
+  text-align: left;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.introPrizeStrong {
+  font-weight: 800;
+  color: #000;
+}
+
+.nameInput {
+  margin-top: 1.25rem;
+  height: 2.75rem;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.5);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  outline: none;
+  text-align: center;
+  transition: border-color 0.15s ease;
+
+  &:focus {
+    border-color: #000;
+  }
+}
+
+.startButton {
+  margin-top: 0.75rem;
+  width: 100%;
+  height: 2.75rem;
+  border-radius: 9999px;
+  border: none;
+  background-color: #000;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background-color: var(--pink);
+    color: #000;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+  }
+}
+
+// ─── Progress ───
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.progressBar {
+  flex: 1;
+  height: 4px;
+  background-color: rgba(0, 0, 0, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--pink);
+  border-radius: 2px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progressText {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.35);
+  white-space: nowrap;
+}
+
+// ─── Question ───
+.questionCard {
+  animation: questionIn 0.35s ease both;
+}
+
+@keyframes questionIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.questionImage {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.questionText {
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.5;
+  color: #000;
+  margin-bottom: 1rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #000;
+
+  &:hover {
+    border-color: rgba(0, 0, 0, 0.25);
+    background: rgba(255, 255, 255, 0.6);
+  }
+}
+
+.optionSelected {
+  border-color: var(--pink);
+  background: rgba(230, 160, 191, 0.1);
+}
+
+.optionCorrect {
+  border-color: #38a169;
+  background: rgba(56, 161, 105, 0.08);
+}
+
+.optionWrong {
+  border-color: #e53e3e;
+  background: rgba(229, 62, 62, 0.06);
+  opacity: 0.6;
+}
+
+.optionLocked {
+  pointer-events: none;
+}
+
+.optionMarker {
+  width: 1.75rem;
+  height: 1.75rem;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  display: grid;
+  place-items: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
+}
+
+.optionMarkerSelected {
+  border-color: var(--pink);
+  background: var(--pink);
+  color: #fff;
+}
+
+.optionMarkerCorrect {
+  border-color: #38a169;
+  background: #38a169;
+  color: #fff;
+}
+
+.optionMarkerWrong {
+  border-color: #e53e3e;
+  background: #e53e3e;
+  color: #fff;
+}
+
+.feedback {
+  margin-top: 1rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-align: center;
+  animation: feedbackIn 0.3s ease;
+}
+
+@keyframes feedbackIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.feedbackCorrect {
+  background: rgba(56, 161, 105, 0.1);
+  color: #276749;
+}
+
+.feedbackWrong {
+  background: rgba(229, 62, 62, 0.08);
+  color: #c53030;
+}
+
+.nextButton {
+  margin-top: 1rem;
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 9999px;
+  border: none;
+  background-color: #000;
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background-color: var(--pink);
+    color: #000;
+  }
+}
+
+// ─── Result ───
+.result {
+  text-align: center;
+  padding: 1rem 0;
+  animation: resultIn 0.5s ease;
+}
+
+@keyframes resultIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.resultEmoji {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.resultScore {
+  margin-top: 0.75rem;
+  font-family: Georgia, serif;
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--pink);
+}
+
+.resultLabel {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.resultMessage {
+  margin-top: 1rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: #000;
+}
+
+// ─── Secret passphrase ───
+.secret {
+  margin-top: 1.5rem;
+  border: 2px dashed var(--pink);
+  border-radius: 8px;
+  padding: 1.25rem;
+  text-align: center;
+  animation: secretReveal 0.8s ease;
+}
+
+@keyframes secretReveal {
+  0% { opacity: 0; transform: scale(0.9); border-color: transparent; }
+  50% { opacity: 1; transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.secretLabel {
+  font-size: 0.6875rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.secretPassphrase {
+  margin-top: 0.5rem;
+  font-family: Georgia, serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--pink);
+  letter-spacing: 0.08em;
+}
+
+.secretHint {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.secretHintStrong {
+  font-weight: 800;
+  color: #000;
+}
+
+.retryButton {
+  margin-top: 1.25rem;
+  height: 2.5rem;
+  padding: 0 1.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: none;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    border-color: #000;
+    color: #000;
+  }
+}

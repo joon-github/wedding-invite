@@ -7,6 +7,7 @@ import { Guestbook } from "@/components/guestbook";
 import { KakaoMap } from "@/components/kakao-map";
 import { PhotoUpload } from "@/components/photo-upload";
 import { ShareActions } from "@/components/share-actions";
+import { WeddingQuiz } from "@/components/wedding-quiz";
 import { invitation } from "@/lib/invitation";
 import Image from "next/image";
 import styles from "./page.module.scss";
@@ -25,6 +26,7 @@ export default function Home() {
       <AccountSection />
       <Guestbook />
       <PhotoUpload />
+      <WeddingQuiz />
       <ShareSection />
     </main>
   );
