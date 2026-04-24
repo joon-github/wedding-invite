@@ -14,7 +14,7 @@
 .device {
   @media (min-width: 768px) {
     position: relative;
-    width: 390px;
+    width: 450px;
     height: 844px;
     border-radius: 44px;
     overflow: hidden;
@@ -38,6 +38,11 @@
 
   @media (min-width: 768px) {
     border-radius: 44px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 
