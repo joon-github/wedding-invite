@@ -20,15 +20,35 @@ function downloadUrl(url: string, filename: string) {
   a.remove();
 }
 
+type SiteSettings = Record<string, boolean>;
+
+const SETTING_LABELS: Record<string, string> = {
+  show_guestbook: "방명록",
+  show_photo_upload: "포토부스",
+  show_quiz: "커플 퀴즈",
+};
+
+const ADMIN_TABS = [
+  { id: "photos", label: "사진" },
+  { id: "guestbook", label: "방명록" },
+  { id: "quiz", label: "퀴즈 응답" },
+  { id: "quiz-manage", label: "문제" },
+  { id: "settings", label: "설정" },
+] as const;
+
+type AdminTab = (typeof ADMIN_TABS)[number]["id"];
+
 export function AdminPanel({ adminKey }: { adminKey: string }) {
-  const [tab, setTab] = useState<"photos" | "guestbook" | "quiz" | "quiz-manage">("photos");
+  const [tab, setTab] = useState<AdminTab>("photos");
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
   const [quizResults, setQuizResults] = useState<QuizResult[]>([]);
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
+  const [settings, setSettings] = useState<SiteSettings>({});
   const [deleting, setDeleting] = useState<string | null>(null);
   const [zipping, setZipping] = useState(false);
   const [zipProgress, setZipProgress] = useState("");
+  const [quizSort, setQuizSort] = useState<"latest" | "score-desc" | "perfect">("latest");
 
   const apiUrl = useCallback((path: string) => `${path}?key=${adminKey}`, [adminKey]);
 
@@ -37,7 +57,21 @@ export function AdminPanel({ adminKey }: { adminKey: string }) {
     fetch("/api/guestbook").then((r) => r.json()).then((d) => setMessages(d.messages ?? []));
     fetch(apiUrl("/api/quiz-results")).then((r) => r.json()).then((d) => setQuizResults(d.results ?? []));
     fetch(apiUrl("/api/quiz-manage")).then((r) => r.json()).then((d) => setQuestions(d.questions ?? []));
+    fetch("/api/settings").then((r) => r.json()).then((d) => setSettings(d.settings ?? {}));
   }, [apiUrl]);
+
+  const toggleSetting = useCallback(async (key: string) => {
+    const newValue = !settings[key];
+    const label = SETTING_LABELS[key] ?? key;
+    const action = newValue ? "활성화" : "비활성화";
+    if (!confirm(`${label}을(를) ${action}할까요?`)) return;
+    setSettings((prev) => ({ ...prev, [key]: newValue }));
+    await fetch(apiUrl("/api/settings"), {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ key, value: newValue }),
+    });
+  }, [settings, apiUrl]);
 
   // ── Photo actions ──
   const deletePhoto = useCallback(async (url: string) => {
@@ -130,9 +164,14 @@ export function AdminPanel({ adminKey }: { adminKey: string }) {
       </div>
 
       <div className={styles.tabs}>
-        {(["photos", "guestbook", "quiz", "quiz-manage"] as const).map((t) => (
-          <button key={t} type="button" className={`${styles.tab} ${tab === t ? styles.tabActive : ""}`} onClick={() => setTab(t)}>
-            {t === "photos" ? `사진` : t === "guestbook" ? `방명록` : t === "quiz" ? `응답` : `문제`}
+        {ADMIN_TABS.map(({ id, label }) => (
+          <button
+            key={id}
+            type="button"
+            className={`${styles.tab} ${tab === id ? styles.tabActive : ""}`}
+            onClick={() => setTab(id)}
+          >
+            {label}
           </button>
         ))}
       </div>
@@ -179,8 +218,23 @@ export function AdminPanel({ adminKey }: { adminKey: string }) {
       {/* ── Quiz results ── */}
       {tab === "quiz" ? (
         <div className={styles.messageList}>
+          <select
+            className={styles.sortSelect}
+            value={quizSort}
+            onChange={(e) => setQuizSort(e.target.value as typeof quizSort)}
+          >
+            <option value="latest">최신순</option>
+            <option value="score-desc">고득점순</option>
+            <option value="perfect">만점자만</option>
+          </select>
           {quizResults.length === 0 ? <p className={styles.empty}>아직 퀴즈 응답이 없습니다</p> : null}
-          {quizResults.map((r) => (
+          {[...quizResults]
+            .filter((r) => quizSort !== "perfect" || r.correct)
+            .sort((a, b) => {
+              if (quizSort === "score-desc") return b.score - a.score || new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+              return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+            })
+            .map((r) => (
             <div key={r.id} className={styles.messageCard}>
               <div className={styles.messageContent}>
                 <p><span className={styles.messageName}>{r.correct ? "🏆 " : ""}{r.name}</span><span className={styles.messageDate}>{new Date(r.created_at).toLocaleDateString("ko-KR")}</span></p>
@@ -200,6 +254,27 @@ export function AdminPanel({ adminKey }: { adminKey: string }) {
           <button type="button" className={styles.addQuestionButton} onClick={addQuestion}>
             + 문제 추가
           </button>
+        </div>
+      ) : null}
+
+      {/* ── Settings ── */}
+      {tab === "settings" ? (
+        <div className={styles.settingsList}>
+          {Object.entries(SETTING_LABELS).map(([key, label]) => (
+            <div key={key} className={styles.settingItem}>
+              <span className={styles.settingLabel}>{label}</span>
+              <button
+                type="button"
+                className={`${styles.settingToggle} ${settings[key] !== false ? styles.settingToggleOn : ""}`}
+                onClick={() => toggleSetting(key)}
+              >
+                <span className={styles.settingToggleKnob} />
+              </button>
+            </div>
+          ))}
+          <p className={styles.settingHint}>
+            OFF로 설정하면 메인 페이지에서 해당 섹션이 숨겨집니다.
+          </p>
         </div>
       ) : null}
     </div>

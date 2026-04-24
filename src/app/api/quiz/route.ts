@@ -1,9 +1,14 @@
 import { supabase } from "@/lib/supabase";
 import { getQuizQuestions, SECRET_PASSPHRASE } from "@/lib/quiz";
+import { isFeatureEnabled } from "@/lib/settings";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
+  if (!(await isFeatureEnabled("show_quiz"))) {
+    return Response.json({ questions: [] });
+  }
+
   const questions = await getQuizQuestions();
 
   const clientQuestions = questions.map((q) => ({
@@ -17,6 +22,10 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  if (!(await isFeatureEnabled("show_quiz"))) {
+    return Response.json({ error: "Quiz is disabled" }, { status: 403 });
+  }
+
   const body = await request.json().catch(() => null);
   const name = typeof body?.name === "string" ? body.name.trim().slice(0, 20) : "";
   const answers = body?.answers;

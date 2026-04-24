@@ -9,10 +9,24 @@ import { PhotoUpload } from "@/components/photo-upload";
 import { ShareActions } from "@/components/share-actions";
 import { WeddingQuiz } from "@/components/wedding-quiz";
 import { invitation } from "@/lib/invitation";
+import { supabase } from "@/lib/supabase";
 import Image from "next/image";
 import styles from "./page.module.scss";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+async function getSiteSettings() {
+  const { data } = await supabase.from("site_settings").select("key, value");
+  const settings: Record<string, boolean> = {};
+  for (const row of data ?? []) {
+    settings[row.key] = row.value === true || row.value === "true";
+  }
+  return settings;
+}
+
+export default async function Home() {
+  const settings = await getSiteSettings();
+
   return (
     <main className={styles.main}>
       <EnvelopeGate />
@@ -24,9 +38,9 @@ export default function Home() {
       <PinkGallery />
       <LocationSection />
       <AccountSection />
-      <Guestbook />
-      <PhotoUpload />
-      <WeddingQuiz />
+      {settings.show_guestbook !== false ? <Guestbook /> : null}
+      {settings.show_photo_upload !== false ? <PhotoUpload /> : null}
+      {settings.show_quiz !== false ? <WeddingQuiz /> : null}
       <ShareSection />
     </main>
   );

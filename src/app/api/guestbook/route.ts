@@ -1,4 +1,5 @@
 import { verifyAdmin } from "@/lib/admin";
+import { isFeatureEnabled } from "@/lib/settings";
 import { supabase } from "@/lib/supabase";
 
 const MAX_NAME_LENGTH = 20;
@@ -27,6 +28,10 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  if (!(await isFeatureEnabled("show_guestbook"))) {
+    return Response.json({ error: "Guestbook is disabled" }, { status: 403 });
+  }
+
   const body = await request.json().catch(() => null);
   const name = sanitizeText(body?.name, MAX_NAME_LENGTH);
   const message = sanitizeText(body?.message, MAX_MESSAGE_LENGTH);

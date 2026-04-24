@@ -1,5 +1,6 @@
 import { del, list, put } from "@vercel/blob";
 import { verifyAdmin } from "@/lib/admin";
+import { isFeatureEnabled } from "@/lib/settings";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +20,10 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  if (!(await isFeatureEnabled("show_photo_upload"))) {
+    return Response.json({ error: "Photo upload is disabled" }, { status: 403 });
+  }
+
   const formData = await request.formData();
   const file = formData.get("file") as File | null;
 

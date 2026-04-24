@@ -1,6 +1,11 @@
+import { isFeatureEnabled } from "@/lib/settings";
 import { supabase } from "@/lib/supabase";
 
 export async function POST(request: Request) {
+  if (!(await isFeatureEnabled("show_quiz"))) {
+    return Response.json({ error: "Quiz is disabled" }, { status: 403 });
+  }
+
   const body = await request.json().catch(() => null);
   const questionId = body?.questionId;
   const selected = body?.selected;
