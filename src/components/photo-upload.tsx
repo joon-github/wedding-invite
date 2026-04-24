@@ -14,6 +14,7 @@ export function PhotoUpload() {
   const [status, setStatus] = useState<"idle" | "loading" | "uploading" | "error">("loading");
   const [dragOver, setDragOver] = useState(false);
   const [newUrls, setNewUrls] = useState<Set<string>>(new Set());
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -63,6 +64,46 @@ export function PhotoUpload() {
       setTimeout(() => setStatus("idle"), 2000);
     }
   }, [status]);
+
+  const selectedPhoto = selectedIndex === null ? null : photos[selectedIndex] ?? null;
+
+  const movePhoto = useCallback((direction: -1 | 1) => {
+    setSelectedIndex((current) => {
+      if (current === null || photos.length === 0) {
+        return current;
+      }
+
+      return (current + direction + photos.length) % photos.length;
+    });
+  }, [photos.length]);
+
+  useEffect(() => {
+    if (selectedIndex === null) {
+      return;
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setSelectedIndex(null);
+      }
+
+      if (event.key === "ArrowLeft") {
+        movePhoto(-1);
+      }
+
+      if (event.key === "ArrowRight") {
+        movePhoto(1);
+      }
+    }
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [movePhoto, selectedIndex]);
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -152,9 +193,12 @@ export function PhotoUpload() {
             </p>
           ) : null}
           {photos.map((photo) => (
-            <div
+            <button
+              type="button"
               key={photo.url}
               className={`${styles.photoItem} ${newUrls.has(photo.url) ? styles.photoNew : ""}`}
+              onClick={() => setSelectedIndex(photos.findIndex((item) => item.url === photo.url))}
+              aria-label="포토부스 사진 크게 보기"
             >
               <img
                 src={photo.url}
@@ -162,7 +206,7 @@ export function PhotoUpload() {
                 className={styles.photoImage}
                 loading="lazy"
               />
-            </div>
+            </button>
           ))}
         </div>
 
@@ -172,6 +216,63 @@ export function PhotoUpload() {
           </p>
         ) : null}
       </div>
+      {selectedPhoto ? (
+        <div
+          className={styles.lightbox}
+          role="dialog"
+          aria-modal="true"
+          aria-label="포토부스 사진 크게 보기"
+          onClick={() => setSelectedIndex(null)}
+        >
+          <button
+            type="button"
+            className={styles.lightboxClose}
+            onClick={() => setSelectedIndex(null)}
+            aria-label="닫기"
+          >
+            ×
+          </button>
+          {photos.length > 1 ? (
+            <>
+              <button
+                type="button"
+                className={styles.lightboxNavLeft}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  movePhoto(-1);
+                }}
+                aria-label="이전 사진"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                className={styles.lightboxNavRight}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  movePhoto(1);
+                }}
+                aria-label="다음 사진"
+              >
+                ›
+              </button>
+            </>
+          ) : null}
+          <div
+            className={styles.lightboxImageWrap}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <img
+              src={selectedPhoto.url}
+              alt=""
+              className={styles.lightboxImage}
+            />
+          </div>
+          <p className={styles.lightboxCount}>
+            {selectedIndex + 1} / {photos.length}
+          </p>
+        </div>
+      ) : null}
     </section>
   );
 }
