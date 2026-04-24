@@ -1,6 +1,7 @@
 import { AccountAccordion } from "@/components/account-accordion";
 import { CopyButton } from "@/components/copy-button";
 import { DdayCounter } from "@/components/dday-counter";
+import { EnvelopeGate } from "@/components/envelope-gate";
 import { Gallery } from "@/components/gallery";
 import { Guestbook } from "@/components/guestbook";
 import { KakaoMap } from "@/components/kakao-map";
@@ -12,6 +13,7 @@ import styles from "./page.module.scss";
 export default function Home() {
   return (
     <main className={styles.main}>
+      <EnvelopeGate />
       <HeroSection />
       <DdayCounter targetDate="2026-10-04" />
       <PaperInvitation />
