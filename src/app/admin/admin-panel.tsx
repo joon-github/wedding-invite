@@ -249,7 +249,7 @@ export function AdminPanel({ adminKey }: { adminKey: string }) {
       {tab === "quiz-manage" ? (
         <div className={styles.quizManage}>
           {questions.map((q, idx) => (
-            <QuestionEditor key={q.id} question={q} index={idx} onSave={saveQuestion} onDelete={deleteQuestion} />
+            <QuestionEditor key={q.id} question={q} index={idx} adminKey={adminKey} onSave={saveQuestion} onDelete={deleteQuestion} />
           ))}
           <button type="button" className={styles.addQuestionButton} onClick={addQuestion}>
             + 문제 추가
@@ -284,17 +284,20 @@ export function AdminPanel({ adminKey }: { adminKey: string }) {
 function QuestionEditor({
   question: initial,
   index,
+  adminKey,
   onSave,
   onDelete,
 }: {
   question: QuizQuestion;
   index: number;
+  adminKey: string;
   onSave: (q: QuizQuestion) => Promise<void>;
   onDelete: (id: number) => Promise<void>;
 }) {
   const [q, setQ] = useState(initial);
   const [dirty, setDirty] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   function update(patch: Partial<QuizQuestion>) {
     setQ((prev) => ({ ...prev, ...patch }));
@@ -305,6 +308,23 @@ function QuestionEditor({
     const options = [...q.options];
     options[i] = value;
     update({ options });
+  }
+
+  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch(`/api/upload?key=${adminKey}`, { method: "POST", body: formData });
+      const data = await res.json();
+      if (data.url) update({ image: data.url });
+    } catch {
+      alert("이미지 업로드 실패");
+    }
+    setUploading(false);
+    e.target.value = "";
   }
 
   async function handleSave() {
@@ -326,12 +346,31 @@ function QuestionEditor({
         onChange={(e) => update({ question: e.target.value })}
         placeholder="문제를 입력하세요"
       />
-      <input
-        className={styles.questionEditorInputSmall}
-        value={q.image ?? ""}
-        onChange={(e) => update({ image: e.target.value || null })}
-        placeholder="이미지 경로 (선택, 예: /image/xxx.jpeg)"
-      />
+      <div className={styles.questionEditorImage}>
+        {q.image ? (
+          <div className={styles.questionEditorImagePreview}>
+            <img src={q.image} alt="" className={styles.questionEditorImageImg} />
+            <button
+              type="button"
+              className={styles.questionEditorImageRemove}
+              onClick={() => update({ image: null })}
+            >
+              ✕
+            </button>
+          </div>
+        ) : (
+          <label className={styles.questionEditorImageUpload}>
+            <span>{uploading ? "업로드 중..." : "📷 이미지 추가 (선택)"}</span>
+            <input
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={handleImageUpload}
+              disabled={uploading}
+            />
+          </label>
+        )}
+      </div>
       <div className={styles.questionEditorOptions}>
         {q.options.map((opt, i) => (
           <div key={i} className={styles.questionEditorOption}>

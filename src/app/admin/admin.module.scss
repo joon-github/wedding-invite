@@ -352,6 +352,65 @@
   }
 }
 
+.questionEditorImage {
+  margin-top: 0.5rem;
+}
+
+.questionEditorImagePreview {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  max-height: 140px;
+}
+
+.questionEditorImageImg {
+  width: 100%;
+  max-height: 140px;
+  object-fit: cover;
+  display: block;
+  border-radius: 6px;
+}
+
+.questionEditorImageRemove {
+  position: absolute;
+  top: 0.375rem;
+  right: 0.375rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 9999px;
+  border: none;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 0.6875rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(4px);
+
+  &:hover {
+    background: rgba(229, 62, 62, 0.8);
+  }
+}
+
+.questionEditorImageUpload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    border-color: var(--pink);
+    color: var(--pink);
+  }
+}
+
 .questionEditorOptions {
   margin-top: 0.625rem;
   display: flex;

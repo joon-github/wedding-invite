@@ -17,13 +17,15 @@ type GuestbookResponse = {
 
 export function Guestbook() {
   const [messages, setMessages] = useState<GuestbookMessage[]>([]);
-  const [name, setName] = useState(() => {
-    if (typeof window === "undefined") return "";
-    return new URLSearchParams(window.location.search).get("name") ?? "";
-  });
+  const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [trap, setTrap] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "saving" | "done" | "error" | "setup">("loading");
+
+  useEffect(() => {
+    const param = new URLSearchParams(window.location.search).get("name");
+    if (param) setName(param);
+  }, []);
 
   useEffect(() => {
     let active = true;

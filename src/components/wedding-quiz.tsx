@@ -16,10 +16,12 @@ type Result = { score: number; total: number; perfect: boolean; passphrase: stri
 
 export function WeddingQuiz() {
   const [phase, setPhase] = useState<Phase>("intro");
-  const [name, setName] = useState(() => {
-    if (typeof window === "undefined") return "";
-    return new URLSearchParams(window.location.search).get("name") ?? "";
-  });
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    const param = new URLSearchParams(window.location.search).get("name");
+    if (param) setName(param);
+  }, []);
   const [questions, setQuestions] = useState<ClientQuestion[]>([]);
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<(number | null)[]>([]);
@@ -43,18 +45,17 @@ export function WeddingQuiz() {
       setCorrectAnswer(null);
       setAnswers(qs.map(() => null));
       setQuestions(qs);
-      // setPhase in a separate tick so questions state is committed
-      setTimeout(() => setPhase("playing"), 0);
+      setPhase("playing");
     } catch {
       setPhase("intro");
     }
   }, []);
 
-  const q = phase === "playing" ? questions[current] : undefined;
+  const q = questions[current] ?? null;
 
   const selectOption = useCallback(
     async (optionIndex: number) => {
-      if (revealed || !q) return;
+      if (revealed || q === null) return;
       setAnswers((prev) => {
         const next = [...prev];
         next[current] = optionIndex;
@@ -155,7 +156,7 @@ export function WeddingQuiz() {
           </div>
         ) : null}
 
-        {phase === "playing" && q ? (
+        {phase === "playing" && q !== null ? (
           <>
             <div className={styles.progress}>
               <div className={styles.progressBar}>
