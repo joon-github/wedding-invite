@@ -38,10 +38,10 @@
 .heroSubtitle {
   margin-top: 1rem;
   width: 100%;
-  display: grid;
-  /* 모바일: 세로 스택(별이 두 이름의 사이) */
-  grid-template-columns: 1fr;
-  justify-items: center;
+  display: flex;
+  /* 모바일: 세로 스택 */
+  flex-direction: column;
+  align-items: center;
   row-gap: 0.15rem;
   line-height: 1.2;
   font-size: 20px;
@@ -50,23 +50,15 @@
   color: #fff;
 }
 
-/* 넓은 화면: [신랑 ←·가운데·→ 신부] — 별을 컨테이너 정가운데에 */
+/* 넓은 화면: [신랑 * 신부] 덩어리 전체를 가로로 가운데 정렬 */
 @media (min-width: 480px) {
   .heroSubtitle {
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    /* center면 *가 글꼴 박스 기준 위로 떠 보이므로 베이스라인 정렬 */
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 0.4rem;
+    row-gap: 0.2rem;
     align-items: baseline;
-    column-gap: 0.35rem;
-  }
-
-  .heroName:first-of-type {
-    justify-self: end;
-    text-align: end;
-  }
-
-  .heroName:last-of-type {
-    justify-self: start;
-    text-align: start;
   }
 }
 
@@ -83,7 +75,7 @@
   line-height: 1.2;
   font-size: 0.9em;
   font-weight: 800;
-  justify-self: center;
+  flex-shrink: 0;
   padding: 0 0.1em;
   /* Georgia 등에서 * 꼬리가 위에 붙어 보이는 광학 보정 */
   position: relative;
@@ -536,7 +528,7 @@
   height: 2rem;
   width: 6rem;
   transform: translateX(-50%) rotate(2deg);
-  background-color: rgba(255, 212, 138, 0.9);
+  background-color: var(--tape);
 }
 
 .locationHeader {
@@ -766,7 +758,7 @@
   height: 2rem;
   width: 5rem;
   transform: rotate(-6deg);
-  background-color: rgba(255, 212, 138, 0.9);
+  background-color: var(--tape);
 }
 
 .accountTapeRight {
@@ -776,7 +768,7 @@
   height: 2rem;
   width: 5rem;
   transform: rotate(6deg);
-  background-color: rgba(255, 212, 138, 0.9);
+  background-color: var(--tape);
 }
 
 .accountHeader {

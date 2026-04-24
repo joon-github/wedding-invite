@@ -67,7 +67,7 @@
   height: 2rem;
   width: 5rem;
   transform: rotate(-3deg);
-  background-color: rgba(255, 212, 138, 0.9);
+  background-color: var(--tape);
 }
 
 .tapeRight {
@@ -77,7 +77,7 @@
   height: 2rem;
   width: 5rem;
   transform: rotate(3deg);
-  background-color: rgba(255, 212, 138, 0.9);
+  background-color: var(--tape);
 }
 
 // ─── Intro ───
