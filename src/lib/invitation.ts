@@ -1,3 +1,5 @@
+import { imageAssets } from "./image-assets";
+
 export type Account = {
   bank: string;
   number: string;
@@ -40,31 +42,10 @@ export const invitation = {
       "그리고 나의 평생에 네가 사는 것.",
     ],
   },
-  heroImage: "/image/A7401864.jpeg",
+  heroImage: imageAssets.photos.hero,
   /** 히어로 상단 짧은 문장 (쉼으로 구분, 첫 덩이는 --terra) */
   heroTagline: ["우리", "둘의", "첫시작"] as const,
-  gallery: [
-    "/image/A7402598.jpeg",
-    "/image/A7401864.jpeg",
-    "/image/A7402567.jpeg",
-    "/image/A7402661.jpeg",
-    "/image/A7402405.jpeg",
-    "/image/A7402203.jpeg",
-    "/image/A7401819.jpeg",
-    "/image/A7402171.jpeg",
-    "/image/A7401966.jpeg",
-    "/image/A7402503.jpeg",
-    "/image/A7402446.jpeg",
-    "/image/A7402467.jpeg",
-    "/image/A7402390.jpeg",
-    "/image/A7402191.jpeg",
-    "/image/A7402216.jpeg",
-    "/image/A7402319.jpeg",
-    "/image/A7401807.jpeg",
-    "/image/A7402230.jpeg",
-    "/image/A7402621.jpeg",
-    "/image/A7402565.jpeg",
-  ],
+  gallery: imageAssets.photos.gallery,
   transport: [
     {
       title: "셔틀버스",

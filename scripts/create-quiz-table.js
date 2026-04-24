@@ -32,7 +32,7 @@ async function run() {
       { question: "두 사람이 처음 함께 여행한 곳은?", image: null, options: ["제주도", "부산", "강릉", "일본"], answer: 2, sort_order: 2 },
       { question: "범준이가 프로포즈한 장소는?", image: null, options: ["한강공원", "집", "레스토랑", "여행지"], answer: 1, sort_order: 3 },
       { question: "정아가 가장 좋아하는 범준이의 모습은?", image: null, options: ["요리할 때", "운동할 때", "웃을 때", "집중할 때"], answer: 2, sort_order: 4 },
-      { question: "웨딩 사진에서 강아지는 총 몇 번 등장했을까요?", image: "/image/A7402503.jpeg", options: ["0번", "1번", "2번", "3번"], answer: 2, sort_order: 5 },
+      { question: "웨딩 사진에서 강아지는 총 몇 번 등장했을까요?", image: "/image/photos/gallery/10.jpg", options: ["0번", "1번", "2번", "3번"], answer: 2, sort_order: 5 },
     ];
 
     for (const q of questions) {

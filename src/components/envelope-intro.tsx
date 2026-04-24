@@ -3,6 +3,7 @@
 import { Nanum_Pen_Script } from "next/font/google";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { imageAssets } from "@/lib/image-assets";
 import styles from "./envelope-intro.module.scss";
 
 const penFont = Nanum_Pen_Script({
@@ -156,7 +157,7 @@ export function EnvelopeIntro({ guestName, onComplete }: EnvelopeIntroProps) {
             style={{ transform: `translateY(${cardTranslateY}px)` }}
           >
             <Image
-              src="/image/welcome_image.png"
+              src={imageAssets.intro.welcome}
               alt="청첩장"
               width={600}
               height={840}
