@@ -20,7 +20,16 @@ export function WeddingQuiz() {
 
   useEffect(() => {
     const param = new URLSearchParams(window.location.search).get("name");
-    if (param) setName(param);
+
+    if (!param) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setName(param);
+    }, 0);
+
+    return () => window.clearTimeout(timeoutId);
   }, []);
   const [questions, setQuestions] = useState<ClientQuestion[]>([]);
   const [current, setCurrent] = useState(0);

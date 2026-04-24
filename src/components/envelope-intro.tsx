@@ -19,6 +19,12 @@ type EnvelopeIntroProps = {
 
 const STORAGE_KEY = "wedding-envelope-seen";
 const SWIPE_THRESHOLD = 80;
+const dustParticles = Array.from({ length: 12 }, (_, index) => ({
+  left: `${8 + ((index * 17) % 84)}%`,
+  animationDuration: `${4 + (index % 6)}s`,
+  animationDelay: `${((index * 7) % 10) / 2}s`,
+  size: 2 + (index % 3),
+}));
 
 export function EnvelopeIntro({ guestName, onComplete }: EnvelopeIntroProps) {
   const [phase, setPhase] = useState<"typing" | "envelope" | "leaving" | "done">("typing");
@@ -26,6 +32,7 @@ export function EnvelopeIntro({ guestName, onComplete }: EnvelopeIntroProps) {
   const [showCursor, setShowCursor] = useState(true);
   const dragRef = useRef({ startY: 0, currentY: 0, dragging: false });
   const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
   const fullText = `${guestName}님,\n편범준 ♡ 유정아\n결혼식에 초대합니다`;
 
   useEffect(() => {
@@ -72,6 +79,7 @@ export function EnvelopeIntro({ guestName, onComplete }: EnvelopeIntroProps) {
   const handleSwipeEnd = useCallback(() => {
     if (!dragRef.current.dragging) return;
     dragRef.current.dragging = false;
+    setIsDragging(false);
 
     const dy = dragRef.current.startY - dragRef.current.currentY;
     if (dy > SWIPE_THRESHOLD) {
@@ -83,6 +91,7 @@ export function EnvelopeIntro({ guestName, onComplete }: EnvelopeIntroProps) {
 
   function handlePointerDown(e: React.PointerEvent) {
     dragRef.current = { startY: e.clientY, currentY: e.clientY, dragging: true };
+    setIsDragging(true);
     (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
   }
 
@@ -99,13 +108,6 @@ export function EnvelopeIntro({ guestName, onComplete }: EnvelopeIntroProps) {
 
   const cardTranslateY = phase === "leaving" ? -120 : -dragOffset * 0.6;
   const overlayOpacity = phase === "leaving" ? 0 : 1 - dragOffset / 400;
-
-  const dustParticles = Array.from({ length: 12 }, (_, i) => ({
-    left: `${8 + Math.random() * 84}%`,
-    animationDuration: `${4 + Math.random() * 6}s`,
-    animationDelay: `${Math.random() * 5}s`,
-    size: 2 + Math.random() * 2,
-  }));
 
   return (
     <div
@@ -153,7 +155,7 @@ export function EnvelopeIntro({ guestName, onComplete }: EnvelopeIntroProps) {
         <div className={styles.envelopeTop} />
         <div className={styles.envelopeCenter}>
           <div
-            className={`${styles.envelopeCard} ${dragRef.current.dragging ? styles.envelopeCardDragging : ""}`}
+            className={`${styles.envelopeCard} ${isDragging ? styles.envelopeCardDragging : ""}`}
             style={{ transform: `translateY(${cardTranslateY}px)` }}
           >
             <Image
@@ -191,8 +193,12 @@ export function useEnvelopeIntro() {
     const name = params.get("name");
 
     if (name && !localStorage.getItem(STORAGE_KEY)) {
-      setGuestName(name);
-      setShow(true);
+      const timeoutId = window.setTimeout(() => {
+        setGuestName(name);
+        setShow(true);
+      }, 0);
+
+      return () => window.clearTimeout(timeoutId);
     }
   }, []);
 

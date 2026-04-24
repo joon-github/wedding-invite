@@ -45,9 +45,14 @@ export function DdayCounter({ targetDate }: DdayCounterProps) {
   const confettiFired = useRef(false);
 
   useEffect(() => {
-    setTime(getTimeLeft(targetDate));
-    const id = setInterval(() => setTime(getTimeLeft(targetDate)), 1000);
-    return () => clearInterval(id);
+    const update = () => setTime(getTimeLeft(targetDate));
+    const timeoutId = window.setTimeout(update, 0);
+    const intervalId = window.setInterval(update, 1000);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      window.clearInterval(intervalId);
+    };
   }, [targetDate]);
 
   const fireConfetti = useCallback(() => {

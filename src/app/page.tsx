@@ -42,32 +42,32 @@ export default async function Home({ searchParams }: HomeProps) {
 
   return (
     <>
-    {hasName ? (
-      <div
-        id="envelope-curtain"
-        style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 9998,
-          backgroundColor: colors.curtain,
-        }}
-      />
-    ) : null}
-    <EnvelopeGate />
-    <main className={styles.main}>
-      <HeroSection />
-      <DdayCounter targetDate="2026-10-04" />
-      <PaperInvitation />
-      <FamilyStory />
-      <SaveTheDate />
-      <PinkGallery />
-      <LocationSection />
-      <AccountSection />
-      {settings.show_guestbook !== false ? <Guestbook /> : null}
-      {settings.show_photo_upload !== false ? <PhotoUpload /> : null}
-      {settings.show_quiz !== false ? <WeddingQuiz /> : null}
-      <ShareSection />
-    </main>
+      {hasName ? (
+        <div
+          id="envelope-curtain"
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 9998,
+            backgroundColor: colors.curtain,
+          }}
+        />
+      ) : null}
+      <EnvelopeGate />
+      <main className={styles.main}>
+        <HeroSection />
+        <DdayCounter targetDate="2026-10-04" />
+        <PaperInvitation />
+        <FamilyStory />
+        <SaveTheDate />
+        <PinkGallery />
+        <LocationSection />
+        <AccountSection />
+        {settings.show_guestbook !== false ? <Guestbook /> : null}
+        {settings.show_photo_upload !== false ? <PhotoUpload /> : null}
+        {settings.show_quiz !== false ? <WeddingQuiz /> : null}
+        <ShareSection />
+      </main>
     </>
   );
 }
@@ -106,6 +106,7 @@ function HeroSection() {
             alt=""
             fill
             priority
+            unoptimized
             sizes="(max-width: 480px) 90vw, 400px"
             className={styles.heroImage}
           />
@@ -303,33 +304,33 @@ function SaveTheDate() {
           17:00
         </p>
         <div className={styles.calendarGrid}>
-        {["SUN", "M", "T", "W", "T", "F", "SAT"].map((day, index) => (
-          <span
-            key={`${day}-${index}`}
-            className={
-              index === 0
-                ? styles.daySunday
-                : index === 6
-                  ? styles.daySaturday
-                  : undefined
-            }
-          >
-            {day}
-          </span>
-        ))}
-        {calendarWeeks.flatMap((week, weekIndex) =>
-          week.map((day, dayIndex) =>
-            day === null ? (
-              <span
-                key={`empty-${weekIndex}-${dayIndex}`}
-                className={styles.calendarEmpty}
-                aria-hidden="true"
-              />
-            ) : (
-              <CalendarDay key={day} day={day} dayIndex={dayIndex} />
+          {["SUN", "M", "T", "W", "T", "F", "SAT"].map((day, index) => (
+            <span
+              key={`${day}-${index}`}
+              className={
+                index === 0
+                  ? styles.daySunday
+                  : index === 6
+                    ? styles.daySaturday
+                    : undefined
+              }
+            >
+              {day}
+            </span>
+          ))}
+          {calendarWeeks.flatMap((week, weekIndex) =>
+            week.map((day, dayIndex) =>
+              day === null ? (
+                <span
+                  key={`empty-${weekIndex}-${dayIndex}`}
+                  className={styles.calendarEmpty}
+                  aria-hidden="true"
+                />
+              ) : (
+                <CalendarDay key={day} day={day} dayIndex={dayIndex} />
+              ),
             ),
-          ),
-        )}
+          )}
         </div>
       </div>
     </section>

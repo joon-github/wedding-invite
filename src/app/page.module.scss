@@ -87,7 +87,6 @@
   aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: 0;
-  box-shadow: 0 8px 28px rgba(50, 38, 30, 0.1);
 }
 
 .heroImage {
@@ -525,7 +524,7 @@
 .pinkInner {
   margin-left: auto;
   margin-right: auto;
-  max-width: 340px;
+  // max-width: 340px;
   display: flex;
   flex-direction: column;
   gap: 2rem;

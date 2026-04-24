@@ -19,12 +19,20 @@ export function Guestbook() {
   const [messages, setMessages] = useState<GuestbookMessage[]>([]);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
-  const [trap, setTrap] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "saving" | "done" | "error" | "setup">("loading");
 
   useEffect(() => {
     const param = new URLSearchParams(window.location.search).get("name");
-    if (param) setName(param);
+
+    if (!param) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setName(param);
+    }, 0);
+
+    return () => window.clearTimeout(timeoutId);
   }, []);
 
   useEffect(() => {
@@ -58,7 +66,7 @@ export function Guestbook() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (!name.trim() || !message.trim() || trap) {
+    if (!name.trim() || !message.trim()) {
       return;
     }
 
@@ -71,7 +79,6 @@ export function Guestbook() {
         body: JSON.stringify({
           name: name.trim(),
           message: message.trim(),
-          website: trap,
         }),
       });
       const data = (await response.json()) as GuestbookResponse;
@@ -108,15 +115,6 @@ export function Guestbook() {
         <span className={styles.tapeRight} />
 
         <form className={styles.form} onSubmit={handleSubmit}>
-          <input
-            value={trap}
-            onChange={(event) => setTrap(event.target.value)}
-            className={styles.honeypot}
-            tabIndex={-1}
-            autoComplete="off"
-            aria-hidden="true"
-            name="website"
-          />
           <label className={styles.fieldLabel}>
             <span className={styles.fieldLabelText}>
               Name
@@ -127,6 +125,7 @@ export function Guestbook() {
               maxLength={20}
               placeholder="성함"
               className={styles.input}
+              required
             />
           </label>
           <label className={styles.fieldLabel}>
@@ -139,6 +138,7 @@ export function Guestbook() {
               maxLength={140}
               placeholder="축하 메시지를 남겨주세요"
               className={styles.textarea}
+              required
             />
           </label>
           <button
@@ -175,9 +175,9 @@ export function Guestbook() {
         ) : null}
 
         <div className={styles.messageList}>
-          {messages.map((item) => (
+          {messages.map((item, index) => (
             <article
-              key={item.id}
+              key={`${item.id}-${index}`}
               className={styles.messageItem}
             >
               <div className={styles.messageHeader}>

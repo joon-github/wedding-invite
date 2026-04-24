@@ -66,6 +66,7 @@ export function PhotoUpload() {
   }, [status]);
 
   const selectedPhoto = selectedIndex === null ? null : photos[selectedIndex] ?? null;
+  const selectedNumber = selectedIndex === null ? 0 : selectedIndex + 1;
 
   const movePhoto = useCallback((direction: -1 | 1) => {
     setSelectedIndex((current) => {
@@ -192,12 +193,12 @@ export function PhotoUpload() {
               아직 공유된 사진이 없어요. 첫 번째 사진을 올려주세요!
             </p>
           ) : null}
-          {photos.map((photo) => (
+          {photos.map((photo, index) => (
             <button
               type="button"
               key={photo.url}
               className={`${styles.photoItem} ${newUrls.has(photo.url) ? styles.photoNew : ""}`}
-              onClick={() => setSelectedIndex(photos.findIndex((item) => item.url === photo.url))}
+              onClick={() => setSelectedIndex(index)}
               aria-label="포토부스 사진 크게 보기"
             >
               <img
@@ -269,7 +270,7 @@ export function PhotoUpload() {
             />
           </div>
           <p className={styles.lightboxCount}>
-            {selectedIndex + 1} / {photos.length}
+            {selectedNumber} / {photos.length}
           </p>
         </div>
       ) : null}
