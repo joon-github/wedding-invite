@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import styles from "./share-actions.module.scss";
 
 type ShareActionsProps = {
@@ -8,15 +8,17 @@ type ShareActionsProps = {
   text: string;
 };
 
+/** `?name=` 등 쿼리·해시 없이 페이지 URL만 (복사/공유용) */
+function getCleanPageUrl(): string {
+  if (typeof window === "undefined") return "";
+  return `${window.location.origin}${window.location.pathname}`;
+}
+
 export function ShareActions({ title, text }: ShareActionsProps) {
   const [copied, setCopied] = useState(false);
-  const fallbackUrl = useMemo(
-    () => (typeof window === "undefined" ? "" : window.location.href),
-    [],
-  );
 
   async function handleShare() {
-    const url = window.location.href;
+    const url = getCleanPageUrl();
 
     if (navigator.share) {
       await navigator.share({ title, text, url });
@@ -29,7 +31,7 @@ export function ShareActions({ title, text }: ShareActionsProps) {
   }
 
   async function handleCopyUrl() {
-    const url = window.location.href || fallbackUrl;
+    const url = getCleanPageUrl();
     await navigator.clipboard.writeText(url);
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1800);
