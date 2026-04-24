@@ -15,6 +15,10 @@ import styles from "./page.module.scss";
 
 export const dynamic = "force-dynamic";
 
+type HomeProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
+
 async function getSiteSettings() {
   const { data } = await supabase.from("site_settings").select("key, value");
   const settings: Record<string, boolean> = {};
@@ -24,12 +28,25 @@ async function getSiteSettings() {
   return settings;
 }
 
-export default async function Home() {
-  const settings = await getSiteSettings();
+export default async function Home({ searchParams }: HomeProps) {
+  const [settings, params] = await Promise.all([getSiteSettings(), searchParams]);
+  const hasName = typeof params.name === "string" && params.name.length > 0;
 
   return (
+    <>
+    {hasName ? (
+      <div
+        id="envelope-curtain"
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 9998,
+          backgroundColor: "#f9f7f4",
+        }}
+      />
+    ) : null}
+    <EnvelopeGate />
     <main className={styles.main}>
-      <EnvelopeGate />
       <HeroSection />
       <DdayCounter targetDate="2026-10-04" />
       <PaperInvitation />
@@ -43,6 +60,7 @@ export default async function Home() {
       {settings.show_quiz !== false ? <WeddingQuiz /> : null}
       <ShareSection />
     </main>
+    </>
   );
 }
 

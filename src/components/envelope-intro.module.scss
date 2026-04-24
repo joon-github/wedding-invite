@@ -2,14 +2,19 @@
 .overlay {
   position: fixed;
   inset: 0;
-  z-index: 10000;
+  z-index: 9999;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #0a0a09;
+  background-color: #f9f7f4;
   transition: opacity 0.8s ease, visibility 0.8s ease;
   overflow: hidden;
+
+  @media (min-width: 768px) {
+    position: absolute;
+    border-radius: 44px;
+  }
 }
 
 .overlayHidden {
@@ -38,7 +43,7 @@
 .welcomeText {
   font-size: 28px;
   line-height: 1.9;
-  color: var(--pink);
+  color: #5a4a3e;
   text-align: center;
   letter-spacing: 0.01em;
   max-width: 320px;
@@ -48,7 +53,7 @@
   display: inline-block;
   width: 2px;
   height: 1.1em;
-  background-color: var(--pink);
+  background-color: #5a4a3e;
   margin-left: 2px;
   vertical-align: text-bottom;
   animation: cursorBlink 0.6s step-end infinite;
@@ -71,7 +76,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 0;
   opacity: 0;
   transition: opacity 0.5s ease;
   touch-action: none;
@@ -81,98 +86,50 @@
   opacity: 1;
 }
 
-.envelope {
+.envelopeCard {
   position: relative;
-  width: 88%;
-  max-width: 340px;
-  aspect-ratio: 5 / 3.2;
-  border-radius: 3px;
-  overflow: visible;
+  width: 100%;
+  max-width: none;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-
-  // paper body
-  background:
-    linear-gradient(170deg, rgba(255, 255, 255, 0.06) 0%, transparent 40%),
-    linear-gradient(180deg, #f5f0e8, #ece5d8);
-  box-shadow:
-    0 8px 40px rgba(0, 0, 0, 0.5),
-    0 2px 8px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
-.envelopeDragging {
+.envelopeCardDragging {
   transition: none;
 }
 
-// inner shadow line for depth
-.envelope::before {
-  content: "";
-  position: absolute;
-  left: 8%;
-  right: 8%;
-  top: 45%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.06), transparent);
-}
-
-// top flap (triangle)
-.flap {
-  position: absolute;
-  top: 0;
-  left: 0;
+.envelopeImage {
   width: 100%;
-  height: 52%;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  background:
-    linear-gradient(180deg, #efe8dd 0%, #e8dfd2 100%);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  z-index: 2;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 12px 40px rgba(0, 0, 0, 0.12));
 }
 
-// flap inner fold line
-.flap::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 25%;
-  right: 25%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08), transparent);
+// recipient name below image
+.recipientOverlay {
+  margin-top: 1.25rem;
+  text-align: center;
+  animation: recipientFadeIn 0.6s ease 0.2s both;
 }
 
-// wax seal
-.seal {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 40% 35%, #d4848f, #b5616e 50%, #993d4d);
-  box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.3),
-    inset 0 1px 2px rgba(255, 255, 255, 0.2);
-  display: grid;
-  place-items: center;
-  font-family: Georgia, serif;
-  font-size: 16px;
-  font-weight: 900;
-  color: rgba(255, 255, 255, 0.85);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+@keyframes recipientFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-// recipient name
-.recipientName {
-  position: absolute;
-  bottom: 12%;
-  right: 10%;
-  z-index: 4;
-  font-family: "Times New Roman", "Bodoni 72", Georgia, serif;
+.recipientTo {
+  font-family: Georgia, "Times New Roman", serif;
   font-style: italic;
-  font-size: 15px;
-  letter-spacing: -0.02em;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #b0a59a;
+}
+
+.recipientName {
+  margin-top: 0.125rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 16px;
+  letter-spacing: -0.01em;
   color: #5a4a3e;
 }
 
@@ -183,23 +140,10 @@
   margin-left: 2px;
 }
 
-// "To." label
-.toLabel {
-  position: absolute;
-  bottom: 12%;
-  left: 10%;
-  z-index: 4;
-  font-family: Georgia, serif;
-  font-style: italic;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: #b5a89a;
-}
-
 // ─── Swipe hint ───
 .swipeHint {
   position: absolute;
-  bottom: max(env(safe-area-inset-bottom, 0px), 1rem);
+  bottom: max(env(safe-area-inset-bottom, 0px), 1.5rem);
   left: 0;
   right: 0;
   display: flex;
@@ -217,7 +161,7 @@
 
 .swipeArrow {
   font-size: 20px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(90, 74, 62, 0.35);
   animation: arrowBounce 1.4s ease-in-out infinite;
 }
 
@@ -230,15 +174,16 @@
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(90, 74, 62, 0.35);
 }
 
-// ─── Gold dust particles ───
+// ─── Dust particles ───
 .dustContainer {
   position: absolute;
   inset: 0;
   pointer-events: none;
   overflow: hidden;
+  z-index: 10;
 }
 
 .dust {
@@ -246,7 +191,7 @@
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background-color: rgba(255, 212, 138, 0.4);
+  background-color: rgba(200, 180, 150, 0.35);
   animation: dustFloat linear infinite;
 }
 

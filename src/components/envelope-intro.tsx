@@ -1,6 +1,7 @@
 "use client";
 
 import { Nanum_Pen_Script } from "next/font/google";
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./envelope-intro.module.scss";
 
@@ -26,7 +27,18 @@ export function EnvelopeIntro({ guestName, onComplete }: EnvelopeIntroProps) {
   const [dragOffset, setDragOffset] = useState(0);
   const fullText = `${guestName}님,\n편범준 ♡ 유정아\n결혼식에 초대합니다`;
 
-  // Phase 1: typewriter
+  useEffect(() => {
+    document.getElementById("envelope-curtain")?.remove();
+    document.body.style.overflow = "hidden";
+    const screen = document.querySelector("[data-phone-screen]") as HTMLElement | null;
+    if (screen) screen.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+      if (screen) screen.style.overflow = "";
+    };
+  }, []);
+
   useEffect(() => {
     if (phase !== "typing") return;
 
@@ -44,10 +56,12 @@ export function EnvelopeIntro({ guestName, onComplete }: EnvelopeIntroProps) {
     return () => clearInterval(id);
   }, [phase, fullText]);
 
-  // Phase: leaving
   useEffect(() => {
     if (phase !== "leaving") return;
     const id = setTimeout(() => {
+      document.body.style.overflow = "";
+      const screen = document.querySelector("[data-phone-screen]") as HTMLElement | null;
+      if (screen) screen.style.overflow = "";
       setPhase("done");
       onComplete();
     }, 800);
@@ -82,7 +96,7 @@ export function EnvelopeIntro({ guestName, onComplete }: EnvelopeIntroProps) {
 
   if (phase === "done") return null;
 
-  const envelopeTranslateY = phase === "leaving" ? -120 : -dragOffset * 0.6;
+  const cardTranslateY = phase === "leaving" ? -120 : -dragOffset * 0.6;
   const overlayOpacity = phase === "leaving" ? 0 : 1 - dragOffset / 400;
 
   const dustParticles = Array.from({ length: 12 }, (_, i) => ({
@@ -97,7 +111,6 @@ export function EnvelopeIntro({ guestName, onComplete }: EnvelopeIntroProps) {
       className={`${styles.overlay} ${phase === "leaving" ? styles.overlayHidden : ""}`}
       style={{ opacity: overlayOpacity }}
     >
-      {/* gold dust */}
       <div className={styles.dustContainer}>
         {dustParticles.map((p, i) => (
           <span
@@ -128,7 +141,7 @@ export function EnvelopeIntro({ guestName, onComplete }: EnvelopeIntroProps) {
         </p>
       </div>
 
-      {/* Phase 2: envelope */}
+      {/* Phase 2: envelope image */}
       <div
         className={`${styles.envelopeLayer} ${phase === "envelope" ? styles.envelopeVisible : ""}`}
         onPointerDown={handlePointerDown}
@@ -137,16 +150,24 @@ export function EnvelopeIntro({ guestName, onComplete }: EnvelopeIntroProps) {
         onPointerCancel={handleSwipeEnd}
       >
         <div
-          className={`${styles.envelope} ${dragRef.current.dragging ? styles.envelopeDragging : ""}`}
-          style={{ transform: `translateY(${envelopeTranslateY}px)` }}
+          className={`${styles.envelopeCard} ${dragRef.current.dragging ? styles.envelopeCardDragging : ""}`}
+          style={{ transform: `translateY(${cardTranslateY}px)` }}
         >
-          <div className={styles.flap} />
-          <div className={styles.seal}>♡</div>
-          <span className={styles.toLabel}>To.</span>
-          <span className={styles.recipientName}>
-            {guestName}
-            <span className={styles.recipientSuffix}>님께</span>
-          </span>
+          <Image
+            src="/image/welcome_image.png"
+            alt="청첩장"
+            width={600}
+            height={840}
+            className={styles.envelopeImage}
+            priority
+          />
+          <div className={styles.recipientOverlay}>
+            <p className={styles.recipientTo}>To.</p>
+            <p className={styles.recipientName}>
+              {guestName}
+              <span className={styles.recipientSuffix}>님께</span>
+            </p>
+          </div>
         </div>
 
         <div className={styles.swipeHint}>
@@ -165,13 +186,11 @@ export function useEnvelopeIntro() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const name = params.get("name");
-    if (!name) return;
 
-    const seen = localStorage.getItem(STORAGE_KEY);
-    if (seen) return;
-
-    setGuestName(name);
-    setShow(true);
+    if (name && !localStorage.getItem(STORAGE_KEY)) {
+      setGuestName(name);
+      setShow(true);
+    }
   }, []);
 
   return { guestName, show, dismiss: () => setShow(false) };

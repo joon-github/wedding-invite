@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PhoneFrame } from "@/components/phone-frame";
 import "./globals.scss";
 
 export const metadata: Metadata = {
@@ -18,7 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body>
+        <PhoneFrame>{children}</PhoneFrame>
+      </body>
     </html>
   );
 }

@@ -39,11 +39,12 @@ function getTimeLeft(target: string): TimeLeft {
 }
 
 export function DdayCounter({ targetDate }: DdayCounterProps) {
-  const [time, setTime] = useState<TimeLeft>(() => getTimeLeft(targetDate));
+  const [time, setTime] = useState<TimeLeft | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const confettiFired = useRef(false);
 
   useEffect(() => {
+    setTime(getTimeLeft(targetDate));
     const id = setInterval(() => setTime(getTimeLeft(targetDate)), 1000);
     return () => clearInterval(id);
   }, [targetDate]);
@@ -161,11 +162,11 @@ export function DdayCounter({ targetDate }: DdayCounterProps) {
   }, []);
 
   useEffect(() => {
-    if (time.isToday && !confettiFired.current) {
+    if (time?.isToday && !confettiFired.current) {
       confettiFired.current = true;
       fireConfetti();
     }
-  }, [time.isToday, fireConfetti]);
+  }, [time?.isToday, fireConfetti]);
 
   useEffect(() => {
     (window as unknown as Record<string, unknown>).__fireConfetti = fireConfetti;
@@ -175,6 +176,17 @@ export function DdayCounter({ targetDate }: DdayCounterProps) {
   }, [fireConfetti]);
 
   const pad = (n: number) => String(n).padStart(2, "0");
+
+  if (!time) {
+    return (
+      <section className={styles.section}>
+        <canvas ref={canvasRef} className={styles.confettiCanvas} />
+        <div className={styles.content}>
+          <p className={styles.label}>Until our wedding</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className={styles.section}>
