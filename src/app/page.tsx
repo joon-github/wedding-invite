@@ -72,9 +72,11 @@ function HeroSection() {
           Save the Date
         </p>
         <p className={`serif-title ${styles.heroSubtitle}`}>
-          {romanize(invitation.couple.groom)}
-          <span className={styles.heroAsterisk}>*</span>
-          {romanize(invitation.couple.bride)}
+          <span className={styles.heroName}>{romanize(invitation.couple.groom)}</span>
+          <span className={styles.heroAsterisk} aria-hidden>
+            *
+          </span>
+          <span className={styles.heroName}>{romanize(invitation.couple.bride)}</span>
         </p>
       </div>
 

@@ -27,62 +27,41 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 4.5rem;
-
-  @media (max-width: 360px) {
-    min-width: 3.25rem;
-  }
+  min-width: clamp(3.25rem, 10vw, 4.5rem);
 }
 
 .number {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 52px;
+  font-size: clamp(32px, 12vw, 52px);
   font-weight: 900;
   line-height: 1;
   color: #fff;
   font-variant-numeric: tabular-nums;
-
-  @media (max-width: 360px) {
-    font-size: 36px;
-  }
 }
 
 .numberDays {
-  font-size: 72px;
+  font-size: clamp(44px, 16vw, 72px);
   color: var(--pink);
   text-shadow: 0 0 40px rgba(230, 160, 191, 0.35);
-
-  @media (max-width: 360px) {
-    font-size: 48px;
-  }
 }
 
 .unitLabel {
   margin-top: 0.5rem;
-  font-size: 10px;
+  font-size: clamp(8px, 2.5vw, 10px);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: clamp(0.1em, 0.5vw, 0.18em);
   color: rgba(255, 255, 255, 0.35);
-
-  @media (max-width: 360px) {
-    font-size: 8px;
-    letter-spacing: 0.1em;
-  }
 }
 
 .separator {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 36px;
+  font-size: clamp(20px, 8vw, 36px);
   font-weight: 300;
   color: rgba(255, 255, 255, 0.15);
   line-height: 1;
   padding-top: 0.25rem;
   align-self: flex-start;
-
-  @media (max-width: 360px) {
-    font-size: 24px;
-  }
 }
 
 // ─── Subtitle ───

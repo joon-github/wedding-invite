@@ -37,16 +37,57 @@
 
 .heroSubtitle {
   margin-top: 1rem;
+  width: 100%;
+  display: grid;
+  /* 모바일: 세로 스택(별이 두 이름의 사이) */
+  grid-template-columns: 1fr;
+  justify-items: center;
+  row-gap: 0.15rem;
+  line-height: 1.2;
   font-size: 20px;
   font-weight: 900;
   letter-spacing: 0.05em;
   color: #fff;
 }
 
+/* 넓은 화면: [신랑 ←·가운데·→ 신부] — 별을 컨테이너 정가운데에 */
+@media (min-width: 480px) {
+  .heroSubtitle {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    /* center면 *가 글꼴 박스 기준 위로 떠 보이므로 베이스라인 정렬 */
+    align-items: baseline;
+    column-gap: 0.35rem;
+  }
+
+  .heroName:first-of-type {
+    justify-self: end;
+    text-align: end;
+  }
+
+  .heroName:last-of-type {
+    justify-self: start;
+    text-align: start;
+  }
+}
+
+/* 이름·별은 쪼개지지 않게(단어 사이 끊김 방지) */
+.heroName {
+  min-width: 0;
+  white-space: nowrap;
+}
+
 .heroAsterisk {
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin: 0;
   color: var(--pink);
+  /* 이름과 동일한 줄 상자(안 올라가 보이게) */
+  line-height: 1.2;
+  font-size: 0.9em;
+  font-weight: 800;
+  justify-self: center;
+  padding: 0 0.1em;
+  /* Georgia 등에서 * 꼬리가 위에 붙어 보이는 광학 보정 */
+  position: relative;
+  top: 0.13em;
 }
 
 .heroFrame {
