@@ -199,12 +199,12 @@ function PaperInvitation() {
           </div>
         </div>
 
-        <div className={styles.paperBadge}>
+        {/* <div className={styles.paperBadge}>
           <p>{romanize(invitation.couple.groom)}</p>
           <p className={styles.paperBadgeLine}>October 4, 2026</p>
           <p className={styles.paperBadgeLine}>17:00 PM</p>
           <p className={styles.paperBadgeLine}>{romanize(invitation.couple.bride)}</p>
-        </div>
+        </div> */}
       </div>
     </section>
   );
