@@ -14,9 +14,20 @@
 // ─── HeroSection (밝은 종이·명조·테라코타 악센트) ───
 .hero {
   background-color: transparent;
-  padding: 2.75rem 1.5rem 3.25rem;
+  min-height: 100svh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 1.8svh, 1.5rem);
+  padding:
+    max(1rem, env(safe-area-inset-top))
+    1.5rem
+    max(1rem, env(safe-area-inset-bottom));
   text-align: center;
   color: var(--hero-ink);
+  padding-bottom: 100px !important;
 }
 
 .heroTagline {
@@ -69,12 +80,33 @@
   font-weight: 500;
 }
 
+.heroRibbonImageFrame {
+  margin-left: auto;
+  margin-right: auto;
+  width: min(56vw, 12rem);
+  padding: 0;
+  flex: 0 0 auto;
+}
+
+.heroRibbonImageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.heroRibbonImage {
+  object-fit: cover;
+}
+
 /* 가로 4:3 — 섹션 좌우 패딩만큼 네거티브 마진으로 main 폭에 거의 딱 붙음 */
 .heroImageFrame {
-  margin: 2.5rem auto 0;
-  width: 100%;
+  margin: 0 auto;
+  width: min(100%, 17rem);
   max-width: 100%;
   padding: 0;
+  flex: 0 1 auto;
 }
 
 .heroImageWrap {
@@ -90,7 +122,7 @@
 }
 
 .heroDateLine {
-  margin-top: 2.1rem;
+  margin-top: 0;
   font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 0.24em;
@@ -98,7 +130,7 @@
 }
 
 .heroNames {
-  margin-top: 1.5rem;
+  margin-top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -124,7 +156,7 @@
 }
 
 .heroClosing {
-  margin-top: 1.5rem;
+  margin-top: 0;
   font-size: 0.88rem;
   font-weight: 500;
   line-height: 1.5;
@@ -133,20 +165,20 @@
 }
 
 .heroMeta {
-  margin-top: 2.25rem;
+  margin-top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.35rem;
-  font-size: 0.8rem;
-  line-height: 1.6;
+  gap: 0.25rem;
+  font-size: clamp(0.74rem, 2.7vw, 0.8rem);
+  line-height: 1.5;
   font-weight: 500;
   color: var(--hero-ink-mute);
   letter-spacing: 0.02em;
   max-width: 18.5rem;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 0.25rem;
+  padding-top: 0;
   // border-top: 1px solid rgba(100, 85, 70, 0.12);
 }
 
@@ -159,6 +191,28 @@
   &:focus-visible {
     text-decoration: underline;
     color: var(--terra);
+  }
+}
+
+@media (max-height: 760px) {
+  .hero {
+    gap: 2rem;
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+
+  .heroRibbonImageFrame {
+    width: min(48vw, 10rem);
+  }
+
+  .heroImageFrame {
+    width: min(78vw, 15rem);
+  }
+
+  .heroMeta {
+    gap: 0.18rem;
+    font-size: 0.72rem;
+    line-height: 1.45;
   }
 }
 

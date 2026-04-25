@@ -78,7 +78,7 @@ function HeroSection() {
 
   return (
     <section className={`${styles.hero} ${heroSerif.className}`}>
-      <p className={styles.heroTagline} lang="ko">
+      {/* <p className={styles.heroTagline} lang="ko">
         <span className={styles.heroSlashTerra} aria-hidden>
           /
         </span>
@@ -97,8 +97,21 @@ function HeroSection() {
         <span className={styles.heroTagRest}>
           {c}
         </span>
-      </p>
+      </p> */}
 
+      <div className={styles.heroRibbonImageFrame}> {/* ribbon */}
+        <div className={styles.heroRibbonImageWrap}>
+          <Image
+            src={invitation.ribbonImage}  //ribbon
+            alt=""
+            fill
+            priority
+            unoptimized
+            sizes="(max-width: 480px) 90vw, 400px"
+            className={styles.heroImage}
+          />
+        </div>
+      </div>
       <div className={styles.heroImageFrame}>
         <div className={styles.heroImageWrap}>
           <Image

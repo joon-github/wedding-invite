@@ -42,6 +42,7 @@ export const invitation = {
       "그리고 나의 평생에 네가 사는 것.",
     ],
   },
+  ribbonImage: imageAssets.photos.ribbon,
   heroImage: imageAssets.photos.hero,
   /** 히어로 상단 짧은 문장 (쉼으로 구분, 첫 덩이는 --terra) */
   heroTagline: ["우리", "둘의", "첫시작"] as const,
