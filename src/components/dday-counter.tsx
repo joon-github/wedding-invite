@@ -195,9 +195,9 @@ export function DdayCounter({ targetDate }: DdayCounterProps) {
     <section className={styles.section}>
       <canvas ref={canvasRef} className={styles.confettiCanvas} />
       <div className={styles.content}>
-        <p className={styles.label}>
+        {/* <p className={styles.label}>
           {time.isToday ? "Today is the day" : "Until our wedding"}
-        </p>
+        </p> */}
 
         {time.isToday ? (
           <div className={styles.ddayHero}>
@@ -234,7 +234,7 @@ export function DdayCounter({ targetDate }: DdayCounterProps) {
                 <span className={styles.unitLabel}>Sec</span>
               </div>
             </div>
-            <p className={styles.subtitle}>
+            {/* <p className={styles.subtitle}>
               <span className={styles.subtitleEmoji} aria-hidden>
                 🪽
               </span>{" "}
@@ -245,7 +245,7 @@ export function DdayCounter({ targetDate }: DdayCounterProps) {
               <span className={styles.subtitleEmoji} aria-hidden>
                 🪽
               </span>
-            </p>
+            </p> */}
           </>
         )}
       </div>

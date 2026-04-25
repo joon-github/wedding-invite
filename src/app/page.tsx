@@ -56,10 +56,10 @@ export default async function Home({ searchParams }: HomeProps) {
       <EnvelopeGate />
       <main className={styles.main}>
         <HeroSection />
-        <DdayCounter targetDate="2026-10-04" />
         <PaperInvitation />
         <FamilyStory />
         <SaveTheDate />
+        <DdayCounter targetDate="2026-10-04" />
         <PinkGallery />
         <LocationSection />
         <AccountSection />
@@ -258,13 +258,6 @@ function FamilyStory() {
 }
 
 function SaveTheDate() {
-  const calendarWeeks = [
-    [null, null, null, null, 1, 2, 3],
-    [4, 5, 6, 7, 8, 9, 10],
-    [11, 12, 13, 14, 15, 16, 17],
-    [18, 19, 20, 21, 22, 23, 24],
-    [25, 26, 27, 28, 29, 30, 31],
-  ];
   return (
     <section className={styles.calendarSection}>
       <div
@@ -316,65 +309,18 @@ function SaveTheDate() {
         <p className={`serif-title ${styles.calendarTime}`}>
           17:00
         </p>
-        <div className={styles.calendarGrid}>
-          {["SUN", "M", "T", "W", "T", "F", "SAT"].map((day, index) => (
-            <span
-              key={`${day}-${index}`}
-              className={
-                index === 0
-                  ? styles.daySunday
-                  : index === 6
-                    ? styles.daySaturday
-                    : undefined
-              }
-            >
-              {day}
-            </span>
-          ))}
-          {calendarWeeks.flatMap((week, weekIndex) =>
-            week.map((day, dayIndex) =>
-              day === null ? (
-                <span
-                  key={`empty-${weekIndex}-${dayIndex}`}
-                  className={styles.calendarEmpty}
-                  aria-hidden="true"
-                />
-              ) : (
-                <CalendarDay key={day} day={day} dayIndex={dayIndex} />
-              ),
-            ),
-          )}
+        <div className={styles.calendarImageWrap}>
+          <Image
+            src="/image/calendar/calendar.png"
+            alt="2026년 10월 달력"
+            width={1200}
+            height={1448}
+            unoptimized
+            className={styles.calendarImage}
+          />
         </div>
       </div>
     </section>
-  );
-}
-
-function CalendarDay({
-  day,
-  dayIndex,
-}: Readonly<{ day: number; dayIndex: number }>) {
-  const isWeddingDay = day === 4;
-  const isSubstituteHoliday = day === 5;
-  const isSunday = dayIndex === 0;
-  const isSaturday = dayIndex === 6;
-
-  const dayClassName = [
-    styles.calendarDay,
-    isWeddingDay ? styles.calendarDayWedding : undefined,
-    !isWeddingDay && (isSubstituteHoliday || isSunday) ? styles.daySunday : undefined,
-    !isWeddingDay && !isSubstituteHoliday && !isSunday && isSaturday ? styles.daySaturday : undefined,
-  ].filter(Boolean).join(" ");
-
-  return (
-    <span className={dayClassName}>
-      {day}
-      {isSubstituteHoliday ? (
-        <span className={styles.calendarDayHolidayLabel}>
-          대체공휴일
-        </span>
-      ) : null}
-    </span>
   );
 }
 
