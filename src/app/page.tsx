@@ -4,6 +4,7 @@ import { DdayCounter } from "@/components/dday-counter";
 import { EnvelopeGate } from "@/components/envelope-gate";
 import { Gallery } from "@/components/gallery";
 import { Guestbook } from "@/components/guestbook";
+import { HeroConfettiTrigger } from "@/components/hero-confetti-trigger";
 import { KakaoMap } from "@/components/kakao-map";
 import { PhotoUpload } from "@/components/photo-upload";
 import { ShareActions } from "@/components/share-actions";
@@ -77,7 +78,8 @@ function HeroSection() {
   const heroDate = formatHeroDateKor(2026, 9, 4);
 
   return (
-    <section className={`${styles.hero} ${heroSerif.className}`}>
+    <section id="hero-section" className={`${styles.hero} ${heroSerif.className}`}>
+      <HeroConfettiTrigger targetId="hero-section" />
       {/* <p className={styles.heroTagline} lang="ko">
         <span className={styles.heroSlashTerra} aria-hidden>
           /

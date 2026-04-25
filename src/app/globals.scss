@@ -89,11 +89,13 @@ img {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2rem;
-  display: grid;
+  display: flex;
   height: 4rem;
+  width: min(100%, 340px);
   max-width: 340px;
-  grid-template-columns: 58px 1px 1fr 38px;
   align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
   border-radius: 9999px;
   border: 1px solid var(--section-badge-border);
   background: var(--section-badge-surface);
@@ -106,8 +108,7 @@ img {
 /* 오시는 길 링크: 약간 좁은 캡슐·호버 */
 .section-badge--link {
   max-width: 320px;
-  width: 70%;
-  grid-template-columns: 56px 1px 1fr 38px;
+  width: min(100%, 320px);
   text-decoration: none;
   color: var(--pink);
   transition: box-shadow 0.15s ease;
@@ -124,8 +125,11 @@ img {
 }
 
 .section-badge__icon {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex: 0 0 2.25rem;
+  width: 2.25rem;
+  align-items: center;
+  justify-content: center;
   font-size: 28px;
   font-weight: 300;
   line-height: 1;
@@ -144,6 +148,8 @@ img {
 .section-badge__svg {
   width: 2rem;
   height: 2rem;
+  display: block;
+  flex: 0 0 auto;
   fill: none;
   stroke: currentColor;
   stroke-width: 2.2;
@@ -152,6 +158,7 @@ img {
 }
 
 .section-badge__divider {
+  flex: 0 0 1px;
   height: 2.25rem;
   width: 1px;
   background-color: var(--terra-50);
@@ -163,9 +170,15 @@ img {
 }
 
 .section-badge__text {
+  display: flex;
+  min-width: 0;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   font-size: 23px;
   font-weight: bold;
+  line-height: 1.1;
   letter-spacing: 0.04em;
   color: var(--ink);
 }
@@ -178,6 +191,10 @@ img {
 }
 
 .section-badge__arrow {
+  display: flex;
+  flex: 0 0 1.75rem;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   font-size: 34px;
   font-weight: 300;
