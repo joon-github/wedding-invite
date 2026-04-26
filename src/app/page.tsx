@@ -12,13 +12,19 @@ import { WeddingQuiz } from "@/components/wedding-quiz";
 import { colors } from "@/lib/design-tokens";
 import { invitation } from "@/lib/invitation";
 import { supabase } from "@/lib/supabase";
-import { Gowun_Batang } from "next/font/google";
+import { Gowun_Batang, Nanum_Pen_Script } from "next/font/google";
 import Image from "next/image";
 import styles from "./page.module.scss";
 
 const heroSerif = Gowun_Batang({
   subsets: ["latin"],
   weight: ["400", "700"],
+  display: "swap",
+});
+
+const heroMetaPen = Nanum_Pen_Script({
+  weight: "400",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -38,7 +44,10 @@ async function getSiteSettings() {
 }
 
 export default async function Home({ searchParams }: HomeProps) {
-  const [settings, params] = await Promise.all([getSiteSettings(), searchParams]);
+  const [settings, params] = await Promise.all([
+    getSiteSettings(),
+    searchParams,
+  ]);
   const hasName = typeof params.name === "string" && params.name.length > 0;
 
   return (
@@ -78,39 +87,23 @@ function HeroSection() {
   const heroDate = formatHeroDateKor(2026, 9, 4);
 
   return (
-    <section id="hero-section" className={`${styles.hero} ${heroSerif.className}`}>
+    <section
+      id="hero-section"
+      className={`${styles.hero} ${heroSerif.className}`}
+    >
       <HeroConfettiTrigger targetId="hero-section" />
-      {/* <p className={styles.heroTagline} lang="ko">
-        <span className={styles.heroSlashTerra} aria-hidden>
-          /
-        </span>
-        <span className={styles.heroTagAccent}>
-          {a}
-        </span>
-        <span className={styles.heroSlash} aria-hidden>
-          /
-        </span>
-        <span className={styles.heroTagRest}>
-          {b}
-        </span>
-        <span className={styles.heroSlash} aria-hidden>
-          /
-        </span>
-        <span className={styles.heroTagRest}>
-          {c}
-        </span>
-      </p> */}
-
-      <div className={styles.heroRibbonImageFrame}> {/* ribbon */}
+      <div className={styles.heroRibbonImageFrame}>
+        {" "}
+        {/* ribbon */}
         <div className={styles.heroRibbonImageWrap}>
           <Image
-            src={invitation.ribbonImage}  //ribbon
+            src={invitation.ribbonImage} //ribbon
             alt=""
             fill
             priority
             unoptimized
             sizes="(max-width: 480px) 90vw, 400px"
-            className={styles.heroImage}
+            className={styles.heroRibbonImage}
           />
         </div>
       </div>
@@ -121,36 +114,32 @@ function HeroSection() {
             alt=""
             fill
             priority
-            unoptimized
-            sizes="(max-width: 480px) 90vw, 400px"
-            className={styles.heroImage}
+            quality={88}
+            sizes="(max-width: 480px) calc(100vw - 3rem), min(28rem, 100vw)"
+            className={styles.heroMainImage}
           />
         </div>
-      </div>
-
-      {/* <p className={styles.heroDateLine}>{heroDate}</p> */}
-
-      {/* <div className={styles.heroNames} lang="ko">
-        <span className={styles.heroGroomName}>{invitation.couple.groom}</span>
-        <span className={styles.heroAnd}>그리고</span>
-        <span className={styles.heroBrideName}>{invitation.couple.bride}</span>
-      </div> */}
-
-      {/* <p className={styles.heroClosing}>저희, 결혼합니다.</p> */}
-
-      <div className={styles.heroMeta} lang="ko">
-        <p>
-          {invitation.event.dateText} {invitation.event.timeText}
-        </p>
-        <p>{invitation.event.hall}</p>
-        <a
-          href={invitation.event.mapUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.heroAddress}
-        >
-          {invitation.event.address}
-        </a>
+        {/* <div className={styles.heroMeta} lang="ko">
+          <p>
+            {invitation.event.dateText} {invitation.event.timeText}
+          </p>
+          <p>{invitation.event.hall}</p>
+          <a
+            href={invitation.event.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.heroAddress}
+          >
+            {invitation.event.address}
+          </a>
+        </div> */}
+        <div className={styles.heroMeta} lang="ko">
+          <p
+            className={`${styles.heroMetaPenText} ${heroMetaPen.className}`}
+          >
+            서로의 삶이 그냥 흘러가지 않도록, 곁에서 모든 순간을 함께하겠습니다.
+          </p>
+        </div>
       </div>
     </section>
   );
@@ -160,9 +149,7 @@ function PaperInvitation() {
   return (
     <section className={styles.paperSection}>
       <div className={`paper-texture paper-border ${styles.paperCard}`}>
-        <span className={styles.paperHeart}>
-          ♡
-        </span>
+        <span className={styles.paperHeart}>♡</span>
         <p className={`hand-text ${styles.paperHeadline}`}>
           {invitation.message.headline}
         </p>
@@ -203,7 +190,9 @@ function PaperInvitation() {
           <p>{romanize(invitation.couple.groom)}</p>
           <p className={styles.paperBadgeLine}>October 4, 2026</p>
           <p className={styles.paperBadgeLine}>17:00 PM</p>
-          <p className={styles.paperBadgeLine}>{romanize(invitation.couple.bride)}</p>
+          <p className={styles.paperBadgeLine}>
+            {romanize(invitation.couple.bride)}
+          </p>
         </div>
       </div>
     </section>
@@ -305,12 +294,8 @@ function SaveTheDate() {
 
       <div className={`paper-texture ${styles.calendarCard}`}>
         <span className={styles.calendarTape} aria-hidden />
-        <p className={`serif-title ${styles.calendarTitle}`}>
-          2026.10.04. SUN
-        </p>
-        <p className={`serif-title ${styles.calendarTime}`}>
-          17:00
-        </p>
+        <p className={`serif-title ${styles.calendarTitle}`}>2026.10.04. SUN</p>
+        <p className={`serif-title ${styles.calendarTime}`}>17:00</p>
         <div className={styles.calendarImageWrap}>
           <Image
             src="/image/calendar/calendar.png"
@@ -377,18 +362,14 @@ function LocationSection() {
         <span className="section-badge__text section-badge__text--wide">
           오시는 길
         </span>
-        <span className="section-badge__arrow">
-          ›
-        </span>
+        <span className="section-badge__arrow">›</span>
       </a>
 
       <div className={`paper-texture ${styles.locationCard}`}>
         <span className={styles.locationTape} />
         <div className={styles.locationHeader}>
           <div>
-            <p className={styles.locationLabel}>
-              Location
-            </p>
+            <p className={styles.locationLabel}>Location</p>
             <p className={styles.locationHallName}>{invitation.event.hall}</p>
           </div>
           <p className={`serif-title ${styles.locationNumber}`}>01</p>
@@ -403,9 +384,7 @@ function LocationSection() {
         />
         <div className={styles.locationInfo}>
           <div className={styles.locationAddress}>
-            <p className={styles.locationAddressLabel}>
-              Address
-            </p>
+            <p className={styles.locationAddressLabel}>Address</p>
             <p className={styles.locationAddressText}>
               {invitation.event.address}
             </p>
@@ -436,21 +415,14 @@ function LocationSection() {
         </div>
         <div className={styles.locationDivider}>
           <span className={styles.locationDividerLine} />
-          <span className={styles.locationDividerText}>
-            Guide
-          </span>
+          <span className={styles.locationDividerText}>Guide</span>
           <span className={styles.locationDividerLine} />
         </div>
         <div className={styles.locationTransport}>
           {invitation.transport.map((item) => (
-            <div
-              key={item.title}
-              className={styles.locationTransportItem}
-            >
+            <div key={item.title} className={styles.locationTransportItem}>
               <p className={styles.locationTransportTitle}>{item.title}</p>
-              <p className={styles.locationTransportDesc}>
-                {item.description}
-              </p>
+              <p className={styles.locationTransportDesc}>{item.description}</p>
             </div>
           ))}
         </div>
@@ -474,9 +446,7 @@ function AccountSection() {
         <span className={styles.accountTapeLeft} />
         <span className={styles.accountTapeRight} />
         <div className={styles.accountHeader}>
-          <p className={styles.accountLabel}>
-            Account
-          </p>
+          <p className={styles.accountLabel}>Account</p>
           <p className={styles.accountDesc}>
             참석이 어려우신 분들을 위해 계좌번호를 안내드립니다.
           </p>
@@ -501,9 +471,7 @@ function ShareSection() {
         title={`${invitation.couple.groom} · ${invitation.couple.bride} 결혼합니다`}
         text={`${invitation.event.dateText} ${invitation.event.timeText}, ${invitation.event.hall}`}
       />
-      <footer className={styles.shareFooter}>
-        © wedding invitation
-      </footer>
+      <footer className={styles.shareFooter}>© wedding invitation</footer>
     </section>
   );
 }
@@ -526,7 +494,11 @@ function FamilyBlock({
   );
 }
 
-function formatHeroDateKor(year: number, monthZeroIndexed: number, day: number) {
+function formatHeroDateKor(
+  year: number,
+  monthZeroIndexed: number,
+  day: number,
+) {
   const d = new Date(year, monthZeroIndexed, day, 12, 0, 0);
   const w = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"] as const;
   const m = String(d.getMonth() + 1).padStart(2, "0");
