@@ -99,7 +99,8 @@ function HeroSection() {
           <Image
             src={invitation.ribbonImage} //ribbon
             alt=""
-            fill
+            width={1800}
+            height={1200}
             priority
             unoptimized
             sizes="(max-width: 480px) 90vw, 400px"
@@ -115,6 +116,7 @@ function HeroSection() {
             fill
             priority
             quality={88}
+            unoptimized
             sizes="(max-width: 480px) calc(100vw - 3rem), min(28rem, 100vw)"
             className={styles.heroMainImage}
           />
