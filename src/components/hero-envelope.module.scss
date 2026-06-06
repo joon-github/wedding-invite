@@ -1,0 +1,76 @@
+.shell {
+  width: min(100%, 16rem);
+  margin: 0 auto;
+  --progress: var(--hero-envelope-progress, 0);
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  perspective: 1200px;
+}
+
+.photoCard {
+  position: absolute;
+  left: 16%;
+  right: 16%;
+  bottom: 0;
+  z-index: 2;
+  border: 1px solid rgb(17 24 39 / 0.12);
+  background: #fff;
+  padding: 0.45rem 0.45rem 1.05rem;
+  box-shadow: 0 18px 34px rgb(17 24 39 / 0.12);
+  transform:
+    translateY(calc(68% - (var(--progress) * 82%)))
+    rotate(calc((1 - var(--progress)) * -0.8deg));
+  transform-origin: center bottom;
+  transition: transform 0.18s linear;
+}
+
+.photoImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.backPocket {
+  position: absolute;
+  inset-inline: 5%;
+  bottom: 0;
+  height: 37%;
+  border: 1px solid var(--hero-envelope-line);
+  background: linear-gradient(180deg, var(--hero-envelope-deep) 0%, var(--hero-envelope) 100%);
+  box-shadow: 0 16px 32px rgb(17 24 39 / 0.08);
+  z-index: 1;
+}
+
+.frontPocket {
+  position: absolute;
+  inset-inline: 5%;
+  bottom: 0;
+  height: 37%;
+  border: 1px solid var(--hero-envelope-line);
+  background: var(--hero-envelope);
+  clip-path: polygon(0 100%, 0 0, 50% 52%, 100% 0, 100% 100%);
+  z-index: 4;
+}
+
+.flap {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: 36.5%;
+  height: 31%;
+  border: 1px solid var(--hero-envelope-line);
+  background: linear-gradient(180deg, #eef1f5 0%, var(--hero-envelope) 100%);
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  transform-origin: center bottom;
+  transform:
+    perspective(1200px)
+    rotateX(calc((1 - var(--progress)) * -175deg))
+    translateY(calc((1 - var(--progress)) * -4%));
+  box-shadow: 0 8px 22px rgb(17 24 39 / 0.06);
+  z-index: 1;
+}

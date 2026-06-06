@@ -5,6 +5,7 @@ import { EnvelopeGate } from "@/components/envelope-gate";
 import { Gallery } from "@/components/gallery";
 import { Guestbook } from "@/components/guestbook";
 import { HeroConfettiTrigger } from "@/components/hero-confetti-trigger";
+import { HeroEnvelope } from "@/components/hero-envelope";
 import { KakaoMap } from "@/components/kakao-map";
 import { PhotoUpload } from "@/components/photo-upload";
 import { ShareActions } from "@/components/share-actions";
@@ -100,32 +101,8 @@ function HeroSection() {
           {c}
         </span>
       </p> */}
-
-      <div className={styles.heroRibbonImageFrame}> {/* ribbon */}
-        <div className={styles.heroRibbonImageWrap}>
-          <Image
-            src={invitation.ribbonImage}  //ribbon
-            alt=""
-            fill
-            priority
-            unoptimized
-            sizes="(max-width: 480px) 90vw, 400px"
-            className={styles.heroImage}
-          />
-        </div>
-      </div>
       <div className={styles.heroImageFrame}>
-        <div className={styles.heroImageWrap}>
-          <Image
-            src={invitation.heroImage}
-            alt=""
-            fill
-            priority
-            unoptimized
-            sizes="(max-width: 480px) 90vw, 400px"
-            className={styles.heroImage}
-          />
-        </div>
+        <HeroEnvelope imageSrc={invitation.heroImage} />
       </div>
 
       {/* <p className={styles.heroDateLine}>{heroDate}</p> */}
