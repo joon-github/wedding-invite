@@ -56,6 +56,31 @@ export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
   return (
     <div className={styles.shell} style={style}>
       <div className={styles.stage}>
+        <svg
+          className={styles.envelopeBase}
+          viewBox="0 0 336 203"
+          aria-hidden="true"
+        >
+          <rect
+            className={styles.layerFill}
+            x="15.19"
+            y="15.12"
+            width="305.12"
+            height="172.78"
+          />
+        </svg>
+
+        <svg
+          className={styles.envelopeInterior}
+          viewBox="0 0 337 204"
+          aria-hidden="true"
+        >
+          <path
+            className={styles.layerFill}
+            d="M16 15 H321 V188 H16 Z"
+          />
+        </svg>
+
         <div className={styles.photoCard}>
           <Image
             src={imageSrc}
@@ -64,14 +89,57 @@ export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
             height={7008}
             priority
             unoptimized
-            sizes="(max-width: 480px) 70vw, 320px"
+            sizes="(max-width: 480px) calc(100vw - 48px), 248px"
             className={styles.photoImage}
           />
         </div>
 
-        <div className={styles.backPocket} aria-hidden />
-        <div className={styles.flap} aria-hidden />
-        <div className={styles.frontPocket} aria-hidden />
+        <div
+          className={styles.envelopeFlap}
+          data-behind={progress >= 0.5}
+          aria-hidden="true"
+        >
+          <svg viewBox="0 0 337 204">
+            <path
+              className={styles.layerFill}
+              d="M16 15 H321 L180 104 Q168.5 112 157 104 Z"
+            />
+          </svg>
+        </div>
+
+        <svg
+          className={styles.envelopeLeft}
+          viewBox="0 0 337 204"
+          aria-hidden="true"
+        >
+          <path
+            className={styles.layerFill}
+            d="M15.95,15.4c7.32,1.46,16.37,2.43,23.27,4.86,6.89,2.43,14.65,6.32,21.54,10.21,6.89,3.89,71.52,45.2,76.26,48.12,4.74,2.92,11.45,6.56,11.45,14.1s-1.54,11.9-9.3,17.49c-7.76,5.59-74.54,60.27-84.45,64.88-9.91,4.62-14.22,6.08-19.39,7.78-5.17,1.7-19.39,5.35-19.39,5.35V15.4Z"
+          />
+        </svg>
+
+        <svg
+          className={styles.envelopeRight}
+          viewBox="0 0 337 204"
+          aria-hidden="true"
+        >
+          <path
+            className={styles.layerFill}
+            d="M321.5,15.4c-7.32,1.46-16.37,2.43-23.27,4.86-6.89,2.43-14.65,6.32-21.54,10.21-6.89,3.89-71.52,45.2-76.26,48.12-4.74,2.92-11.45,6.56-11.45,14.1,0,7.53,1.54,11.9,9.3,17.49,7.76,5.59,74.54,60.27,84.45,64.88,9.91,4.62,14.22,6.08,19.39,7.78,5.17,1.7,19.39,5.35,19.39,5.35V15.4Z"
+          />
+        </svg>
+
+        <svg
+          className={styles.envelopeBottom}
+          viewBox="0 0 337 204"
+          aria-hidden="true"
+        >
+          <path
+            className={styles.layerFill}
+            d="M16.01,188.18s2.62-10.79,5.24-14.07c2.62-3.28,10.04-9.62,14.4-12.67,4.36-3.05,85.97-63.81,88.15-65.92s6.98-4.46,11.78-4.46h33.17s28.37,0,33.17,0,9.6,2.35,11.78,4.46c2.18,2.11,83.79,62.87,88.15,65.92s11.78,9.38,14.4,12.67c2.62,3.28,5.24,14.07,5.24,14.07H16.01Z"
+          />
+        </svg>
+
       </div>
     </div>
   );

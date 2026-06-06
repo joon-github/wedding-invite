@@ -11,6 +11,26 @@
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
 }
 
+.main > section {
+  position: relative;
+}
+
+.main > section + section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(209 213 219 / 0.95) 14%,
+    rgb(209 213 219 / 0.95) 86%,
+    transparent 100%
+  );
+}
+
 // ─── HeroSection (밝은 종이·명조·테라코타 악센트) ───
 .hero {
   background-color: transparent;
