@@ -35,7 +35,8 @@
 .hero {
   position: relative;
   background-color: transparent;
-  // min-height: calc(100svh + clamp(18rem, 55svh, 28rem));
+  // min-height: calc(100svh + 190px);
+  min-height: 100vh;
   box-sizing: border-box;
   text-align: center;
   color: var(--hero-ink);

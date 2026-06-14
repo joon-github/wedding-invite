@@ -19,14 +19,36 @@ export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
 
   useEffect(() => {
     let frame = 0;
+    let snapTimer = 0;
+    let touchStartY = 0;
+    let snapping = false;
 
     const update = () => {
       frame = 0;
       const hero = shellRef.current?.closest("section");
       const heroTop = hero instanceof HTMLElement ? hero.offsetTop : 0;
       const scrollRange = clamp(window.innerHeight * 0.22, 140, 190);
+      const scrollOffset = window.scrollY - heroTop;
 
-      setProgress(clamp((window.scrollY - heroTop) / scrollRange, 0, 1));
+      setProgress(clamp(scrollOffset / scrollRange, 0, 1));
+    };
+
+    const snapHero = (direction: "open" | "close") => {
+      if (snapping) {
+        return;
+      }
+
+      const hero = shellRef.current?.closest("section");
+      const heroTop = hero instanceof HTMLElement ? hero.offsetTop : 0;
+      const scrollRange = clamp(window.innerHeight * 0.22, 140, 190);
+      const target = direction === "open" ? heroTop + scrollRange : heroTop;
+
+      snapping = true;
+      window.clearTimeout(snapTimer);
+      window.scrollTo({ top: target, behavior: "smooth" });
+      snapTimer = window.setTimeout(() => {
+        snapping = false;
+      }, 520);
     };
 
     const onScroll = () => {
@@ -37,17 +59,62 @@ export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
       frame = window.requestAnimationFrame(update);
     };
 
+    const onWheel = (event: WheelEvent) => {
+      const hero = shellRef.current?.closest("section");
+      const heroTop = hero instanceof HTMLElement ? hero.offsetTop : 0;
+      const scrollRange = clamp(window.innerHeight * 0.22, 140, 190);
+      const offset = window.scrollY - heroTop;
+
+      if (event.deltaY > 0 && offset >= -2 && offset < scrollRange * 0.75) {
+        event.preventDefault();
+        snapHero("open");
+      } else if (event.deltaY < 0 && offset > 0 && offset <= scrollRange * 1.15) {
+        event.preventDefault();
+        snapHero("close");
+      }
+    };
+
+    const onTouchStart = (event: TouchEvent) => {
+      touchStartY = event.touches[0]?.clientY ?? 0;
+    };
+
+    const onTouchMove = (event: TouchEvent) => {
+      const currentY = event.touches[0]?.clientY ?? touchStartY;
+      const deltaY = touchStartY - currentY;
+      const hero = shellRef.current?.closest("section");
+      const heroTop = hero instanceof HTMLElement ? hero.offsetTop : 0;
+      const scrollRange = clamp(window.innerHeight * 0.22, 140, 190);
+      const offset = window.scrollY - heroTop;
+
+      if (deltaY > 12 && offset >= -2 && offset < scrollRange * 0.75) {
+        event.preventDefault();
+        snapHero("open");
+        touchStartY = currentY;
+      } else if (deltaY < -12 && offset > 0 && offset <= scrollRange * 1.15) {
+        event.preventDefault();
+        snapHero("close");
+        touchStartY = currentY;
+      }
+    };
+
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
+    window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
 
     return () => {
       if (frame) {
         window.cancelAnimationFrame(frame);
       }
 
+      window.clearTimeout(snapTimer);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
     };
   }, []);
 
