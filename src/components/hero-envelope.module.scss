@@ -12,54 +12,9 @@
   left: calc(4.5% + 10px);
   right: calc(4.5% + 10px);
   z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #2f3439;
-  text-align: center;
   pointer-events: none;
-}
-
-.typographyEyebrow,
-.typographyTitle,
-.typographyDate {
-  margin: 0;
-  white-space: nowrap;
-}
-
-.typographyEyebrow {
-  color: #8b9299;
-  font-size: clamp(0.58rem, 2.5cqw, 0.78rem);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: 0.16em;
-}
-
-.typographyTitle {
-  margin-top: 0.55rem;
-  font-size: clamp(2rem, 10cqw, 3.25rem);
-  font-weight: 400;
-  line-height: 1.08;
-  letter-spacing: 0;
-}
-
-.typographyDate {
-  margin-top: 0.45rem;
-  color: #747c84;
-  font-size: clamp(0.65rem, 2.8cqw, 0.86rem);
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: 0.08em;
-}
-
-.typographyCharacter {
-  display: inline-block;
-  opacity: 0;
-  clip-path: inset(0 100% 0 0);
-  transform: translate3d(0, 0.16em, 0) rotate(-1.5deg);
-  animation: write-character 180ms ease-out forwards;
-  animation-delay: calc(260ms + var(--character-order) * 70ms);
-  will-change: opacity, clip-path, transform;
+  --handwriting-color: #2f3439;
+  --handwriting-stroke-width: 0.72;
 }
 
 .stage {
@@ -169,21 +124,4 @@
   fill: currentColor;
   stroke: var(--hero-envelope-line);
   stroke-width: 0.65px;
-}
-
-@keyframes write-character {
-  to {
-    opacity: 1;
-    clip-path: inset(0 0 0 0);
-    transform: translate3d(0, 0, 0) rotate(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .typographyCharacter {
-    opacity: 1;
-    clip-path: none;
-    transform: none;
-    animation: none;
-  }
 }
