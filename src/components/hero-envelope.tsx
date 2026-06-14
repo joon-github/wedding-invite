@@ -1,28 +1,32 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./hero-envelope.module.scss";
 
 type HeroEnvelopeProps = {
   imageSrc: string;
 };
 
-const MAX_SCROLL = 220;
-
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
 }
 
 export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
+  const shellRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
+  const photoProgress = clamp((progress - 0.32) / 0.68, 0, 1);
 
   useEffect(() => {
     let frame = 0;
 
     const update = () => {
       frame = 0;
-      setProgress(clamp(window.scrollY / MAX_SCROLL, 0, 1));
+      const hero = shellRef.current?.closest("section");
+      const heroTop = hero instanceof HTMLElement ? hero.offsetTop : 0;
+      const scrollRange = clamp(window.innerHeight * 0.22, 140, 190);
+
+      setProgress(clamp((window.scrollY - heroTop) / scrollRange, 0, 1));
     };
 
     const onScroll = () => {
@@ -35,6 +39,7 @@ export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
 
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
 
     return () => {
       if (frame) {
@@ -42,19 +47,28 @@ export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
       }
 
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
   }, []);
 
   const style = useMemo(
-    () =>
-      ({
+    () => {
+      const photoClosedY = 112;
+      const photoOpenY = 7;
+      const photoY = photoOpenY + (1 - photoProgress) * (photoClosedY - photoOpenY);
+
+      return ({
         "--hero-envelope-progress": progress.toFixed(4),
-      }) as React.CSSProperties,
-    [progress],
+        "--hero-envelope-flap-rotation": `${progress * 180}deg`,
+        "--hero-envelope-photo-y": `${photoY}%`,
+        "--hero-envelope-photo-rotation": `${(1 - photoProgress) * -0.35}deg`,
+      }) as React.CSSProperties;
+    },
+    [photoProgress, progress],
   );
 
   return (
-    <div className={styles.shell} style={style}>
+    <div ref={shellRef} className={styles.shell} style={style}>
       <div className={styles.stage}>
         <svg
           className={styles.envelopeBase}
@@ -81,17 +95,19 @@ export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
           />
         </svg>
 
-        <div className={styles.photoCard}>
-          <Image
-            src={imageSrc}
-            alt=""
-            width={4672}
-            height={7008}
-            priority
-            unoptimized
-            sizes="(max-width: 480px) calc(100vw - 48px), 248px"
-            className={styles.photoImage}
-          />
+        <div className={styles.photoTrack}>
+          <div className={styles.photoCard}>
+            <Image
+              src={imageSrc}
+              alt=""
+              width={4672}
+              height={7008}
+              priority
+              unoptimized
+              sizes="(max-width: 480px) calc(100vw - 48px), 248px"
+              className={styles.photoImage}
+            />
+          </div>
         </div>
 
         <div

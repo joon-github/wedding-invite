@@ -1,37 +1,48 @@
 .shell {
-  width: min(100%, 17rem);
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5 / 7;
   margin: 0 auto;
   --progress: var(--hero-envelope-progress, 0);
 }
 
 .stage {
-  position: relative;
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: visible;
   perspective: 1200px;
 }
 
-.photoCard {
+.photoTrack {
   position: absolute;
-  left: 0.75rem;
-  right: 0.75rem;
-  bottom: 0;
+  left: calc(4.5% + 10px);
+  right: calc(4.5% + 10px);
+  top: -150%;
+  bottom: 7.5%;
   z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.photoCard {
+  box-sizing: border-box;
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  width: 100%;
   border: 1px solid rgb(17 24 39 / 0.1);
   background: #fff;
-  padding: 0.38rem 0.38rem 0.95rem;
+  padding: 1rem 1rem 0.95rem;
   box-shadow: 0 14px 30px rgb(17 24 39 / 0.1);
   transform:
-    translate3d(0, calc((1 - var(--progress)) * 100%), 0)
-    rotate(calc((1 - var(--progress)) * -0.35deg));
+    translate3d(0, var(--hero-envelope-photo-y, 100%), 0)
+    rotate(var(--hero-envelope-photo-rotation, -0.35deg));
   transform-origin: center bottom;
-  opacity: clamp(0, calc((var(--progress) - 0.5) * 5), 1);
-  transition:
-    transform 0.18s linear,
-    opacity 0.18s linear;
-  will-change: transform, opacity;
-  pointer-events: none;
+  transition: transform 0.18s linear;
+  will-change: transform;
 }
 
 .photoImage {
@@ -69,8 +80,7 @@
   inset: 0;
   z-index: 5;
   transform-origin: center 7.4%;
-  transform:
-    rotateX(calc(var(--progress) * 180deg));
+  transform: rotateX(var(--hero-envelope-flap-rotation, 0deg));
   transition: transform 0.18s linear;
   transform-style: preserve-3d;
   pointer-events: none;

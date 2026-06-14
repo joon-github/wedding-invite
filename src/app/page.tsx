@@ -80,54 +80,58 @@ function HeroSection() {
 
   return (
     <section id="hero-section" className={`${styles.hero} ${heroSerif.className}`}>
-      <HeroConfettiTrigger targetId="hero-section" />
-      {/* <p className={styles.heroTagline} lang="ko">
-        <span className={styles.heroSlashTerra} aria-hidden>
-          /
-        </span>
-        <span className={styles.heroTagAccent}>
-          {a}
-        </span>
-        <span className={styles.heroSlash} aria-hidden>
-          /
-        </span>
-        <span className={styles.heroTagRest}>
-          {b}
-        </span>
-        <span className={styles.heroSlash} aria-hidden>
-          /
-        </span>
-        <span className={styles.heroTagRest}>
-          {c}
-        </span>
-      </p> */}
-      <div className={styles.heroImageFrame}>
-        <HeroEnvelope imageSrc={invitation.heroImage} />
-      </div>
+      <div className={styles.heroSticky}>
+        <HeroConfettiTrigger targetId="hero-section" />
+        {/* <p className={styles.heroTagline} lang="ko">
+          <span className={styles.heroSlashTerra} aria-hidden>
+            /
+          </span>
+          <span className={styles.heroTagAccent}>
+            {a}
+          </span>
+          <span className={styles.heroSlash} aria-hidden>
+            /
+          </span>
+          <span className={styles.heroTagRest}>
+            {b}
+          </span>
+          <span className={styles.heroSlash} aria-hidden>
+            /
+          </span>
+          <span className={styles.heroTagRest}>
+            {c}
+          </span>
+        </p> */}
+        <div className={styles.heroVisualGroup}>
+          <div className={styles.heroImageFrame}>
+            <HeroEnvelope imageSrc={invitation.heroImage} />
+          </div>
 
-      {/* <p className={styles.heroDateLine}>{heroDate}</p> */}
+          {/* <p className={styles.heroDateLine}>{heroDate}</p> */}
 
-      {/* <div className={styles.heroNames} lang="ko">
-        <span className={styles.heroGroomName}>{invitation.couple.groom}</span>
-        <span className={styles.heroAnd}>그리고</span>
-        <span className={styles.heroBrideName}>{invitation.couple.bride}</span>
-      </div> */}
+          {/* <div className={styles.heroNames} lang="ko">
+            <span className={styles.heroGroomName}>{invitation.couple.groom}</span>
+            <span className={styles.heroAnd}>그리고</span>
+            <span className={styles.heroBrideName}>{invitation.couple.bride}</span>
+          </div> */}
 
-      {/* <p className={styles.heroClosing}>저희, 결혼합니다.</p> */}
+          {/* <p className={styles.heroClosing}>저희, 결혼합니다.</p> */}
 
-      <div className={styles.heroMeta} lang="ko">
-        <p>
-          {invitation.event.dateText} {invitation.event.timeText}
-        </p>
-        <p>{invitation.event.hall}</p>
-        <a
-          href={invitation.event.mapUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.heroAddress}
-        >
-          {invitation.event.address}
-        </a>
+          <div className={styles.heroMeta} lang="ko">
+            <p>
+              {invitation.event.dateText} {invitation.event.timeText}
+            </p>
+            <p>{invitation.event.hall}</p>
+            <a
+              href={invitation.event.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.heroAddress}
+            >
+              {invitation.event.address}
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );
