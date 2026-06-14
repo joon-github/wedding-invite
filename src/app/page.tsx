@@ -137,21 +137,21 @@ function PaperInvitation() {
   return (
     <section className={styles.paperSection}>
       <div className={`paper-texture paper-border ${styles.paperCard}`}>
-        <span className={styles.paperHeart}>♡</span>
-        <p className={`hand-text ${styles.paperHeadline}`}>
+        {/* <span className={styles.paperHeart}>♡</span> */}
+        {/* <p className={`hand-text ${styles.paperHeadline}`}>
           {invitation.message.headline}
-        </p>
+        </p> */}
         <div className={`hand-text ${styles.paperBody}`}>
           {invitation.message.body.map((line) => (
             <p key={line}>{line}</p>
           ))}
         </div>
-        <p className={`hand-text ${styles.paperClosing}`}>
+        {/* <p className={`hand-text ${styles.paperClosing}`}>
           소중한 분들을 모시고 첫 시작을 함께하고자 합니다.
           <br />
           귀한 걸음 하시어 축복해주신다면
           <br />더 없는 기쁨으로 간직하겠습니다.
-        </p>
+        </p> */}
 
         <div className={styles.paperPhotoGrid}>
           <div className={styles.paperPhotoLeft}>
