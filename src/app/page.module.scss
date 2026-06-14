@@ -11,23 +11,61 @@
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
 }
 
+.main > section {
+  position: relative;
+}
+
+.main > section + section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(209 213 219 / 0.95) 14%,
+    rgb(209 213 219 / 0.95) 86%,
+    transparent 100%
+  );
+}
+
 // ─── HeroSection (밝은 종이·명조·테라코타 악센트) ───
 .hero {
+  position: relative;
   background-color: transparent;
+  // min-height: calc(100svh + 190px);
+  min-height: 100vh;
+  box-sizing: border-box;
+  text-align: center;
+  color: var(--hero-ink);
+}
+
+.heroSticky {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100svh;
   min-height: 100svh;
   box-sizing: border-box;
+  overflow: hidden;
+  padding:
+    max(0.75rem, env(safe-area-inset-top))
+    1rem
+    max(1rem, env(safe-area-inset-bottom));
+  container-type: size;
+}
+
+.heroVisualGroup {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: clamp(1rem, 2.5svh, 1.5rem);
-  padding:
-    max(1rem, env(safe-area-inset-top))
-    1.5rem
-    max(1rem, env(safe-area-inset-bottom));
-  text-align: center;
-  color: var(--hero-ink);
-  padding-bottom: 100px !important;
+  width: 100%;
+  gap: clamp(0.25rem, 0.8cqh, 0.5rem);
+  transform: translateY(-20px);
 }
 
 .heroTagline {
@@ -102,26 +140,22 @@
 
 /* 가로 4:3 — 섹션 좌우 패딩만큼 네거티브 마진으로 main 폭에 거의 딱 붙음 */
 .heroImageFrame {
-  width: 100%;
+  width: min(100%, 56cqh, 32rem);
+  max-width: 32rem;
+  margin: 0 auto;
   padding: 0;
-  flex: 0 1 auto;
 }
 
 .heroImageWrap {
-  position: relative;
   width: 100%;
-  aspect-ratio: 2137 / 1471;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 0;
 }
 
-/* 메인 웨딩 사진: cover + 중앙, fill 레이어 뭉개짐(특히 Safari) 완화 */
-.heroMainImage {
-  object-fit: contain;
-  object-position: center center;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  transform: translateZ(0);
+.heroImage {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .heroDateLine {
@@ -168,21 +202,20 @@
 }
 
 .heroMeta {
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.25rem;
-  font-size: clamp(0.74rem, 2.7vw, 0.8rem);
-  line-height: 1.5;
-  font-weight: 500;
-  color: var(--hero-ink-mute);
-  letter-spacing: 0.02em;
+  font-size: clamp(0.8rem, 3.7vw, 0.92rem);
+  line-height: 1.65;
+  font-weight: 400;
+  color: #2f3439;
+  letter-spacing: 0.01em;
+  font-variant-numeric: lining-nums;
   max-width: 18.5rem;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 0;
-  // border-top: 1px solid rgba(100, 85, 70, 0.12);
+  padding-bottom: 0;
 }
 
 /* 필기체(나눔손펜) — font-size는 여기서만 켜짐(부모 .heroMeta만 키워도 p는 이 값이 이김) */
@@ -210,23 +243,30 @@
 }
 
 @media (max-height: 760px) {
-  .hero {
-    padding-top: max(0.75rem, env(safe-area-inset-top));
-    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
-  }
-
   .heroRibbonImageFrame {
     width: min(48vw, 10rem);
   }
 
   .heroImageFrame {
-    width: 100%;
+    width: min(100%, 54cqh, 27rem);
   }
 
   .heroMeta {
     gap: 0.18rem;
     font-size: 0.72rem;
     line-height: 1.45;
+  }
+}
+
+@supports not (width: 1cqh) {
+  .heroImageFrame {
+    width: min(100%, 32rem);
+  }
+
+  @media (max-height: 760px) {
+    .heroImageFrame {
+      width: min(82vw, 27rem);
+    }
   }
 }
 

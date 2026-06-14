@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "handwriting:generate": "node scripts/generate-handwriting.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.104.1",
@@ -23,6 +24,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "fontkit": "^2.0.4",
     "sass": "^1.99.0",
     "typescript": "^5"
   }

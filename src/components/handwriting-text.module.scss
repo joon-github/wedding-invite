@@ -1,0 +1,66 @@
+.root {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  color: var(--handwriting-color, #2f3439);
+  --handwriting-fill-color: currentColor;
+}
+
+.writingMask {
+  mask-type: alpha;
+}
+
+.maskPath {
+  fill: none;
+  opacity: 0;
+  stroke: white;
+  stroke-width: var(--handwriting-reveal-width);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-path var(--handwriting-draw-duration) ease-out forwards;
+  animation-delay: var(--handwriting-draw-delay);
+}
+
+.outlinePath {
+  fill: var(--handwriting-fill-color);
+}
+
+.settledGlyph {
+  opacity: 0;
+  animation: settle-glyph var(--handwriting-glyph-settle-duration) ease-out forwards;
+  animation-delay: var(--handwriting-glyph-settle-delay);
+}
+
+@keyframes draw-path {
+  from {
+    opacity: 1;
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes settle-glyph {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .maskPath {
+    opacity: 1;
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+
+  .settledGlyph {
+    opacity: 1;
+    animation: none;
+  }
+}

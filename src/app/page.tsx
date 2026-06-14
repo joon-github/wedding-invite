@@ -5,6 +5,7 @@ import { EnvelopeGate } from "@/components/envelope-gate";
 import { Gallery } from "@/components/gallery";
 import { Guestbook } from "@/components/guestbook";
 import { HeroConfettiTrigger } from "@/components/hero-confetti-trigger";
+import { HeroEnvelope } from "@/components/hero-envelope";
 import { KakaoMap } from "@/components/kakao-map";
 import { PhotoUpload } from "@/components/photo-upload";
 import { ShareActions } from "@/components/share-actions";
@@ -12,21 +13,8 @@ import { WeddingQuiz } from "@/components/wedding-quiz";
 import { colors } from "@/lib/design-tokens";
 import { invitation } from "@/lib/invitation";
 import { supabase } from "@/lib/supabase";
-import { Gowun_Batang, Nanum_Pen_Script } from "next/font/google";
 import Image from "next/image";
 import styles from "./page.module.scss";
-
-const heroSerif = Gowun_Batang({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  display: "swap",
-});
-
-const heroMetaPen = Nanum_Pen_Script({
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const dynamic = "force-dynamic";
 
@@ -87,60 +75,58 @@ function HeroSection() {
   const heroDate = formatHeroDateKor(2026, 9, 4);
 
   return (
-    <section
-      id="hero-section"
-      className={`${styles.hero} ${heroSerif.className}`}
-    >
-      <HeroConfettiTrigger targetId="hero-section" />
-      <div className={styles.heroRibbonImageFrame}>
-        {" "}
-        {/* ribbon */}
-        <div className={styles.heroRibbonImageWrap}>
-          <Image
-            src={invitation.ribbonImage} //ribbon
-            alt=""
-            width={1800}
-            height={1200}
-            priority
-            unoptimized
-            sizes="(max-width: 480px) 90vw, 400px"
-            className={styles.heroRibbonImage}
-          />
-        </div>
-      </div>
-      <div className={styles.heroImageFrame}>
-        <div className={styles.heroImageWrap}>
-          <Image
-            src={invitation.heroImage}
-            alt=""
-            fill
-            priority
-            quality={88}
-            unoptimized
-            sizes="(max-width: 480px) calc(100vw - 3rem), min(28rem, 100vw)"
-            className={styles.heroMainImage}
-          />
-        </div>
-        {/* <div className={styles.heroMeta} lang="ko">
-          <p>
-            {invitation.event.dateText} {invitation.event.timeText}
-          </p>
-          <p>{invitation.event.hall}</p>
-          <a
-            href={invitation.event.mapUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.heroAddress}
-          >
-            {invitation.event.address}
-          </a>
-        </div> */}
-        <div className={styles.heroMeta} lang="ko">
-          <p
-            className={`${styles.heroMetaPenText} ${heroMetaPen.className}`}
-          >
-            서로의 삶이 그냥 흘러가지 않도록, 곁에서 모든 순간을 함께하겠습니다.
-          </p>
+    <section id="hero-section" className={`hand-text ${styles.hero}`}>
+      <div className={styles.heroSticky}>
+        <HeroConfettiTrigger targetId="hero-section" />
+        {/* <p className={styles.heroTagline} lang="ko">
+          <span className={styles.heroSlashTerra} aria-hidden>
+            /
+          </span>
+          <span className={styles.heroTagAccent}>
+            {a}
+          </span>
+          <span className={styles.heroSlash} aria-hidden>
+            /
+          </span>
+          <span className={styles.heroTagRest}>
+            {b}
+          </span>
+          <span className={styles.heroSlash} aria-hidden>
+            /
+          </span>
+          <span className={styles.heroTagRest}>
+            {c}
+          </span>
+        </p> */}
+        <div className={styles.heroVisualGroup}>
+          <div className={styles.heroImageFrame}>
+            <HeroEnvelope imageSrc={invitation.heroImage} />
+          </div>
+
+          {/* <p className={styles.heroDateLine}>{heroDate}</p> */}
+
+          {/* <div className={styles.heroNames} lang="ko">
+            <span className={styles.heroGroomName}>{invitation.couple.groom}</span>
+            <span className={styles.heroAnd}>그리고</span>
+            <span className={styles.heroBrideName}>{invitation.couple.bride}</span>
+          </div> */}
+
+          {/* <p className={styles.heroClosing}>저희, 결혼합니다.</p> */}
+
+          <div className={styles.heroMeta} lang="ko">
+            <p>
+              {invitation.event.dateText} {invitation.event.timeText}
+            </p>
+            <p>{invitation.event.hall}</p>
+            <a
+              href={invitation.event.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.heroAddress}
+            >
+              {invitation.event.address}
+            </a>
+          </div>
         </div>
       </div>
     </section>
