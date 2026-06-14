@@ -9,70 +9,73 @@ type HeroEnvelopeProps = {
   imageSrc: string;
 };
 
-function clamp(value: number, min: number, max: number) {
-  return Math.min(max, Math.max(min, value));
+function getHeroSection(shell: HTMLDivElement | null) {
+  const hero = shell?.closest("section");
+  return hero instanceof HTMLElement ? hero : null;
+}
+
+function isHeroPinned(shell: HTMLDivElement | null) {
+  const hero = getHeroSection(shell);
+
+  if (!hero) {
+    return false;
+  }
+
+  const rect = hero.getBoundingClientRect();
+  return rect.top <= 1 && rect.bottom >= window.innerHeight * 0.82;
 }
 
 export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
   const shellRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
-  const photoProgress = clamp((progress - 0.38) / 0.62, 0, 1);
-  const photoHidden = progress < 0.03 && photoProgress < 0.03;
+  const isOpenRef = useRef(false);
+  const closeFlapTimerRef = useRef(0);
+  const [isOpen, setIsOpen] = useState(false);
+  const [flapBehind, setFlapBehind] = useState(false);
+  const progress = isOpen ? 1 : 0;
+  const photoProgress = progress;
+  const photoHidden = !isOpen;
+
+  const setOpenState = (open: boolean) => {
+    if (isOpenRef.current === open) {
+      return;
+    }
+
+    isOpenRef.current = open;
+    window.clearTimeout(closeFlapTimerRef.current);
+
+    if (open) {
+      setIsOpen(true);
+      setFlapBehind(true);
+      return;
+    }
+
+    setIsOpen(false);
+    setFlapBehind(true);
+    closeFlapTimerRef.current = window.setTimeout(() => {
+      setFlapBehind(false);
+    }, 480);
+  };
 
   useEffect(() => {
-    let frame = 0;
-    let snapTimer = 0;
     let touchStartY = 0;
-    let snapping = false;
-
-    const update = () => {
-      frame = 0;
-      const hero = shellRef.current?.closest("section");
-      const heroTop = hero instanceof HTMLElement ? hero.offsetTop : 0;
-      const scrollRange = clamp(window.innerHeight * 0.22, 140, 190);
-      const scrollOffset = window.scrollY - heroTop;
-
-      setProgress(clamp(scrollOffset / scrollRange, 0, 1));
-    };
-
-    const snapHero = (direction: "open" | "close") => {
-      if (snapping) {
-        return;
-      }
-
-      const hero = shellRef.current?.closest("section");
-      const heroTop = hero instanceof HTMLElement ? hero.offsetTop : 0;
-      const scrollRange = clamp(window.innerHeight * 0.22, 140, 190);
-      const target = direction === "open" ? heroTop + scrollRange : heroTop;
-
-      snapping = true;
-      window.clearTimeout(snapTimer);
-      window.scrollTo({ top: target, behavior: "smooth" });
-      snapTimer = window.setTimeout(() => {
-        snapping = false;
-      }, 520);
-    };
-
-    const onScroll = () => {
-      if (frame) {
-        return;
-      }
-
-      frame = window.requestAnimationFrame(update);
-    };
 
     const onWheel = (event: WheelEvent) => {
-      const hero = shellRef.current?.closest("section");
-      const heroTop = hero instanceof HTMLElement ? hero.offsetTop : 0;
-      const scrollRange = clamp(window.innerHeight * 0.22, 140, 190);
-      const offset = window.scrollY - heroTop;
+      if (!isHeroPinned(shellRef.current)) {
+        return;
+      }
 
-      if (event.deltaY > 0 && offset >= -2 && offset < scrollRange * 0.75) {
+      if (event.deltaY > 0) {
+        if (!isOpenRef.current) {
+          event.preventDefault();
+          setOpenState(true);
+        }
+
+        return;
+      }
+
+      if (event.deltaY < 0 && isOpenRef.current) {
         event.preventDefault();
-        snapHero("open");
-      } else if (event.deltaY < 0 && offset > 0 && offset <= scrollRange * 1.15) {
-        event.preventDefault();
-        snapHero("close");
+        setOpenState(false);
       }
     };
 
@@ -81,39 +84,33 @@ export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
     };
 
     const onTouchMove = (event: TouchEvent) => {
+      if (!isHeroPinned(shellRef.current)) {
+        return;
+      }
+
       const currentY = event.touches[0]?.clientY ?? touchStartY;
       const deltaY = touchStartY - currentY;
-      const hero = shellRef.current?.closest("section");
-      const heroTop = hero instanceof HTMLElement ? hero.offsetTop : 0;
-      const scrollRange = clamp(window.innerHeight * 0.22, 140, 190);
-      const offset = window.scrollY - heroTop;
 
-      if (deltaY > 12 && offset >= -2 && offset < scrollRange * 0.75) {
+      if (deltaY > 10 && !isOpenRef.current) {
         event.preventDefault();
-        snapHero("open");
+        setOpenState(true);
         touchStartY = currentY;
-      } else if (deltaY < -12 && offset > 0 && offset <= scrollRange * 1.15) {
+        return;
+      }
+
+      if (deltaY < -10 && isOpenRef.current) {
         event.preventDefault();
-        snapHero("close");
+        setOpenState(false);
         touchStartY = currentY;
       }
     };
 
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
     window.addEventListener("wheel", onWheel, { passive: false });
     window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: false });
 
     return () => {
-      if (frame) {
-        window.cancelAnimationFrame(frame);
-      }
-
-      window.clearTimeout(snapTimer);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.clearTimeout(closeFlapTimerRef.current);
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
@@ -122,7 +119,7 @@ export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
 
   const style = useMemo(
     () => {
-      const photoClosedY = 92;
+      const photoClosedY = 100;
       const photoOpenY = -12;
       const photoY = photoOpenY + (1 - photoProgress) * (photoClosedY - photoOpenY);
 
@@ -135,11 +132,16 @@ export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
         "--hero-envelope-photo-progress": photoProgress.toFixed(4),
       }) as React.CSSProperties;
     },
-    [photoHidden, photoProgress, progress],
+    [isOpen, photoHidden, photoProgress, progress],
   );
 
   return (
-    <div ref={shellRef} className={styles.shell} style={style}>
+    <div
+      ref={shellRef}
+      className={styles.shell}
+      data-open={isOpen}
+      style={style}
+    >
       <div className={styles.typography}>
         <HandwritingText />
       </div>
@@ -187,7 +189,7 @@ export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
 
         <div
           className={styles.envelopeFlap}
-          data-behind={progress >= 0.5}
+          data-behind={flapBehind}
           aria-hidden="true"
         >
           <svg viewBox="0 0 337 204">
