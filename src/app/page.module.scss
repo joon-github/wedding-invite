@@ -206,11 +206,12 @@
   flex-direction: column;
   align-items: center;
   gap: 0.25rem;
-  font-size: clamp(0.74rem, 2.7vw, 0.8rem);
-  line-height: 1.5;
-  font-weight: 500;
-  color: var(--hero-ink-mute);
-  letter-spacing: 0.02em;
+  font-size: clamp(0.8rem, 3.7vw, 0.92rem);
+  line-height: 1.65;
+  font-weight: 400;
+  color: #2f3439;
+  letter-spacing: 0.01em;
+  font-variant-numeric: lining-nums;
   max-width: 18.5rem;
   margin-left: auto;
   margin-right: auto;

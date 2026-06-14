@@ -13,15 +13,8 @@ import { WeddingQuiz } from "@/components/wedding-quiz";
 import { colors } from "@/lib/design-tokens";
 import { invitation } from "@/lib/invitation";
 import { supabase } from "@/lib/supabase";
-import { Gowun_Batang } from "next/font/google";
 import Image from "next/image";
 import styles from "./page.module.scss";
-
-const heroSerif = Gowun_Batang({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  display: "swap",
-});
 
 export const dynamic = "force-dynamic";
 
@@ -79,7 +72,7 @@ function HeroSection() {
   const heroDate = formatHeroDateKor(2026, 9, 4);
 
   return (
-    <section id="hero-section" className={`${styles.hero} ${heroSerif.className}`}>
+    <section id="hero-section" className={`hand-text ${styles.hero}`}>
       <div className={styles.heroSticky}>
         <HeroConfettiTrigger targetId="hero-section" />
         {/* <p className={styles.heroTagline} lang="ko">
