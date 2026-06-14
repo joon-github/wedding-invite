@@ -1,18 +1,50 @@
 "use client";
 
+import { Nanum_Pen_Script } from "next/font/google";
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./hero-envelope.module.scss";
 
+const penFont = Nanum_Pen_Script({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 type HeroEnvelopeProps = {
   imageSrc: string;
+  typographyTitle: string;
+  typographyDate: string;
 };
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
 }
 
-export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
+function AnimatedCharacters({
+  text,
+  startIndex,
+}: {
+  text: string;
+  startIndex: number;
+}) {
+  return Array.from(text).map((character, index) => (
+    <span
+      key={`${character}-${index}`}
+      className={styles.typographyCharacter}
+      style={{ "--character-order": startIndex + index } as React.CSSProperties}
+      aria-hidden="true"
+    >
+      {character === " " ? "\u00a0" : character}
+    </span>
+  ));
+}
+
+export function HeroEnvelope({
+  imageSrc,
+  typographyTitle,
+  typographyDate,
+}: HeroEnvelopeProps) {
   const shellRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const photoProgress = clamp((progress - 0.32) / 0.68, 0, 1);
@@ -136,6 +168,24 @@ export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
 
   return (
     <div ref={shellRef} className={styles.shell} style={style}>
+      <div className={styles.typography}>
+        <p
+          className={styles.typographyEyebrow}
+          aria-label="The wedding of"
+        >
+          <AnimatedCharacters text="THE WEDDING OF" startIndex={0} />
+        </p>
+        <p
+          className={`${styles.typographyTitle} ${penFont.className}`}
+          aria-label={typographyTitle}
+        >
+          <AnimatedCharacters text={typographyTitle} startIndex={15} />
+        </p>
+        <p className={styles.typographyDate} aria-label={typographyDate}>
+          <AnimatedCharacters text={typographyDate} startIndex={28} />
+        </p>
+      </div>
+
       <div className={styles.stage}>
         <svg
           className={styles.envelopeBase}

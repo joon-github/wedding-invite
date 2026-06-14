@@ -104,7 +104,11 @@ function HeroSection() {
         </p> */}
         <div className={styles.heroVisualGroup}>
           <div className={styles.heroImageFrame}>
-            <HeroEnvelope imageSrc={invitation.heroImage} />
+            <HeroEnvelope
+              imageSrc={invitation.heroImage}
+              typographyTitle={`${invitation.couple.groom.slice(1)} 그리고 ${invitation.couple.bride.slice(1)}`}
+              typographyDate="2026. 10. 04"
+            />
           </div>
 
           {/* <p className={styles.heroDateLine}>{heroDate}</p> */}
