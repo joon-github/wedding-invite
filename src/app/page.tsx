@@ -113,7 +113,7 @@ function HeroSection() {
 
           {/* <p className={styles.heroClosing}>저희, 결혼합니다.</p> */}
 
-          <div className={styles.heroMeta} lang="ko">
+          {/* <div className={styles.heroMeta} lang="ko">
             <p>
               {invitation.event.dateText} {invitation.event.timeText}
             </p>
@@ -126,7 +126,7 @@ function HeroSection() {
             >
               {invitation.event.address}
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
