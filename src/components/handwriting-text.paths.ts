@@ -6,6 +6,7 @@ export type HandwritingStroke = {
 
 export type HandwritingMaskGroup = {
   outlineIndex: number;
+  line: "eyebrow" | "title" | "date";
   strokes: readonly HandwritingStroke[];
 };
 
@@ -24,6 +25,7 @@ const eyebrowGroups: HandwritingMaskGroup[] = [
   "M228 10 H222 V18 M222 14 H227",
 ].map((d, outlineIndex) => ({
   outlineIndex,
+  line: "eyebrow" as const,
   strokes: [
     {
       d,
@@ -36,6 +38,7 @@ const eyebrowGroups: HandwritingMaskGroup[] = [
 const titleGroups: HandwritingMaskGroup[] = [
   {
     outlineIndex: 12,
+    line: "title",
     strokes: [
       { d: "M79 44 C78 50 79 58 79 64", revealWidth: 9 },
       {
@@ -47,6 +50,7 @@ const titleGroups: HandwritingMaskGroup[] = [
   },
   {
     outlineIndex: 13,
+    line: "title",
     strokes: [
       {
         d: "M102 44 C107 41 114 42 118 44 C115 47 110 50 103 52",
@@ -62,6 +66,7 @@ const titleGroups: HandwritingMaskGroup[] = [
   },
   {
     outlineIndex: 14,
+    line: "title",
     strokes: [
       {
         d: "M134 47 C139 45 145 46 148 47 C147 50 147 53 147 55",
@@ -72,6 +77,7 @@ const titleGroups: HandwritingMaskGroup[] = [
   },
   {
     outlineIndex: 15,
+    line: "title",
     strokes: [
       {
         d: "M151 47 C156 45 163 46 166 47 C163 50 156 50 152 51 C156 53 162 53 166 54",
@@ -82,6 +88,7 @@ const titleGroups: HandwritingMaskGroup[] = [
   },
   {
     outlineIndex: 16,
+    line: "title",
     strokes: [
       {
         d: "M171 47 C175 45 181 46 184 47 C183 50 183 53 183 55",
@@ -93,6 +100,7 @@ const titleGroups: HandwritingMaskGroup[] = [
   },
   {
     outlineIndex: 17,
+    line: "title",
     strokes: [
       {
         d: "M201 45 C207 42 215 43 219 45 C215 48 211 51 202 53",
@@ -107,6 +115,7 @@ const titleGroups: HandwritingMaskGroup[] = [
   },
   {
     outlineIndex: 18,
+    line: "title",
     strokes: [
       {
         d: "M226 51 C225 46 229 43 234 44 C239 45 240 51 237 55 C233 58 227 56 226 51",
@@ -131,6 +140,7 @@ const dateGroups: HandwritingMaskGroup[] = [
   "M227 100 V88 L221 96 H229",
 ].map((d, index) => ({
   outlineIndex: 19 + index,
+  line: "date" as const,
   strokes: [
     {
       d,

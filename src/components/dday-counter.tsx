@@ -56,7 +56,6 @@ export function DdayCounter({ targetDate }: DdayCounterProps) {
   }, [targetDate]);
 
   const fireConfetti = useCallback(() => {
-    return;
     const canvas = canvasRef.current!;
     if (!canvas) return;
 

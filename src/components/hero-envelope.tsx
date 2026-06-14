@@ -16,7 +16,8 @@ function clamp(value: number, min: number, max: number) {
 export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
   const shellRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
-  const photoProgress = clamp((progress - 0.32) / 0.68, 0, 1);
+  const photoProgress = clamp((progress - 0.38) / 0.62, 0, 1);
+  const photoHidden = progress < 0.03 && photoProgress < 0.03;
 
   useEffect(() => {
     let frame = 0;
@@ -121,8 +122,8 @@ export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
 
   const style = useMemo(
     () => {
-      const photoClosedY = 112;
-      const photoOpenY = 7;
+      const photoClosedY = 92;
+      const photoOpenY = -12;
       const photoY = photoOpenY + (1 - photoProgress) * (photoClosedY - photoOpenY);
 
       return ({
@@ -130,9 +131,11 @@ export function HeroEnvelope({ imageSrc }: HeroEnvelopeProps) {
         "--hero-envelope-flap-rotation": `${progress * 180}deg`,
         "--hero-envelope-photo-y": `${photoY}%`,
         "--hero-envelope-photo-rotation": `${(1 - photoProgress) * -0.35}deg`,
+        "--hero-envelope-photo-opacity": photoHidden ? "0" : "1",
+        "--hero-envelope-photo-progress": photoProgress.toFixed(4),
       }) as React.CSSProperties;
     },
-    [photoProgress, progress],
+    [photoHidden, photoProgress, progress],
   );
 
   return (

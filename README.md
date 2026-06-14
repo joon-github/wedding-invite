@@ -47,3 +47,25 @@ GUESTBOOK_SECRET=스크립트_속성과_같은_값
 npm run lint
 npm run build
 ```
+
+### Handwriting SVG
+
+필기 애니메이션 문구를 바꿀 때 SVG 데이터를 자동 생성합니다. 실행 전에
+`npm run dev` 또는 `npm run build`를 한 번 실행해 Nanum Pen Script 파일을
+`.next`에 생성해야 합니다.
+
+```bash
+npm run handwriting:generate -- \
+  --eyebrow "THE WEDDING OF" \
+  --title "새로운 문구" \
+  --date "2026. 10. 04"
+```
+
+결과는 아래 두 파일에 기록됩니다.
+
+- `src/components/handwriting-text.outlines.ts`
+- `src/components/handwriting-text.paths.ts`
+
+자동 마스크는 폰트 외곽선을 기준으로 생성됩니다. 실제 손글씨의 정확한 획
+순서가 중요한 글자는 `handwriting-text.paths.ts`의 해당 `strokes`만
+중심선 SVG path로 보정할 수 있습니다.

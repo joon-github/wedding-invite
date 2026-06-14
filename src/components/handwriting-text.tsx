@@ -32,6 +32,39 @@ type HandwritingTextProps = {
   className?: string;
 };
 
+function getGroupAdvance(group: HandwritingMaskGroup) {
+  if (group.line === "eyebrow") {
+    return HANDWRITING_ANIMATION.eyebrowAdvanceMs;
+  }
+
+  if (group.line === "title") {
+    return HANDWRITING_ANIMATION.titleAdvanceMs;
+  }
+
+  return HANDWRITING_ANIMATION.dateAdvanceMs;
+}
+
+function getGroupStartDelays(groups: readonly HandwritingMaskGroup[]) {
+  return groups.reduce<number[]>((delays, group, groupIndex) => {
+    if (groupIndex === 0) {
+      return [HANDWRITING_ANIMATION.startDelayMs];
+    }
+
+    const previousGroup = groups[groupIndex - 1];
+    const previousStartDelay =
+      delays[groupIndex - 1] ?? HANDWRITING_ANIMATION.startDelayMs;
+    const lineGap =
+      previousGroup.line !== group.line
+        ? HANDWRITING_ANIMATION.lineGapMs
+        : 0;
+
+    return [
+      ...delays,
+      previousStartDelay + getGroupAdvance(previousGroup) + lineGap,
+    ];
+  }, []);
+}
+
 export function HandwritingText({
   artwork = HERO_HANDWRITING_ARTWORK,
   outlines = HERO_HANDWRITING_OUTLINES.paths,
@@ -42,11 +75,13 @@ export function HandwritingText({
     "--handwriting-draw-duration": `${HANDWRITING_ANIMATION.drawDurationMs}ms`,
     "--handwriting-glyph-settle-duration": `${HANDWRITING_ANIMATION.glyphSettleDurationMs}ms`,
   } as CSSProperties;
-  let groupStartDelay = HANDWRITING_ANIMATION.startDelayMs;
+  const groupStartDelays = getGroupStartDelays(artwork.groups);
 
-  const preparedGroups = artwork.groups.flatMap((group) => {
+  const preparedGroups = artwork.groups.flatMap((group, groupIndex) => {
     const outline = outlines[group.outlineIndex];
     const maskId = `${maskIdPrefix}-${group.outlineIndex}`;
+    const groupStartDelay =
+      groupStartDelays[groupIndex] ?? HANDWRITING_ANIMATION.startDelayMs;
 
     if (!outline) {
       return [];
@@ -71,18 +106,6 @@ export function HandwritingText({
       Math.max(0, group.strokes.length - 1) *
         HANDWRITING_ANIMATION.strokeDelayMs +
       Math.round(HANDWRITING_ANIMATION.drawDurationMs * 0.72);
-    const groupAdvance =
-      group.outlineIndex < 12
-        ? HANDWRITING_ANIMATION.eyebrowAdvanceMs
-        : group.outlineIndex < 19
-          ? HANDWRITING_ANIMATION.titleAdvanceMs
-          : HANDWRITING_ANIMATION.dateAdvanceMs;
-    const lineGap =
-      group.outlineIndex === 11 || group.outlineIndex === 18
-        ? HANDWRITING_ANIMATION.lineGapMs
-        : 0;
-
-    groupStartDelay += groupAdvance + lineGap;
 
     return [{ maskId, outline, settleDelay, strokes }];
   });

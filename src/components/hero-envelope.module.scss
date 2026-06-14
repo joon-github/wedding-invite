@@ -30,12 +30,15 @@
 
 .photoTrack {
   position: absolute;
-  left: calc(4.5% + 10px);
-  right: calc(4.5% + 10px);
-  top: -150%;
-  bottom: 7.5%;
+  left: calc(7.5% + 12px);
+  right: calc(7.5% + 12px);
+  top: -185%;
+  bottom: 14%;
   z-index: 2;
-  overflow: hidden;
+  overflow: visible;
+  clip-path: inset(
+    0 0 calc((1 - var(--hero-envelope-photo-progress, 0)) * 100%) 0
+  );
   pointer-events: none;
 }
 
@@ -43,17 +46,20 @@
   box-sizing: border-box;
   position: absolute;
   inset-inline: 0;
-  bottom: 0;
+  bottom: 12%;
   width: 100%;
   border: 1px solid rgb(17 24 39 / 0.1);
   background: #fff;
-  padding: 1rem 1rem 0.95rem;
+  padding: 0.85rem 0.85rem 0.8rem;
   box-shadow: 0 14px 30px rgb(17 24 39 / 0.1);
+  opacity: var(--hero-envelope-photo-opacity, 1);
   transform:
     translate3d(0, var(--hero-envelope-photo-y, 100%), 0)
     rotate(var(--hero-envelope-photo-rotation, -0.35deg));
   transform-origin: center bottom;
-  transition: transform 0.18s linear;
+  transition:
+    transform 0.18s linear,
+    opacity 0.12s linear;
   will-change: transform;
 }
 
@@ -61,6 +67,8 @@
   display: block;
   width: 100%;
   height: auto;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .envelopeBase,

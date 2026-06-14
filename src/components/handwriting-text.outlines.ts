@@ -4,7 +4,7 @@ export type HandwritingOutline = {
 };
 
 export const HERO_HANDWRITING_OUTLINES = {
-  ariaLabel: "THE WEDDING OF, 아이ㄴ 그리고 정아, 2026년 10월 4일",
+  ariaLabel: "THE WEDDING OF, 범준 그리고 정아, 2026년 10월 4일",
   viewBox: "0 0 320 108",
   paths: [
   {
