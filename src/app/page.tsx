@@ -80,7 +80,7 @@ function DescriptionSection() {
           <div className={styles.content}>
             <p>예식 관련 안내사항 입니다. 💁🏻‍♀️</p>
             <br />
-            <p>본 예식은 싱랑, 신부 측 구분 없이</p>
+            <p>본 예식은 신랑, 신부 측 구분 없이</p>
             <p>자유롭게 원하시는 자리에 착석</p>
             <p>부탁드립니다. 🪑</p>
           </div>
