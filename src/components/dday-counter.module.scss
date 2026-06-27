@@ -33,7 +33,7 @@
 
 .number {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(32px, 12vw, 52px);
+  font-size: 36px;
   font-weight: 900;
   line-height: 1;
   color: var(--ink);
@@ -41,7 +41,7 @@
 }
 
 .numberDays {
-  font-size: clamp(44px, 16vw, 72px);
+  font-size: 40px;
   color: var(--pink);
   text-shadow: 0 0 40px var(--terra-32);
 }

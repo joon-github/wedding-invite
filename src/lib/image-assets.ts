@@ -14,6 +14,9 @@ export const imageAssets = {
   intro: {
     welcome: `${base}/intro/welcome.png`,
   },
+  invitation: {
+    main: `${base}/invitation.png`,
+  },
   photos: {
     ribbon: `${base}/photos/ribbon/ribbon.png`,
     hero: `${base}/photos/hero/primary.jpg`,

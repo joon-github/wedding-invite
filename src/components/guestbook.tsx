@@ -99,21 +99,8 @@ export function Guestbook() {
 
   return (
     <section className={`pink-collage ${styles.section}`}>
-      <div className="section-badge">
-        <span className="section-badge__icon section-badge__icon--lg">
-          ✎
-        </span>
-        <span className="section-badge__divider" />
-        <span className="section-badge__text">방명록</span>
-        <span className="section-badge__arrow">
-          ›
-        </span>
-      </div>
-
+      <div style={{ fontSize: "25px", textAlign: "center", marginBottom: "2rem", fontWeight: "700" }}>Guest Book</div>
       <div className={`paper-texture ${styles.card}`}>
-        <span className={styles.tapeLeft} />
-        <span className={styles.tapeRight} />
-
         <form className={styles.form} onSubmit={handleSubmit}>
           <label className={styles.fieldLabel}>
             <span className={styles.fieldLabelText}>
@@ -175,6 +162,7 @@ export function Guestbook() {
         ) : null}
 
         <div className={styles.messageList}>
+          {messages.length === 0 ? <p className={styles.empty}>방명록이 비어있습니다</p> : null}
           {messages.map((item, index) => (
             <article
               key={`${item.id}-${index}`}

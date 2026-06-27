@@ -201,12 +201,12 @@ export function DdayCounter({ targetDate }: DdayCounterProps) {
 
         {time.isToday ? (
           <div className={styles.ddayHero}>
-            <p className={styles.ddayEmoji}>😇</p>
+            <p className={styles.ddayEmoji}>🥳</p>
             <p className={styles.ddayTitle}>D-Day</p>
             <p className={styles.ddayMessage}>
-              10월 4일, 1004
+              10월 4일,
               <br />
-              천사 같은 두 사람의 결혼식 날입니다
+              범준, 정아의 결혼식 날입니다!!!
             </p>
           </div>
         ) : (
@@ -234,18 +234,18 @@ export function DdayCounter({ targetDate }: DdayCounterProps) {
                 <span className={styles.unitLabel}>Sec</span>
               </div>
             </div>
-            {/* <p className={styles.subtitle}>
+            <p className={styles.subtitle}>
               <span className={styles.subtitleEmoji} aria-hidden>
-                🪽
-              </span>{" "}
-              결혼식까지{" "}
+                🤵🏽
+              </span>{"🤍"}
+              <span className={styles.subtitleEmoji} aria-hidden>
+                👰🏻
+              </span>
+              결혼식까지
               <span className={styles.subtitlePink}>
                 D-{time.days}
               </span>{" "}
-              <span className={styles.subtitleEmoji} aria-hidden>
-                🪽
-              </span>
-            </p> */}
+            </p>
           </>
         )}
       </div>

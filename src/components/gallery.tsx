@@ -41,7 +41,7 @@ export function Gallery({ images }: GalleryProps) {
           className={styles.toggleButton}
           onClick={() => setExpanded((value) => !value)}
         >
-          {expanded ? "접기" : "더보기"}
+          {expanded ? "Close" : "More"}
         </button>
       ) : null}
 

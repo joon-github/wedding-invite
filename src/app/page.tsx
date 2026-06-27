@@ -56,20 +56,52 @@ export default async function Home({ searchParams }: HomeProps) {
         <HeroSection />
         <PaperInvitation />
         <FamilyStory />
+        <PinkGallery />
         <SaveTheDate />
         <DdayCounter targetDate="2026-10-04" />
-        <PinkGallery />
         <LocationSection />
         <AccountSection />
         {settings.show_guestbook !== false ? <Guestbook /> : null}
         {settings.show_photo_upload !== false ? <PhotoUpload /> : null}
-        {settings.show_quiz !== false ? <WeddingQuiz /> : null}
+        {/* {settings.show_quiz !== false ? <WeddingQuiz /> : null} */}
+        <DescriptionSection />
         <ShareSection />
       </main>
     </>
   );
 }
 
+function DescriptionSection() {
+  return (
+    <>
+      <section className={styles.descriptionSection}>
+        <div className={styles.descriptionCard}>
+          <div className={styles.title}>예식 안내</div>
+          <div className={styles.content}>
+            <p>예식 관련 안내사항 입니다. 💁🏻‍♀️</p>
+            <br />
+            <p>본 예식은 싱랑, 신부 측 구분 없이</p>
+            <p>자유롭게 원하시는 자리에 착석</p>
+            <p>부탁드립니다. 🪑</p>
+          </div>
+        </div>
+      </section>
+      <section className={styles.descriptionSection}>
+        <div className={styles.descriptionCard}>
+          <div className={styles.title}>애견화동 안내</div>
+          <div className={styles.content}>
+            <p>예식 진행시 신부의 반려견</p>
+            <p>'법규'의 화동이 준비되어 있습니다.</p>
+            <p>🐶💐</p>
+            <br />
+            <p>넓은 이해와 사랑으로 지켜봐</p>
+            <p>주시면 감사드리겠습니다.🧚🏻</p>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
 function HeroSection() {
   const [a, b, c] = invitation.heroTagline;
   const heroDate = formatHeroDateKor(2026, 9, 4);
@@ -138,22 +170,54 @@ function PaperInvitation() {
     <section className={styles.paperSection}>
       <div className={`paper-texture paper-border ${styles.paperCard}`}>
         {/* <span className={styles.paperHeart}>♡</span> */}
-        {/* <p className={`hand-text ${styles.paperHeadline}`}>
-          {invitation.message.headline}
-        </p> */}
+        <p className={`${styles.paperHeadline}`}>
+          Invitation
+        </p>
         <div className={`hand-text ${styles.paperBody}`}>
-          {invitation.message.body.map((line) => (
-            <p key={line}>{line}</p>
-          ))}
-        </div>
-        {/* <p className={`hand-text ${styles.paperClosing}`}>
-          소중한 분들을 모시고 첫 시작을 함께하고자 합니다.
+          {/* <p>결혼은 당신의 모든 것에 관심을</p>
+          <p>기울이겠다고 약속하는 거예요.</p>
           <br />
-          귀한 걸음 하시어 축복해주신다면
-          <br />더 없는 기쁨으로 간직하겠습니다.
-        </p> */}
+          <p>좋은 일, 나쁜 일</p>
+          <p>일상적이고 지루한 일,</p>
+          <br />
+          <p>모든 것을, 항상 매일매일</p>
+          <p>당신은 이렇게 말하는 거죠.</p>
+          <br />
+          <p>"너의 삶은 그냥 흘러가지 않을 거야,</p>
+          <p>내가 그 모든 순간을 지켜볼 테니까.</p>
+          <br />
+          <p>너의 인생은 혼자가 아니야.</p>
+          <p>내가 너의 증인이 되어줄게."</p>
+          <br />
+          <p>영화 [Shall We Dance(2024)] 中</p> */}
+          <p>나와 몹시 다르고,다양해서</p>
+          <p>이따금 경이로울것이다.</p>
+          <br />
+          <p>한 사람이 오는건 그 사람의 삶 전체가</p>
+          <p>오는 것 이라는 말을 웬 광고판에서 본 적 있다.</p>
+          <br />
+          <p>왜 아침에 그 문구가 생각났을까.</p>
+          <br />
+          <p>아무튼 사람을,인연을</p>
+          <p>곁에 두기로 하는 것은</p>
+          <p>그래서, 무척이나 거대한 결심이다.</p>
+          <br />
+          <p>정현종 시의 <strong>방문객</strong> 으로부터</p>
+        </div>
+        <p className={`hand-text ${styles.paperClosing}`}>
+          편진영 · 황선애의 아들 범준
+          <br />
+          유창호 · 이현진의 딸 정아
+        </p>
+        <p className={`hand-text ${styles.paperClosing}`}
+          style={{ marginBottom: "1.8rem" }}
+        >
+          2026년 10월 04일 (일) 오후 5시
+          <br />
+          리움 하우스 웨딩
+        </p>
 
-        <div className={styles.paperPhotoGrid}>
+        {/* <div className={styles.paperPhotoGrid}>
           <div className={styles.paperPhotoLeft}>
             <Image
               src={invitation.gallery[0]}
@@ -172,7 +236,7 @@ function PaperInvitation() {
               className={styles.paperPhotoRightImg}
             />
           </div>
-        </div>
+        </div> */}
 
         {/* <div className={styles.paperBadge}>
           <p>{romanize(invitation.couple.groom)}</p>
@@ -181,7 +245,7 @@ function PaperInvitation() {
           <p className={styles.paperBadgeLine}>{romanize(invitation.couple.bride)}</p>
         </div> */}
       </div>
-    </section>
+    </section >
   );
 }
 
@@ -190,45 +254,24 @@ function FamilyStory() {
     <section className={styles.familySection}>
       <div className={styles.familyStory}>
         <div className={styles.familyPhotoMain}>
-          <Image
-            src={invitation.gallery[2]}
-            alt=""
-            width={760}
-            height={900}
-            className={styles.familyPhotoMainImg}
-          />
+          <div className={styles.familyPhotoMainCrop}>
+            <Image
+              src={invitation.invitation}
+              alt=""
+              width={760}
+              height={900}
+              className={styles.familyPhotoMainImg}
+            />
+          </div>
           <span className={styles.familyTape} />
         </div>
-        <div className={`notebook-paper hand-text ${styles.familyNote}`}>
-          <span className={styles.familyNoteTapeRight} aria-hidden />
-          <p>착하고 멋있는 아들 {invitation.couple.groom.substring(1)}아!</p>
-          <p>우리 아들로 태어나서 항상 고맙고 감사하다.</p>
-          <p>언제나 기쁘게 행복하게, 서로 의지하면서 잘 살아라.</p>
-          <p className={styles.familyNoteParagraph}>사랑한다 ~ ♡</p>
-        </div>
-        <div className={styles.familyPhotoSmall}>
-          <Image
-            src={invitation.gallery[3]}
-            alt=""
-            width={500}
-            height={620}
-            className={styles.familyPhotoSmallImg}
-          />
-          <span className={styles.familyPhotoSmallTape} aria-hidden />
-        </div>
       </div>
-
-      <div className={styles.familyGrid}>
-        <FamilyBlock
-          label={`${invitation.couple.groomParents}의 아들`}
-          name={invitation.couple.groom}
-          role="신랑"
-        />
-        <FamilyBlock
-          label={`${invitation.couple.brideParents}의 딸`}
-          name={invitation.couple.bride}
-          role="신부"
-        />
+      <div className={`hand-text ${styles.introMent}`}>
+        <p>엄마 품에 숨어 낯가림이 많았던 범준,</p>
+        <p>동네 할머니들 사랑받던 수다쟁이 정아</p>
+        <br />
+        <p>성격도 자라온 환경도 다르지만</p>
+        <p>사랑하고 존중하며 예쁘게 살겠습니다.</p>
       </div>
     </section>
   );
@@ -237,7 +280,7 @@ function FamilyStory() {
 function SaveTheDate() {
   return (
     <section className={styles.calendarSection}>
-      <div
+      {/* <div
         className="section-badge section-badge--static"
         role="img"
         aria-label="일정"
@@ -276,12 +319,11 @@ function SaveTheDate() {
         <span className="section-badge__divider" />
         <span className="section-badge__text">날짜</span>
         <span className="section-badge__arrow">›</span>
-      </div>
-
+      </div> */}
+      <h4 className={`${styles.calendarTitle}`} style={{ fontSize: "25px" }}>Save the Date</h4>
+      {/* <p className={`${styles.calendarSubTitle}`}>2026.10.04. SUN 17:00</p> */}
       <div className={`paper-texture ${styles.calendarCard}`}>
-        <span className={styles.calendarTape} aria-hidden />
-        <p className={`serif-title ${styles.calendarTitle}`}>2026.10.04. SUN</p>
-        <p className={`serif-title ${styles.calendarTime}`}>17:00</p>
+        {/* <span className={styles.calendarTape} aria-hidden /> */}
         <div className={styles.calendarImageWrap}>
           <Image
             src="/image/calendar/calendar.png"
@@ -300,8 +342,9 @@ function SaveTheDate() {
 function PinkGallery() {
   return (
     <section className={`pink-collage ${styles.pinkSection}`}>
+      <h4 className={`${styles.pinkTitle}`}>Photography</h4>
       <div className={styles.pinkInner}>
-        <div className={styles.pinkPhotoCard}>
+        {/* <div className={styles.pinkPhotoCard}>
           <Image
             src={invitation.gallery[4]}
             alt=""
@@ -309,14 +352,7 @@ function PinkGallery() {
             height={900}
             className={styles.pinkPhotoImg}
           />
-          <p className={`hand-text ${styles.pinkCaption}`}>
-            내 인생에 가장 큰 선물은
-            <br />
-            너와 함께라면 어떤 길도
-            <br />
-            행복한 여정이 될 거야.
-          </p>
-        </div>
+        </div> */}
 
         <Gallery images={invitation.gallery} />
       </div>
@@ -327,7 +363,10 @@ function PinkGallery() {
 function LocationSection() {
   return (
     <section className={styles.locationSection}>
-      <a
+      <div className={`${styles.calendarTitle}`} style={{ fontSize: "25px", textAlign: "center", marginBottom: "2rem" }}>
+        Location
+      </div>
+      {/* <a
         href={invitation.event.kakaoMapUrl}
         target="_blank"
         rel="noreferrer"
@@ -345,20 +384,16 @@ function LocationSection() {
           </svg>
         </span>
         <span className="section-badge__divider section-badge__divider--muted" />
-        <span className="section-badge__text section-badge__text--wide">
-          오시는 길
-        </span>
+
         <span className="section-badge__arrow">›</span>
-      </a>
+      </a> */}
 
       <div className={`paper-texture ${styles.locationCard}`}>
-        <span className={styles.locationTape} />
         <div className={styles.locationHeader}>
           <div>
             <p className={styles.locationLabel}>Location</p>
             <p className={styles.locationHallName}>{invitation.event.hall}</p>
           </div>
-          <p className={`serif-title ${styles.locationNumber}`}>01</p>
         </div>
         <KakaoMap
           title={invitation.event.hall}
@@ -405,32 +440,60 @@ function LocationSection() {
           <span className={styles.locationDividerLine} />
         </div>
         <div className={styles.locationTransport}>
-          {invitation.transport.map((item) => (
-            <div key={item.title} className={styles.locationTransportItem}>
-              <p className={styles.locationTransportTitle}>{item.title}</p>
-              <p className={styles.locationTransportDesc}>{item.description}</p>
+          <div className={styles.locationTransportItem}>
+            <p className={styles.locationTransportTitle}>🚘 자 가 용</p>
+            <div className={styles.locationTransportDesc}>
+              <p>상상플랫폼 8부두 주차장 이용</p>
+              <p>(주소: 인천시 중구 북성동 1가 4-248)</p>
+              <br />
+              <p>주차장 입구 앞에 있는 자사 직원의 인솔에</p>
+              <p>따라 셔틀버스를 이용하시면 됩니다.</p>
             </div>
-          ))}
+          </div>
+          <div className={styles.locationTransportItem}>
+            <p className={styles.locationTransportTitle}>🚊 지 하 철</p>
+            <div className={styles.locationTransportDesc}>
+              <p>1호선/수인선(인천역) 하차 → 1번 출구 → 웅이돈가스 앞 셔틀버스 탑승 (셔틀버스 수시운행/직원 항시안내)</p>
+            </div>
+          </div>
+          <div className={styles.locationTransportItem}>
+            <p className={styles.locationTransportTitle}>🚍 버 스</p>
+            <div className={styles.locationTransportDesc}>
+              <p>(간선)
+                15, 26, 307번 버스
+              </p>
+              <p>
+                [중구청] 하차
+              </p>
+              <p>
+
+                (간선)
+                2, 10, 15, 26, 45번 버스
+              </p>
+              <p>
+                [인천역(차이나타운)] 하차
+              </p>
+              <p>
+                (좌석)
+                307번 버스
+              </p>
+              <p>
+                [인천역(차이나타운)] 하차
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
-    </section>
+    </section >
   );
 }
 
 function AccountSection() {
   return (
     <section className={styles.accountSection}>
-      <div className="section-badge">
-        <span className="section-badge__icon section-badge__icon--heart">
-          ♡
-        </span>
-        <span className="section-badge__divider" />
-        <span className="section-badge__text">마음 전하실 곳</span>
-        <span className="section-badge__arrow">›</span>
-      </div>
+      <div style={{ fontSize: "25px", textAlign: "center", marginBottom: "2rem", fontWeight: "700" }}>마음 전하실 곳</div>
       <div className={`paper-texture ${styles.accountCard}`}>
-        <span className={styles.accountTapeLeft} />
-        <span className={styles.accountTapeRight} />
         <div className={styles.accountHeader}>
           <p className={styles.accountLabel}>Account</p>
           <p className={styles.accountDesc}>

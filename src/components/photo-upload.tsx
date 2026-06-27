@@ -121,21 +121,12 @@ export function PhotoUpload() {
 
   return (
     <section className={styles.section}>
-      <div className="section-badge">
-        <span className="section-badge__icon">📸</span>
-        <span className="section-badge__divider" />
-        <span className="section-badge__text">포토부스</span>
-        <span className="section-badge__arrow">›</span>
-      </div>
-
+      <div style={{ fontSize: "25px", textAlign: "center", marginBottom: "2rem", fontWeight: "700" }}>Photo Booth</div>
       <div className={`paper-texture ${styles.card}`}>
-        <span className={styles.tapeLeft} />
-        <span className={styles.tapeRight} />
-
         <div className={styles.header}>
           <p className={styles.label}>Share your moments</p>
           <p className={styles.subtitle}>
-            현장에서 찍은 사진을 공유해주세요!
+            📁 현장에서 찍은 사진을 공유해주세요!
           </p>
         </div>
 

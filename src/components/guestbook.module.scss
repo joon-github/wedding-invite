@@ -2,7 +2,12 @@
   padding: 3.5rem 1.5rem;
   color: var(--ink);
 }
-
+.empty {
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: lightgray;
+}
 .card {
   position: relative;
   padding: 1.25rem 1.25rem 1.5rem;

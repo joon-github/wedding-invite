@@ -42,6 +42,10 @@
   color: var(--hero-ink);
 }
 
+.introMent {
+  text-align: center;
+}
+
 .heroSticky {
   position: sticky;
   top: 0;
@@ -278,7 +282,7 @@
 
 .paperCard {
   position: relative;
-  padding: 3rem 1.75rem;
+  padding: 1rem 1.75rem;
   text-align: center;
   color: #000;
 }
@@ -291,25 +295,41 @@
   font-size: 1.5rem;
 }
 
-.paperHeadline {
+.paperHeadline,
+.calendarTitle
+ {
   margin-top: 1.5rem;
-  font-size: 22px;
+  font-size: 25px;
   font-weight: 700;
+}
+.calendarSubTitle {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+  word-break: break-word;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .paperBody {
   margin-top: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  font-size: 18px;
-  line-height: 2;
+  font-size: 15px;
+  line-height: 1.7;
 }
 
 .paperClosing {
-  margin-top: 2.25rem;
-  font-size: 18px;
+  margin-top: 2rem;
   line-height: 2;
+  border-top: 1px solid #d2d2d2;
+  padding-top: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 17px;
+  font-weight: 700;
 }
 
 .paperPhotoGrid {
@@ -386,26 +406,40 @@
 .familyPhotoMain {
   position: relative;
   width: 72%;
+  margin-left: auto;
+  margin-right: auto;
+  aspect-ratio: 4 / 5;
+  overflow: visible;
   background-color: #fff;
-  padding: 0.25rem;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   transform: rotate(1deg);
 }
 
-.familyPhotoMainImg {
+.familyPhotoMainCrop {
   width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 5;
+  height: 100%;
+  overflow: hidden;
+}
+
+.familyPhotoMainImg {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
+  transform: scale(1.3);
+  transform-origin: center 34%;
 }
 
 .familyTape {
   position: absolute;
-  left: -1rem;
-  top: 4rem;
-  height: 3rem;
-  width: 2rem;
+  z-index: 5;
+  left: 50%;
+  top: -0.85rem;
+  height: 1.5rem;
+  width: 3.5rem;
   background-color: var(--tape);
+  transform: translateX(-50%) rotate(-4deg);
 }
 
 .familyNote {
@@ -545,13 +579,14 @@
 
 .calendarImageWrap {
   margin-top: 1.5rem;
-  padding: 5px;
 }
 
 .calendarImage {
   display: block;
   width: 100%;
   height: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .calendarGrid {
@@ -632,6 +667,18 @@
 }
 
 // ─── PinkGallery ───
+
+.pinkTitle {
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  line-height: 1.2;
+  word-break: break-word;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
 .pinkSection {
   padding: 3rem 2rem;
   color: #000;
@@ -829,8 +876,10 @@
 }
 
 .locationTransportItem {
-  display: grid;
-  grid-template-columns: 72px 1fr;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 0.75rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: rgba(255, 255, 255, 0.3);
@@ -843,6 +892,7 @@
 }
 
 .locationTransportDesc {
+  text-align: center;
   font-size: 0.875rem;
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
@@ -850,15 +900,15 @@
 
 /* 달력 — 캡슐 뱃지는 .section-badge (전역) + paper-texture + 테이프 */
 .calendarCard {
-  @extend .locationCard;
-  box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  min-width: 0;
-  max-width: 100%;
-  padding: 1.5rem 0.65rem 1.6rem;
-  text-align: center;
+  // @extend .locationCard;
+  // box-sizing: border-box;
+  // margin-left: auto;
+  // margin-right: auto;
+  // width: 100%;
+  // min-width: 0;
+  // max-width: 100%;
+  // padding: 1.5rem 0.65rem 1.6rem;
+  // text-align: center;
 }
 
 .calendarTape {
@@ -930,4 +980,32 @@
   text-align: center;
   font-size: 0.75rem;
   color: rgba(0, 0, 0, 0.45);
+}
+
+
+// ─── DescriptionSection ───
+.descriptionSection {
+  background-color: transparent;
+  padding: 3rem 1.5rem;
+  color: var(--ink);
+}
+
+.descriptionCard {
+  position: relative;
+  padding: 1.25rem;
+  color: var(--ink);
+  box-shadow: var(--section-card-shadow);
+  background-color: #e9e6e6;
+  border-radius: 12px;
+  text-align: center;
+}
+.title {
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  line-height: 1.2;
+  word-break: break-word;
+  text-align: center;
+  margin-bottom: 1rem;
 }
