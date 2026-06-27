@@ -986,26 +986,26 @@
 // ─── DescriptionSection ───
 .descriptionSection {
   background-color: transparent;
-  padding: 3rem 1.5rem;
+  padding: 2rem 1.5rem;
   color: var(--ink);
+  .title {
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    line-height: 1.2;
+    word-break: break-word;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
 }
 
 .descriptionCard {
   position: relative;
-  padding: 1.25rem;
+  padding: 1.7rem 1.5rem;
   color: var(--ink);
   box-shadow: var(--section-card-shadow);
   background-color: #e9e6e6;
   border-radius: 12px;
   text-align: center;
-}
-.title {
-  font-size: 25px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--ink);
-  line-height: 1.2;
-  word-break: break-word;
-  text-align: center;
-  margin-bottom: 1rem;
 }
