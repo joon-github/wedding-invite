@@ -84,8 +84,8 @@ export const invitation = {
       },
       {
         relation: "아버지",
-        bank: "카카오뱅크",
-        number: "12345-123-12",
+        bank: "새마을금고",
+        number: "9002-1486-8924-9",
         holder: "편진영",
       },
     ] satisfies Account[],

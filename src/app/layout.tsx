@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BgmAutoplay } from "@/components/bgm-autoplay";
 import { PhoneFrame } from "@/components/phone-frame";
 import { handFont } from "@/lib/fonts";
 import { THEME_STYLE } from "@/lib/design-tokens";
@@ -27,6 +28,7 @@ export default function RootLayout({
       style={THEME_STYLE as CSSProperties}
     >
       <body>
+        <BgmAutoplay />
         <PhoneFrame>{children}</PhoneFrame>
       </body>
     </html>
