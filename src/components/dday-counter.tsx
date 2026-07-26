@@ -239,7 +239,7 @@ export function DdayCounter({ targetDate }: DdayCounterProps) {
                 🤵🏽
               </span>{"🤍"}
               <span className={styles.subtitleEmoji} aria-hidden>
-                👰🏻
+                👰🏻‍♀️
               </span>
               결혼식까지
               <span className={styles.subtitlePink}>

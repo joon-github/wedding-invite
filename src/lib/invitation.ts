@@ -24,7 +24,7 @@ export const invitation = {
     dateText: "2026년 10월 4일 일요일",
     timeText: "오후 5시",
     hall: "📍 리움 하우스웨딩",
-    address: "인천광역시 중구 북성동 제물량로232번길 23",
+    address: "인천광역시 제물포구 북성동 제물량로232번길 23",
     lat: 37.474727503707,
     lng: 126.62048207432,
     mapUrl:
