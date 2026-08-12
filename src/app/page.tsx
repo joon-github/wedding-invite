@@ -84,6 +84,23 @@ function DescriptionSection() {
             <p>자유롭게 원하시는 자리에 착석</p>
             <p>부탁드립니다. 🪑</p>
           </div>
+          <br />
+          {/* <div className={styles.title}>안내 사항</div> */}
+          {/* <div className={styles.content}>
+            <p>예식장 내 ATM기가 없습니다.</p>
+
+            <p> 하객 여러분께서는 참고 바랍니다.🙇🏻‍♀️</p>
+          </div> */}
+        </div>
+      </section>
+      <section className={styles.descriptionSection}>
+        <div className={styles.descriptionCard}>
+          <div className={styles.title}>이용 안내</div>
+          <div className={styles.content}>
+            <p>예식장 내 ATM기가 없습니다.</p>
+
+            <p> 하객 여러분께서는 참고 바랍니다.🙇🏻‍♀️</p>
+          </div>
         </div>
       </section>
       <section className={styles.descriptionSection}>
@@ -444,7 +461,7 @@ function LocationSection() {
             <p className={styles.locationTransportTitle}>🚘 자 가 용</p>
             <div className={styles.locationTransportDesc}>
               <p>상상플랫폼 8부두 주차장 이용</p>
-              <p>(주소: 인천시 중구 북성동 1가 4-248)</p>
+              <p>(주소: 인천시 제물포구 북성동 1가 4-248)</p>
               <br />
               <p>주차장 입구 앞에 있는 자사 직원의 인솔에</p>
               <p>따라 셔틀버스를 이용하시면 됩니다.</p>
